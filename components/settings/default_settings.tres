@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GameSettings" load_steps=2 format=3 uid="uid://c8nsxk1ypdoga"]
+
+[ext_resource type="Script" uid="uid://dc6bbg01bgo3" path="res://components/settings/game_settings.gd" id="1_p4hu6"]
+
+[resource]
+script = ExtResource("1_p4hu6")
+use_alternate_physics = true
+volume_music = 2.0
+metadata/_custom_type_script = "uid://dc6bbg01bgo3"

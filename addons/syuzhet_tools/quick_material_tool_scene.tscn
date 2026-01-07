@@ -1,0 +1,227 @@
+[gd_scene load_steps=13 format=3 uid="uid://b24qeo2aa8va1"]
+
+[ext_resource type="Script" uid="uid://dqaghj8efk7li" path="res://addons/syuzhet_tools/quick_material_tool.gd" id="1_a6d5p"]
+[ext_resource type="StyleBox" uid="uid://bbh5bjk27qlc5" path="res://addons/syuzhet_tools/header_label.tres" id="2_0e7cw"]
+[ext_resource type="StyleBox" uid="uid://cretamudty6dn" path="res://addons/syuzhet_tools/base_panel.tres" id="2_vd7f7"]
+[ext_resource type="StyleBox" uid="uid://buy6w41xefyvu" path="res://addons/syuzhet_tools/dark_panel.tres" id="3_vd7f7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5imd6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tn27v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_23wei"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e7vjh"]
+
+[sub_resource type="DPITexture" id="DPITexture_0e7cw"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zm1 2h10v8H3z\"/><path stroke=\"#e0e0e0\" stroke-linecap=\"round\" stroke-width=\"1.5\" d=\"M7 4.25 4.25 7m6.5-2.75-5.5 5.5M11.75 7 9 9.75\"/></svg>
+"
+base_scale = 1.5
+saturation = 2.0
+color_map = {
+Color(1, 0.37254903, 0.37254903, 1): Color(1, 0.47, 0.42, 1),
+Color(0.37254903, 1, 0.5921569, 1): Color(0.45, 0.95, 0.5, 1),
+Color(1, 0.8666667, 0.39607844, 1): Color(1, 0.87, 0.4, 1)
+}
+
+[sub_resource type="DPITexture" id="DPITexture_vd7f7"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"M3 2a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9c1.105 0 1.818-.91 2-2l1-6a1 1 0 0 0-1-1H6c-.552 0-.909.455-1 1l-1 6c-.091.545-.448 1-1 1a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1 1 1 0 0 0 1 1h5a1 1 0 0 0-1-1H7a2 2 0 0 0-2-2H3z\"/></svg>
+"
+base_scale = 1.5
+saturation = 2.0
+color_map = {
+Color(1, 0.37254903, 0.37254903, 1): Color(1, 0.47, 0.42, 1),
+Color(0.37254903, 1, 0.5921569, 1): Color(0.45, 0.95, 0.5, 1),
+Color(1, 0.8666667, 0.39607844, 1): Color(1, 0.87, 0.4, 1)
+}
+
+[sub_resource type="DPITexture" id="DPITexture_0nub4"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"none\" stroke=\"#e0e0e0\" stroke-width=\"2\" d=\"m3 3 10 10M3 13 13 3\"/></svg>
+"
+base_scale = 1.5
+saturation = 2.0
+color_map = {
+Color(1, 0.37254903, 0.37254903, 1): Color(1, 0.47, 0.42, 1),
+Color(0.37254903, 1, 0.5921569, 1): Color(0.45, 0.95, 0.5, 1),
+Color(1, 0.8666667, 0.39607844, 1): Color(1, 0.87, 0.4, 1)
+}
+
+[sub_resource type="DPITexture" id="DPITexture_r8xnr"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"m2 2v2h2v-2zm4 0v2h8v-2zm-4 5v2h2v-2zm4 0v2h8v-2zm-4 5v2h2v-2zm4 0v2h8v-2z\"/></svg>
+"
+base_scale = 1.5
+saturation = 2.0
+color_map = {
+Color(1, 0.37254903, 0.37254903, 1): Color(1, 0.47, 0.42, 1),
+Color(0.37254903, 1, 0.5921569, 1): Color(0.45, 0.95, 0.5, 1),
+Color(1, 0.8666667, 0.39607844, 1): Color(1, 0.87, 0.4, 1)
+}
+
+[node name="QuickMaterialScene" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_vd7f7")
+script = ExtResource("1_a6d5p")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="FilePicker" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="FilePickerHeaderContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/FilePicker"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_0e7cw")
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/FilePicker/FilePickerHeaderContainer"]
+layout_mode = 2
+
+[node name="FilePickerHeader" type="Button" parent="MarginContainer/VBoxContainer/FilePicker/FilePickerHeaderContainer/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 0.7058824)
+theme_override_colors/icon_disabled_color = Color(1, 1, 1, 0.7058824)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5imd6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_tn27v")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_23wei")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_e7vjh")
+disabled = true
+button_mask = 0
+text = "Quick Material"
+icon = SubResource("DPITexture_0e7cw")
+alignment = 0
+
+[node name="FileDragLabel" type="Label" parent="MarginContainer/VBoxContainer/FilePicker"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "No file selected. Drag a file here to start."
+clip_text = true
+
+[node name="FilePreview" type="TextureRect" parent="MarginContainer/VBoxContainer/FilePicker"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/FilePicker"]
+layout_mode = 2
+
+[node name="FilePickerTextBox" type="LineEdit" parent="MarginContainer/VBoxContainer/FilePicker/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "<empty>"
+
+[node name="FilePickerButton" type="Button" parent="MarginContainer/VBoxContainer/FilePicker/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+icon = SubResource("DPITexture_vd7f7")
+
+[node name="FilePickerEraser" type="Button" parent="MarginContainer/VBoxContainer/FilePicker/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+icon = SubResource("DPITexture_0nub4")
+
+[node name="MaterialCreation" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MaterialCreationHeaderContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/MaterialCreation"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_0e7cw")
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/MaterialCreation/MaterialCreationHeaderContainer"]
+layout_mode = 2
+
+[node name="MaterialCreationHeader" type="Button" parent="MarginContainer/VBoxContainer/MaterialCreation/MaterialCreationHeaderContainer/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 0.7058824)
+theme_override_colors/icon_disabled_color = Color(1, 1, 1, 0.7058824)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5imd6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_tn27v")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_23wei")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_e7vjh")
+disabled = true
+button_mask = 0
+text = "Material Properties"
+icon = SubResource("DPITexture_r8xnr")
+alignment = 0
+
+[node name="Options" type="HSplitContainer" parent="MarginContainer/VBoxContainer/MaterialCreation"]
+layout_mode = 2
+split_offset = 310
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MaterialCreation/Options"]
+layout_mode = 2
+
+[node name="TransparencyLabel" type="Label" parent="MarginContainer/VBoxContainer/MaterialCreation/Options/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Transparent"
+vertical_alignment = 1
+
+[node name="EmissionLabel" type="Label" parent="MarginContainer/VBoxContainer/MaterialCreation/Options/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Emissive"
+vertical_alignment = 1
+
+[node name="DoubleSideLabel" type="Label" parent="MarginContainer/VBoxContainer/MaterialCreation/Options/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Double-Sided"
+vertical_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/MaterialCreation/Options"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_vd7f7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MaterialCreation/Options/PanelContainer"]
+layout_mode = 2
+
+[node name="TransparencyCheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/MaterialCreation/Options/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "On"
+
+[node name="EmissionCheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/MaterialCreation/Options/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "On"
+
+[node name="DoubleSideCheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/MaterialCreation/Options/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "On"
+
+[node name="CreateMaterialButton" type="Button" parent="MarginContainer/VBoxContainer/MaterialCreation"]
+layout_mode = 2
+text = "Create Material"
+
+[node name="FilePickerDialog" type="FileDialog" parent="."]
+unique_name_in_owner = true
+title = "Open a File"
+file_mode = 0
+filters = PackedStringArray("*.png ; Image Files", "*.png ; Image Files", "*.png ; Image Files", "*.png ; Image Files")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/FilePicker/HBoxContainer/FilePickerButton" to="." method="_on_file_picker_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/FilePicker/HBoxContainer/FilePickerEraser" to="." method="_on_file_picker_eraser_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MaterialCreation/CreateMaterialButton" to="." method="_on_create_material_button_pressed"]
+[connection signal="file_selected" from="FilePickerDialog" to="." method="_on_file_picker_dialog_file_selected"]

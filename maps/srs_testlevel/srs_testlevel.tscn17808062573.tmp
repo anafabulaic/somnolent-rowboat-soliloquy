@@ -1,0 +1,655 @@
+[gd_scene load_steps=46 format=3 uid="uid://c6eehclo76ctx"]
+
+[ext_resource type="Script" uid="uid://buckq04u7fn0t" path="res://components/entities/map_scene.gd" id="1_pc3k2"]
+[ext_resource type="Environment" uid="uid://ca8bvt7wjvxip" path="res://materials/sky/environments/test_scene.tres" id="2_54pdo"]
+[ext_resource type="ArrayOccluder3D" uid="uid://cecqumb46v1ef" path="res://maps/srs_testlevel/srs_testlevel.occ" id="3_ln2k3"]
+[ext_resource type="LightmapGIData" uid="uid://mlvwhqiis2iw" path="res://maps/srs_testlevel/srs_testlevel.lmbake" id="4_pdack"]
+[ext_resource type="PackedScene" uid="uid://ciw48xbp1lrhy" path="res://scenes/map_entities/doors/map_door1.tscn" id="5_xvfjm"]
+[ext_resource type="PackedScene" uid="uid://3vafmsjb1bdh" path="res://models/levels/testlevel.glb" id="6_j2jv2"]
+[ext_resource type="Script" uid="uid://vu4en3txosrr" path="res://components/entities/physics/physics_prop.gd" id="9_3wv6t"]
+[ext_resource type="Script" uid="uid://ul0kbjravm0b" path="res://components/entities/map_spawnpoint.gd" id="9_7hb5g"]
+[ext_resource type="Resource" uid="uid://mfqndggnsmfu" path="res://plastic.tres" id="10_onhiw"]
+[ext_resource type="PackedScene" uid="uid://cwmp72pwppte1" path="res://scenes/map_entities/map_info_bubble.tscn" id="11_bi52l"]
+[ext_resource type="PackedScene" uid="uid://c4h2pgk047t4v" path="res://scenes/map_entities/props/prop_physbox.tscn" id="12_7hb5g"]
+[ext_resource type="Script" uid="uid://b65ry1hptnufj" path="res://components/entities/interactive/map_trinket.gd" id="13_ln2k3"]
+[ext_resource type="Script" uid="uid://gkki0ci4yiks" path="res://components/entities/interactive/conditionals/interact_condition_delay.gd" id="14_2n247"]
+[ext_resource type="Texture2D" uid="uid://cxoe5ajdq4l0k" path="res://icon.svg" id="14_pdack"]
+[ext_resource type="Resource" uid="uid://c3k2ru0357134" path="res://trinkets/test_trinket/test_trinket.tres" id="14_xvfjm"]
+[ext_resource type="AudioStream" uid="uid://dpyjxpatd1dlq" path="res://sounds/interaction/meow.ogg" id="15_mgqn3"]
+[ext_resource type="Resource" uid="uid://v64wfbu37top" path="res://trinkets/test_trinket2/test_trinket2.tres" id="16_3wv6t"]
+[ext_resource type="Script" uid="uid://diry24ij7ve2h" path="res://components/entities/interactive/effects/effect_play_2D_sound.gd" id="16_5dh8q"]
+[ext_resource type="Script" uid="uid://gpfdxtmbylmt" path="res://components/entities/interactive/base/interactable_conditional.gd" id="16_xvfjm"]
+[ext_resource type="Script" uid="uid://bsqpmw5vc5dvx" path="res://components/entities/interactive/conditionals/interact_condition_has_trinket.gd" id="17_j2jv2"]
+[ext_resource type="Script" uid="uid://d2ird86ui57tc" path="res://components/entities/interactive/effects/map_player_teleport.gd" id="18_3wv6t"]
+[ext_resource type="Script" uid="uid://cxskkr6k8urre" path="res://components/entities/interactive/effects/map_player_level_change.gd" id="19_bi52l"]
+[ext_resource type="Script" uid="uid://cfpvlqnslqmvn" path="res://components/entities/interactive/effects/effect_print_debug.gd" id="19_onhiw"]
+[ext_resource type="AudioStream" uid="uid://n0joyeb74gmf" path="res://sounds/effects/sfx_teleport.wav" id="21_bi52l"]
+[ext_resource type="Script" uid="uid://smxebn1sb80y" path="res://components/entities/interactive/effects/effect_multiple.gd" id="22_8isf3"]
+[ext_resource type="AudioStream" uid="uid://dj2ykqol653i7" path="res://sounds/ui/ui_trinket_equip.wav" id="23_ff3cu"]
+[ext_resource type="Script" uid="uid://cw4axrxes7bwd" path="res://components/entities/interactive/effects/effect_play_music.gd" id="24_gt6x8"]
+[ext_resource type="AudioStream" uid="uid://df7pyg2c2ke16" path="res://sounds/entities/doors/qubodup-DoorClose06.ogg" id="24_w1iy7"]
+[ext_resource type="Resource" uid="uid://c512e4wcq5vt3" path="res://scenes/ui/transition_effect/fade_transition_effect.tres" id="25_rhje1"]
+[ext_resource type="Resource" uid="uid://dprnrg4nak21v" path="res://resources/music/testmusic1.tres" id="25_umcqo"]
+[ext_resource type="Resource" uid="uid://0juuoepqwp34" path="res://resources/music/testmusic2.tres" id="26_umcqo"]
+[ext_resource type="Resource" uid="uid://dmcki5trutijk" path="res://scenes/ui/transition_effect/zoom_transition_effect.tres" id="27_d18oo"]
+[ext_resource type="Script" uid="uid://bwpdcps8wrej1" path="res://components/entities/interactive/map_interact_volume.gd" id="27_wyq58"]
+[ext_resource type="Resource" uid="uid://bki6n0buwhhg8" path="res://scenes/ui/transition_effect/strip_transition_effect.tres" id="28_gt6x8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bl13t"]
+cull_mode = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_k0t8k"]
+material = SubResource("StandardMaterial3D_bl13t")
+size = Vector2(0.2, 2)
+subdivide_depth = 8
+
+[sub_resource type="BoxMesh" id="BoxMesh_coxib"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nr2x3"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nr2x3"]
+bounce = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_nr2x3"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7xtry"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xvfjm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j2jv2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7hb5g"]
+size = Vector3(1, 1.5124817, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8isf3"]
+size = Vector3(1.9716797, 3.6983643, 2.6367188)
+
+[node name="TestScene" type="Node3D"]
+script = ExtResource("1_pc3k2")
+map_name = "srs_testlevel"
+metadata/_custom_type_script = "uid://buckq04u7fn0t"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("2_54pdo")
+
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="."]
+occluder = ExtResource("3_ln2k3")
+bake_mask = 4294967293
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+bounce_indirect_energy = 2.0
+light_data = ExtResource("4_pdack")
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="MapDoor1" parent="World" instance=ExtResource("5_xvfjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.25, 0, -5)
+
+[node name="testlevel" parent="World" instance=ExtResource("6_j2jv2")]
+
+[node name="Physics" type="Node3D" parent="."]
+
+[node name="softbodytest" type="Node3D" parent="Physics"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -3.9928212, 1.6698437, -6.2916145)
+
+[node name="SoftBody3D6" type="SoftBody3D" parent="Physics/softbodytest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.98027897, 0, 0)
+mesh = SubResource("PlaneMesh_k0t8k")
+skeleton = NodePath("../SoftBody3D2")
+collision_layer = 0
+collision_mask = 2147483651
+simulation_precision = 1
+linear_stiffness = 1.0
+ray_pickable = false
+pinned_points = [19, 18]
+attachments/0/point_index = 19
+attachments/0/spatial_attachment_path = NodePath("")
+attachments/0/offset = Vector3(0, 0, 0)
+attachments/1/point_index = 18
+attachments/1/spatial_attachment_path = NodePath("")
+attachments/1/offset = Vector3(0, 0, 0)
+
+[node name="SoftBody3D5" type="SoftBody3D" parent="Physics/softbodytest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4792881, 0, 0)
+mesh = SubResource("PlaneMesh_k0t8k")
+skeleton = NodePath("../SoftBody3D6")
+collision_layer = 0
+collision_mask = 2147483651
+simulation_precision = 1
+linear_stiffness = 1.0
+ray_pickable = false
+pinned_points = [19, 18]
+attachments/0/point_index = 19
+attachments/0/spatial_attachment_path = NodePath("")
+attachments/0/offset = Vector3(0, 0, 0)
+attachments/1/point_index = 18
+attachments/1/spatial_attachment_path = NodePath("")
+attachments/1/offset = Vector3(0, 0, 0)
+
+[node name="SoftBody3D4" type="SoftBody3D" parent="Physics/softbodytest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2276502, 0, 0)
+mesh = SubResource("PlaneMesh_k0t8k")
+skeleton = NodePath("../SoftBody3D3")
+collision_layer = 0
+collision_mask = 2147483651
+simulation_precision = 1
+linear_stiffness = 1.0
+ray_pickable = false
+pinned_points = [19, 18]
+attachments/0/point_index = 19
+attachments/0/spatial_attachment_path = NodePath("")
+attachments/0/offset = Vector3(0, 0, 0)
+attachments/1/point_index = 18
+attachments/1/spatial_attachment_path = NodePath("")
+attachments/1/offset = Vector3(0, 0, 0)
+
+[node name="SoftBody3D3" type="SoftBody3D" parent="Physics/softbodytest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.72491646, 0, 0)
+mesh = SubResource("PlaneMesh_k0t8k")
+skeleton = NodePath("../SoftBody3D2")
+collision_layer = 0
+collision_mask = 2147483651
+simulation_precision = 1
+linear_stiffness = 1.0
+ray_pickable = false
+pinned_points = [19, 18]
+attachments/0/point_index = 19
+attachments/0/spatial_attachment_path = NodePath("")
+attachments/0/offset = Vector3(0, 0, 0)
+attachments/1/point_index = 18
+attachments/1/spatial_attachment_path = NodePath("")
+attachments/1/offset = Vector3(0, 0, 0)
+
+[node name="SoftBody3D2" type="SoftBody3D" parent="Physics/softbodytest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45132494, 0, 0)
+mesh = SubResource("PlaneMesh_k0t8k")
+collision_layer = 0
+collision_mask = 2147483651
+simulation_precision = 1
+linear_stiffness = 1.0
+ray_pickable = false
+pinned_points = [19, 18]
+attachments/0/point_index = 19
+attachments/0/spatial_attachment_path = NodePath("")
+attachments/0/offset = Vector3(0, 0, 0)
+attachments/1/point_index = 18
+attachments/1/spatial_attachment_path = NodePath("")
+attachments/1/offset = Vector3(0, 0, 0)
+
+[node name="SoftBody3D" type="SoftBody3D" parent="Physics/softbodytest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19529247, 0, 0)
+mesh = SubResource("PlaneMesh_k0t8k")
+skeleton = NodePath("../../..")
+collision_layer = 0
+collision_mask = 2147483651
+simulation_precision = 1
+linear_stiffness = 1.0
+ray_pickable = false
+pinned_points = [19, 18]
+attachments/0/point_index = 19
+attachments/0/spatial_attachment_path = NodePath("")
+attachments/0/offset = Vector3(0, 0, 0)
+attachments/1/point_index = 18
+attachments/1/spatial_attachment_path = NodePath("")
+attachments/1/offset = Vector3(0, 0, 0)
+
+[node name="littlebox" type="RigidBody3D" parent="Physics"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.552221, 2.3788157, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 20.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Physics/littlebox"]
+layers = 2
+mesh = SubResource("BoxMesh_coxib")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Physics/littlebox"]
+shape = SubResource("BoxShape3D_nr2x3")
+
+[node name="bigbox" type="RigidBody3D" parent="Physics"]
+transform = Transform3D(2.8485725, 0, 0, 0, 3.9974587, 0, 0, 0, 3.983036, -8.58241, 2.0657911, -8.035668)
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Physics/bigbox"]
+layers = 2
+mesh = SubResource("BoxMesh_coxib")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Physics/bigbox"]
+shape = SubResource("BoxShape3D_nr2x3")
+
+[node name="physball" type="RigidBody3D" parent="Physics"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6552958, 0.9785087, -5.17909)
+collision_layer = 2
+collision_mask = 3
+mass = 50.0
+physics_material_override = SubResource("PhysicsMaterial_nr2x3")
+script = ExtResource("9_3wv6t")
+sound_mat = ExtResource("10_onhiw")
+metadata/_custom_type_script = "uid://vu4en3txosrr"
+
+[node name="physbox-rigid" type="MeshInstance3D" parent="Physics/physball"]
+layers = 2
+gi_mode = 0
+mesh = SubResource("SphereMesh_nr2x3")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Physics/physball"]
+shape = SubResource("SphereShape3D_7xtry")
+
+[node name="PropPhysbox" parent="Physics" instance=ExtResource("12_7hb5g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8380585, 0.5, -2.907195)
+metadata/asset_placer_res_id = "uid://c4h2pgk047t4v"
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, -0.034271605, 0.99941254, 0, -0.99941254, -0.034271605, 0, 2.133125, 0)
+light_bake_mode = 1
+shadow_enabled = true
+shadow_reverse_cull_face = true
+directional_shadow_blend_splits = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -17.939163, 3.9584742, 0.057973742)
+light_energy = 2.445
+light_bake_mode = 1
+spot_range = 6.2791915
+spot_angle = 49.819645
+
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="MapSpawnPoint" type="Marker3D" parent="Entities"]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 2.763617, 0, 2.0076118)
+script = ExtResource("9_7hb5g")
+spawn_point_name = "test"
+metadata/_custom_type_script = "uid://ul0kbjravm0b"
+
+[node name="MapInfoBubble" parent="Entities" instance=ExtResource("11_bi52l")]
+transform = Transform3D(1, 0, 1.7484555e-07, 0, 1, 0, -1.7484555e-07, 0, 1, -16.555407, 1.5, 2.8946392e-06)
+label_text = "I AM A TEST!
+HELP ME IMMEDIATELY"
+
+[node name="MapDoor1" parent="Entities" instance=ExtResource("5_xvfjm")]
+transform = Transform3D(1.000001, 0, 0, 0, 1, 0, 0, 0, 1.000001, 11, -2.3841858e-07, -1)
+metadata/asset_placer_res_id = "uid://ciw48xbp1lrhy"
+
+[node name="Trinket" type="Node3D" parent="Entities"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.306393)
+
+[node name="MapTrinket" type="StaticBody3D" parent="Entities/Trinket"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.772985, 0.88300264, 7.16123)
+script = ExtResource("13_ln2k3")
+trinket = ExtResource("14_xvfjm")
+metadata/_custom_type_script = "uid://b65ry1hptnufj"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Trinket/MapTrinket"]
+shape = SubResource("BoxShape3D_xvfjm")
+
+[node name="Sprite3D" type="Sprite3D" parent="Entities/Trinket/MapTrinket"]
+billboard = 2
+texture = ExtResource("14_pdack")
+
+[node name="Label" type="Label3D" parent="Entities/Trinket/MapTrinket"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7691575, 0)
+billboard = 2
+text = "Trinket: test_trinket"
+
+[node name="MapTrinket2" type="StaticBody3D" parent="Entities/Trinket"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.272147, 0.88300264, 7.16123)
+script = ExtResource("13_ln2k3")
+trinket = ExtResource("16_3wv6t")
+metadata/_custom_type_script = "uid://b65ry1hptnufj"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Trinket/MapTrinket2"]
+shape = SubResource("BoxShape3D_xvfjm")
+
+[node name="Sprite3D" type="Sprite3D" parent="Entities/Trinket/MapTrinket2"]
+billboard = 2
+texture = ExtResource("14_pdack")
+
+[node name="Label" type="Label3D" parent="Entities/Trinket/MapTrinket2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7691575, 0)
+billboard = 2
+text = "Trinket: test_trinket2"
+
+[node name="Conditionals" type="Node3D" parent="Entities"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.306393)
+
+[node name="InteractableConditionalFilter" type="StaticBody3D" parent="Entities/Conditionals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.486961, 0.88300264, 10.073232)
+collision_layer = 9
+collision_mask = 0
+script = ExtResource("16_xvfjm")
+can_interact = true
+metadata/_custom_type_script = "uid://gpfdxtmbylmt"
+
+[node name="InteractionConditionHasTrinket" type="Node" parent="Entities/Conditionals/InteractableConditionalFilter"]
+script = ExtResource("17_j2jv2")
+trinket = ExtResource("14_xvfjm")
+metadata/_custom_type_script = "uid://bsqpmw5vc5dvx"
+
+[node name="InteractableEffectPrintDebug" type="Node" parent="Entities/Conditionals/InteractableConditionalFilter"]
+script = ExtResource("19_onhiw")
+metadata/_custom_type_script = "uid://cfpvlqnslqmvn"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Conditionals/InteractableConditionalFilter"]
+shape = SubResource("BoxShape3D_j2jv2")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Entities/Conditionals/InteractableConditionalFilter"]
+billboard = 2
+texture = ExtResource("14_pdack")
+
+[node name="Label" type="Label3D" parent="Entities/Conditionals/InteractableConditionalFilter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7691575, 0)
+billboard = 2
+text = "Conditional (Conditions as Filter)
+If you don't have test_trinket, this will fail!"
+
+[node name="InteractableConditionalActivateChildren" type="StaticBody3D" parent="Entities/Conditionals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.094067, 0.88300264, 10.073232)
+collision_layer = 9
+collision_mask = 0
+script = ExtResource("16_xvfjm")
+condition_mode = 1
+can_interact = true
+metadata/_custom_type_script = "uid://gpfdxtmbylmt"
+
+[node name="InteractionConditionHasTrinket" type="Node" parent="Entities/Conditionals/InteractableConditionalActivateChildren"]
+script = ExtResource("17_j2jv2")
+trinket = ExtResource("14_xvfjm")
+metadata/_custom_type_script = "uid://bsqpmw5vc5dvx"
+
+[node name="InteractableEffectPrintDebug" type="Node" parent="Entities/Conditionals/InteractableConditionalActivateChildren/InteractionConditionHasTrinket"]
+script = ExtResource("19_onhiw")
+metadata/_custom_type_script = "uid://cfpvlqnslqmvn"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Conditionals/InteractableConditionalActivateChildren"]
+shape = SubResource("BoxShape3D_j2jv2")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Entities/Conditionals/InteractableConditionalActivateChildren"]
+billboard = 2
+texture = ExtResource("14_pdack")
+
+[node name="Label" type="Label3D" parent="Entities/Conditionals/InteractableConditionalActivateChildren"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7691575, 0)
+billboard = 2
+text = "Conditional (Conditions Activate Children)
+If you don't have test_trinket, this will fail!"
+
+[node name="InteractableConditionalActivateChildrenExclusive" type="StaticBody3D" parent="Entities/Conditionals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.76531, 0, 10.259225)
+collision_layer = 9
+collision_mask = 0
+script = ExtResource("16_xvfjm")
+condition_mode = 2
+use_ui_failure = false
+can_interact = true
+metadata/_custom_type_script = "uid://gpfdxtmbylmt"
+
+[node name="InteractConditionDelay" type="Node" parent="Entities/Conditionals/InteractableConditionalActivateChildrenExclusive"]
+script = ExtResource("14_2n247")
+delay = 0.5
+metadata/_custom_type_script = "uid://gkki0ci4yiks"
+
+[node name="InteractionConditionHasTrinket" type="Node" parent="Entities/Conditionals/InteractableConditionalActivateChildrenExclusive/InteractConditionDelay"]
+script = ExtResource("17_j2jv2")
+trinket = ExtResource("16_3wv6t")
+metadata/_custom_type_script = "uid://bsqpmw5vc5dvx"
+
+[node name="InteractableEffectPlayUISound" type="Node" parent="Entities/Conditionals/InteractableConditionalActivateChildrenExclusive/InteractConditionDelay/InteractionConditionHasTrinket"]
+script = ExtResource("16_5dh8q")
+sound = ExtResource("15_mgqn3")
+metadata/_custom_type_script = "uid://diry24ij7ve2h"
+
+[node name="InteractionConditionHasTrinket2" type="Node" parent="Entities/Conditionals/InteractableConditionalActivateChildrenExclusive/InteractConditionDelay"]
+script = ExtResource("17_j2jv2")
+trinket = ExtResource("14_xvfjm")
+metadata/_custom_type_script = "uid://bsqpmw5vc5dvx"
+
+[node name="InteractableEffectPlayUISound" type="Node" parent="Entities/Conditionals/InteractableConditionalActivateChildrenExclusive/InteractConditionDelay/InteractionConditionHasTrinket2"]
+script = ExtResource("16_5dh8q")
+sound = ExtResource("15_mgqn3")
+pitch = 0.5
+metadata/_custom_type_script = "uid://diry24ij7ve2h"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Conditionals/InteractableConditionalActivateChildrenExclusive"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7220478, 0)
+shape = SubResource("BoxShape3D_7hb5g")
+
+[node name="Sprite3D" type="Sprite3D" parent="Entities/Conditionals/InteractableConditionalActivateChildrenExclusive"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.80418277, 0)
+billboard = 2
+texture = ExtResource("14_pdack")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Entities/Conditionals/InteractableConditionalActivateChildrenExclusive"]
+
+[node name="Label" type="Label3D" parent="Entities/Conditionals/InteractableConditionalActivateChildrenExclusive"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6630684, 0)
+billboard = 2
+text = "Conditional (Decision Tree)
+This interactable will meow differently based
+on which test_trinket you're holding"
+
+[node name="InteractableConditionalWhatever" type="StaticBody3D" parent="Entities/Conditionals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.883989, 0, 3.4487982)
+collision_layer = 9
+collision_mask = 0
+script = ExtResource("16_xvfjm")
+condition_mode = 2
+use_ui_failure = false
+can_interact = true
+metadata/_custom_type_script = "uid://gpfdxtmbylmt"
+
+[node name="InteractableEffectMultiple" type="Node" parent="Entities/Conditionals/InteractableConditionalWhatever"]
+script = ExtResource("22_8isf3")
+use_children = true
+metadata/_custom_type_script = "uid://smxebn1sb80y"
+
+[node name="InteractableEffectPlay2DSound" type="Node" parent="Entities/Conditionals/InteractableConditionalWhatever/InteractableEffectMultiple"]
+script = ExtResource("16_5dh8q")
+sound = ExtResource("23_ff3cu")
+metadata/_custom_type_script = "uid://diry24ij7ve2h"
+
+[node name="InteractableEffectPlay2DSound2" type="Node" parent="Entities/Conditionals/InteractableConditionalWhatever/InteractableEffectMultiple"]
+script = ExtResource("16_5dh8q")
+sound = ExtResource("15_mgqn3")
+metadata/_custom_type_script = "uid://diry24ij7ve2h"
+
+[node name="InteractableEffectPlay2DSound3" type="Node" parent="Entities/Conditionals/InteractableConditionalWhatever/InteractableEffectMultiple"]
+script = ExtResource("16_5dh8q")
+sound = ExtResource("24_w1iy7")
+metadata/_custom_type_script = "uid://diry24ij7ve2h"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Conditionals/InteractableConditionalWhatever"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7220478, 0)
+shape = SubResource("BoxShape3D_7hb5g")
+
+[node name="Sprite3D" type="Sprite3D" parent="Entities/Conditionals/InteractableConditionalWhatever"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.80418277, 0)
+billboard = 2
+texture = ExtResource("14_pdack")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Entities/Conditionals/InteractableConditionalWhatever"]
+
+[node name="Label" type="Label3D" parent="Entities/Conditionals/InteractableConditionalWhatever"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6630684, 0)
+billboard = 2
+text = "Conditional (Whatever Shit I Put Here)
+Does the last thing I needed to test"
+
+[node name="MapInteractVolume" type="Area3D" parent="Entities/Conditionals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.040503, 0, -3.5286036)
+collision_layer = 0
+collision_mask = 2147483648
+monitorable = false
+script = ExtResource("27_wyq58")
+trigger_on_enter = true
+metadata/_custom_type_script = "uid://bwpdcps8wrej1"
+
+[node name="InteractableEffectPlayMusic" type="Node" parent="Entities/Conditionals/MapInteractVolume"]
+script = ExtResource("24_gt6x8")
+music_resource = ExtResource("25_umcqo")
+stop_music = true
+metadata/_custom_type_script = "uid://cw4axrxes7bwd"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Conditionals/MapInteractVolume"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3491821, 0)
+shape = SubResource("BoxShape3D_8isf3")
+
+[node name="Label3D" type="Label3D" parent="Entities/Conditionals/MapInteractVolume"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8495173, 0)
+billboard = 2
+text = "If you walk in here
+music will stop playing!"
+
+[node name="MapInteractVolume2" type="Area3D" parent="Entities/Conditionals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.040503, 0, 0.27848577)
+collision_layer = 0
+collision_mask = 2147483648
+monitorable = false
+script = ExtResource("27_wyq58")
+trigger_on_enter = true
+metadata/_custom_type_script = "uid://bwpdcps8wrej1"
+
+[node name="InteractableEffectPlayMusic" type="Node" parent="Entities/Conditionals/MapInteractVolume2"]
+script = ExtResource("24_gt6x8")
+music_resource = ExtResource("26_umcqo")
+metadata/_custom_type_script = "uid://cw4axrxes7bwd"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Conditionals/MapInteractVolume2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3491821, 0)
+shape = SubResource("BoxShape3D_8isf3")
+
+[node name="Label3D" type="Label3D" parent="Entities/Conditionals/MapInteractVolume2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8495173, 0)
+billboard = 2
+text = "If you walk in here
+music will start playing!"
+
+[node name="Teleporters" type="Node3D" parent="Entities"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.306393)
+
+[node name="TeleporterFade" type="StaticBody3D" parent="Entities/Teleporters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.36654449, 0.88300264, 7.16123)
+collision_layer = 9
+collision_mask = 0
+script = ExtResource("16_xvfjm")
+can_interact = true
+metadata/_custom_type_script = "uid://gpfdxtmbylmt"
+
+[node name="MapPlayerTeleport" type="Node" parent="Entities/Teleporters/TeleporterFade" node_paths=PackedStringArray("destination")]
+script = ExtResource("18_3wv6t")
+destination = NodePath("../../TeleportDest")
+transition_type = ExtResource("25_rhje1")
+play_sound = true
+teleport_sound = ExtResource("21_bi52l")
+metadata/_custom_type_script = "uid://d2ird86ui57tc"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Teleporters/TeleporterFade"]
+shape = SubResource("BoxShape3D_j2jv2")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Entities/Teleporters/TeleporterFade"]
+billboard = 2
+texture = ExtResource("14_pdack")
+
+[node name="Label" type="Label3D" parent="Entities/Teleporters/TeleporterFade"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7691575, 0)
+billboard = 2
+text = "Teleporter - Fade"
+
+[node name="TeleporterZoom" type="StaticBody3D" parent="Entities/Teleporters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6780856, 0.88300264, 7.16123)
+collision_layer = 9
+collision_mask = 0
+script = ExtResource("16_xvfjm")
+can_interact = true
+metadata/_custom_type_script = "uid://gpfdxtmbylmt"
+
+[node name="MapPlayerTeleport" type="Node" parent="Entities/Teleporters/TeleporterZoom" node_paths=PackedStringArray("destination")]
+script = ExtResource("18_3wv6t")
+destination = NodePath("../../TeleportDest")
+transition_type = ExtResource("27_d18oo")
+play_sound = true
+teleport_sound = ExtResource("21_bi52l")
+metadata/_custom_type_script = "uid://d2ird86ui57tc"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Teleporters/TeleporterZoom"]
+shape = SubResource("BoxShape3D_j2jv2")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Entities/Teleporters/TeleporterZoom"]
+billboard = 2
+texture = ExtResource("14_pdack")
+
+[node name="Label" type="Label3D" parent="Entities/Teleporters/TeleporterZoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7691575, 0)
+billboard = 2
+text = "Teleporter - Zoom"
+
+[node name="TeleporterStrip" type="StaticBody3D" parent="Entities/Teleporters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1943665, 0.88300264, 7.16123)
+collision_layer = 9
+collision_mask = 0
+script = ExtResource("16_xvfjm")
+can_interact = true
+metadata/_custom_type_script = "uid://gpfdxtmbylmt"
+
+[node name="MapPlayerTeleport" type="Node" parent="Entities/Teleporters/TeleporterStrip" node_paths=PackedStringArray("destination")]
+script = ExtResource("18_3wv6t")
+destination = NodePath("../../TeleportDest")
+transition_type = ExtResource("28_gt6x8")
+play_sound = true
+teleport_sound = ExtResource("21_bi52l")
+metadata/_custom_type_script = "uid://d2ird86ui57tc"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Teleporters/TeleporterStrip"]
+shape = SubResource("BoxShape3D_j2jv2")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Entities/Teleporters/TeleporterStrip"]
+billboard = 2
+texture = ExtResource("14_pdack")
+
+[node name="Label" type="Label3D" parent="Entities/Teleporters/TeleporterStrip"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7691575, 0)
+billboard = 2
+text = "Teleporter - Strip"
+
+[node name="TeleportDest" type="Marker3D" parent="Entities/Teleporters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.908255, 0, 7.2255425)
+
+[node name="LevelChange" type="Node3D" parent="Entities"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.306393)
+
+[node name="LevelChange" type="StaticBody3D" parent="Entities/LevelChange"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20858145, 0.88300264, 10.024633)
+collision_layer = 9
+collision_mask = 0
+script = ExtResource("16_xvfjm")
+can_interact = true
+metadata/_custom_type_script = "uid://gpfdxtmbylmt"
+
+[node name="MapPlayerLevelChange" type="Node" parent="Entities/LevelChange/LevelChange"]
+script = ExtResource("19_bi52l")
+level = "uid://cham4e43o18rj"
+spawnpoint = "test"
+transition_type = ExtResource("28_gt6x8")
+play_sound = true
+teleport_sound = ExtResource("21_bi52l")
+metadata/_custom_type_script = "uid://cxskkr6k8urre"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/LevelChange/LevelChange"]
+shape = SubResource("BoxShape3D_j2jv2")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Entities/LevelChange/LevelChange"]
+billboard = 2
+texture = ExtResource("14_pdack")
+
+[node name="Label" type="Label3D" parent="Entities/LevelChange/LevelChange"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7691575, 0)
+billboard = 2
+text = "Level Change"
+
+[connection signal="on_interact_succeed" from="Entities/Conditionals/InteractableConditionalFilter" to="Entities/Conditionals/InteractableConditionalFilter/InteractableEffectPrintDebug" method="trigger"]
+[connection signal="on_interact_succeed" from="Entities/Teleporters/TeleporterFade" to="Entities/Teleporters/TeleporterFade/MapPlayerTeleport" method="trigger"]
+[connection signal="on_interact_succeed" from="Entities/Teleporters/TeleporterZoom" to="Entities/Teleporters/TeleporterZoom/MapPlayerTeleport" method="trigger"]
+[connection signal="on_interact_succeed" from="Entities/Teleporters/TeleporterStrip" to="Entities/Teleporters/TeleporterStrip/MapPlayerTeleport" method="trigger"]
+[connection signal="on_interact_succeed" from="Entities/LevelChange/LevelChange" to="Entities/LevelChange/LevelChange/MapPlayerLevelChange" method="trigger"]

@@ -1,0 +1,422 @@
+[gd_scene load_steps=42 format=3 uid="uid://dtdnvis8ni0o"]
+
+[ext_resource type="Script" uid="uid://buckq04u7fn0t" path="res://components/entities/map_scene.gd" id="1_snuy3"]
+[ext_resource type="Shader" uid="uid://dkpp5dqov1ncx" path="res://materials/sky/shader/ripple_sky.gdshader" id="2_1gf3v"]
+[ext_resource type="Texture2D" uid="uid://bft8o5ogtgcil" path="res://materials/sky/nexus_skybox.hdr" id="3_0up50"]
+[ext_resource type="ArrayOccluder3D" uid="uid://dhtfaftvncnyd" path="res://maps/srs_site433_dream/srs_site433_dream.occ" id="3_a1vq4"]
+[ext_resource type="LightmapGIData" uid="uid://i7yu1xgncmkq" path="res://maps/srs_site433_dream/srs_site433_dream.lmbake" id="4_x8xre"]
+[ext_resource type="PackedScene" uid="uid://b2bxn0ayjxw5m" path="res://maps/srs_site433/srs_site433.glb" id="5_se8b2"]
+[ext_resource type="PackedScene" uid="uid://b5jatwf525aqn" path="res://models/prop_surveillance_camera/prop_surveillance_camera.glb" id="6_wkdhs"]
+[ext_resource type="PackedScene" uid="uid://bnji3mrlb5is7" path="res://models/prop_bed/prop_bed.glb" id="7_u7kdy"]
+[ext_resource type="PackedScene" uid="uid://ciw48xbp1lrhy" path="res://scenes/map_entities/doors/map_door1.tscn" id="8_8wj33"]
+[ext_resource type="Script" uid="uid://ul0kbjravm0b" path="res://components/entities/map_spawnpoint.gd" id="9_28kpg"]
+[ext_resource type="PackedScene" uid="uid://dunpoadkoto00" path="res://models/prop_garbage_pile2/prop_garbage_pile2.glb" id="9_a1vq4"]
+[ext_resource type="PackedScene" uid="uid://bchy5kr5rky8u" path="res://maps/srs_site433_dream/srs_site433_dream.glb" id="11_a1vq4"]
+[ext_resource type="PackedScene" uid="uid://dfvx637jrbef7" path="res://models/prop_computer/prop_computer.glb" id="11_buo4c"]
+[ext_resource type="PackedScene" uid="uid://cfq1hnulhcmgq" path="res://models/prop_computer_monitor/prop_computer_monitor.glb" id="12_tdro0"]
+[ext_resource type="Texture2D" uid="uid://cu66y7poa73o7" path="res://materials/water/splashparticle.png" id="12_x8xre"]
+[ext_resource type="Texture2D" uid="uid://g8cgpjw6578x" path="res://materials/sky/blue_sky.hdr" id="13_3g6lq"]
+[ext_resource type="Material" uid="uid://cutc44cu3vb8n" path="res://models/prop_computer_monitor/prop_computer_monitor.tres" id="13_082nl"]
+[ext_resource type="Script" uid="uid://gpfdxtmbylmt" path="res://components/entities/interactive/base/interactable_conditional.gd" id="13_tdro0"]
+[ext_resource type="Script" uid="uid://smxebn1sb80y" path="res://components/entities/interactive/effects/effect_multiple.gd" id="15_svav5"]
+[ext_resource type="Script" uid="uid://c0irewagqysai" path="res://components/entities/interactive/map_interact_auto.gd" id="15_u7kdy"]
+[ext_resource type="PackedScene" uid="uid://c4h2pgk047t4v" path="res://scenes/map_entities/props/prop_physbox.tscn" id="15_wkdhs"]
+[ext_resource type="Script" uid="uid://cw4axrxes7bwd" path="res://components/entities/interactive/effects/effect_play_music.gd" id="16_8wj33"]
+[ext_resource type="Resource" uid="uid://cxoorrkbi6bed" path="res://resources/music/mus_res_nexus.tres" id="17_8wj33"]
+[ext_resource type="AudioStream" uid="uid://cpapree3e8pcj" path="res://sounds/ui/ui_trinket_get.wav" id="17_e1ka8"]
+[ext_resource type="Script" uid="uid://diry24ij7ve2h" path="res://components/entities/interactive/effects/effect_play_2D_sound.gd" id="17_js3ko"]
+[ext_resource type="Script" uid="uid://b142d5fnhwjin" path="res://components/entities/interactive/effects/effect_trigger_method.gd" id="20_3iybn"]
+[ext_resource type="Script" uid="uid://c00h86pdx3rah" path="res://components/entities/interactive/effects/effect_do_ui_effect.gd" id="20_e1ka8"]
+[ext_resource type="Material" uid="uid://bdv3a8x3muvme" path="res://models/prop_computer_monitor/prop_computer_monitor_on2.tres" id="22_hyarv"]
+[ext_resource type="Script" uid="uid://cxskkr6k8urre" path="res://components/entities/interactive/effects/map_player_level_change.gd" id="22_y3anp"]
+[ext_resource type="Resource" uid="uid://dmcki5trutijk" path="res://scenes/ui/transition_effect/zoom_transition_effect.tres" id="23_svav5"]
+[ext_resource type="AudioStream" uid="uid://n0joyeb74gmf" path="res://sounds/effects/sfx_teleport.wav" id="24_5cqu2"]
+
+[sub_resource type="Gradient" id="Gradient_1gf3v"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0up50"]
+gradient = SubResource("Gradient_1gf3v")
+fill_from = Vector2(1, 0.54131055)
+fill_to = Vector2(1, 0.64387465)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3iybn"]
+noise_type = 2
+frequency = 0.02
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1af1s"]
+noise = SubResource("FastNoiseLite_3iybn")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hyarv"]
+shader = ExtResource("2_1gf3v")
+shader_parameter/sky_mat = ExtResource("3_0up50")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_1af1s")
+shader_parameter/gradient_mask = SubResource("GradientTexture2D_0up50")
+shader_parameter/speed = 0.002
+shader_parameter/distortion = 0.03
+shader_parameter/power = 2.0
+
+[sub_resource type="Sky" id="Sky_fr5j0"]
+sky_material = SubResource("ShaderMaterial_hyarv")
+
+[sub_resource type="Environment" id="Environment_r8huv"]
+background_mode = 2
+sky = SubResource("Sky_fr5j0")
+sky_rotation = Vector3(0, 2.9129546, 0)
+ambient_light_source = 1
+reflected_light_source = 1
+glow_enabled = true
+glow_normalized = true
+glow_strength = 1.5
+glow_mix = 0.2
+glow_bloom = 1.0
+fog_light_color = Color(0.24264203, 0.29646727, 0.47284538, 1)
+fog_aerial_perspective = 0.973
+adjustment_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_082nl"]
+size = Vector3(0.6485596, 0.5967407, 0.58496094)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e1ka8"]
+size = Vector3(0.2890625, 3.2357788, 1.6975098)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_js3ko"]
+size = Vector3(0.2890625, 3.0534363, 1.3691406)
+
+[node name="srs_site433" type="Node3D" node_paths=PackedStringArray("environment", "spawnpoints")]
+script = ExtResource("1_snuy3")
+map_name = "srs_site433_dream"
+environment = NodePath("WorldEnvironment")
+spawnpoints = [NodePath("Entities/spawnpoint_default"), NodePath("Entities/MSP_FromBackstage"), NodePath("Entities/MSP_FromHH"), NodePath("Entities/MSP_StatuesArea"), NodePath("Entities/MSP_FromPP")]
+world_bounds = Vector3(0, 50, 0)
+metadata/_custom_type_script = "uid://buckq04u7fn0t"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_r8huv")
+
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="."]
+occluder = ExtResource("3_a1vq4")
+bake_mask = 4294967293
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+supersampling = true
+light_data = ExtResource("4_x8xre")
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="srs_site433" parent="World" instance=ExtResource("5_se8b2")]
+
+[node name="srs_site433_dream" parent="World" instance=ExtResource("11_a1vq4")]
+
+[node name="curtain_002" parent="World/srs_site433_dream" index="15"]
+layers = 5
+
+[node name="curtain-detail_003" parent="World/srs_site433_dream" index="16"]
+layers = 5
+
+[node name="curtain_004" parent="World/srs_site433_dream" index="17"]
+layers = 5
+
+[node name="curtain-detail_005" parent="World/srs_site433_dream" index="18"]
+layers = 5
+
+[node name="tp_statue_psych-detail" parent="World/srs_site433_dream" index="50"]
+layers = 2
+
+[node name="prop_surveillance_camera2" parent="World" instance=ExtResource("6_wkdhs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6899247, 4.475905, -4.3468337)
+
+[node name="prop_surveillance_camera" parent="World/prop_surveillance_camera2" index="0"]
+cast_shadow = 1
+gi_mode = 1
+
+[node name="prop_bed2" parent="World" instance=ExtResource("7_u7kdy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7673439, 0.0076876665, 3.7581224)
+
+[node name="prop_bed" parent="World/prop_bed2" index="0"]
+transform = Transform3D(-0.9993496, 0, 0.036058865, 0, 1, 0, -0.036058865, 0, -0.9993496, -1.9201412, 0, 0.3127084)
+cast_shadow = 1
+gi_mode = 1
+
+[node name="MapDoor1" parent="World" instance=ExtResource("8_8wj33")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.6539152, 0, -6.1022143)
+
+[node name="prop_garbage_pile22" parent="World" instance=ExtResource("9_a1vq4")]
+transform = Transform3D(-0.2588191, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, -0.2588191, 0.9273591, -2.5809584, -8.984852)
+
+[node name="prop_computer2" parent="World" instance=ExtResource("11_buo4c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.80853, 0.94106174, -4.612397)
+
+[node name="prop_computer" parent="World/prop_computer2" index="0"]
+cast_shadow = 1
+gi_mode = 1
+
+[node name="prop_computer_monitor2" parent="World" instance=ExtResource("12_tdro0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8059214, 1.1211033, -4.621568)
+
+[node name="prop_computer_monitor" parent="World/prop_computer_monitor2" index="0"]
+cast_shadow = 1
+gi_mode = 1
+surface_material_override/1 = ExtResource("13_082nl")
+
+[node name="save_interactable" type="StaticBody3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8256952, 0.9410616, -4.6030297)
+collision_layer = 9
+script = ExtResource("13_tdro0")
+condition_mode = 2
+use_ui_success = false
+use_ui_failure = false
+interact_delay = 1.0
+can_interact = true
+
+[node name="InteractableEffectMultiple" type="Node" parent="World/save_interactable"]
+script = ExtResource("15_svav5")
+use_children = true
+metadata/_custom_type_script = "uid://smxebn1sb80y"
+
+[node name="InteractableEffectPlay2DSound" type="Node" parent="World/save_interactable/InteractableEffectMultiple"]
+script = ExtResource("17_js3ko")
+sound = ExtResource("17_e1ka8")
+use_random_pitch = true
+random_pitch_min = 0.2
+random_pitch_max = 0.4
+metadata/_custom_type_script = "uid://diry24ij7ve2h"
+
+[node name="InteractableEffectTriggerMethod" type="Node" parent="World/save_interactable/InteractableEffectMultiple" node_paths=PackedStringArray("target")]
+script = ExtResource("20_3iybn")
+target = NodePath("../../../prop_computer_monitor2/prop_computer_monitor")
+method_name = "set_surface_override_material"
+method_args = [1, ExtResource("22_hyarv")]
+metadata/_custom_type_script = "uid://b142d5fnhwjin"
+
+[node name="InteractableEffectTriggerMethod4" type="Node" parent="World/save_interactable/InteractableEffectMultiple" node_paths=PackedStringArray("target")]
+script = ExtResource("20_3iybn")
+target = NodePath("../../../prop_computer_monitor2/prop_computer_monitor")
+method_name = "set_surface_override_material"
+method_args = [1, ExtResource("13_082nl")]
+pre_delay = 0.2
+metadata/_custom_type_script = "uid://b142d5fnhwjin"
+
+[node name="InteractableEffectTriggerMethod2" type="Node" parent="World/save_interactable/InteractableEffectMultiple" node_paths=PackedStringArray("target")]
+script = ExtResource("20_3iybn")
+target = NodePath("../../../prop_computer_monitor2/prop_computer_monitor")
+method_name = "set_surface_override_material"
+method_args = [1, ExtResource("22_hyarv")]
+pre_delay = 0.4
+metadata/_custom_type_script = "uid://b142d5fnhwjin"
+
+[node name="InteractableEffectTriggerMethod3" type="Node" parent="World/save_interactable/InteractableEffectMultiple" node_paths=PackedStringArray("target")]
+script = ExtResource("20_3iybn")
+target = NodePath("../../../prop_computer_monitor2/prop_computer_monitor")
+method_name = "set_surface_override_material"
+method_args = [1, ExtResource("13_082nl")]
+pre_delay = 0.6
+metadata/_custom_type_script = "uid://b142d5fnhwjin"
+
+[node name="InteractableEffectDoUIEffect" type="Node" parent="World/save_interactable/InteractableEffectMultiple"]
+script = ExtResource("20_e1ka8")
+ui_effect = 1
+metadata/_custom_type_script = "uid://c00h86pdx3rah"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/save_interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.017028809, 0.26327515, 0.029785156)
+shape = SubResource("BoxShape3D_082nl")
+
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="Physics" type="Node3D" parent="Entities"]
+
+[node name="PropPhysbox" parent="Entities/Physics" instance=ExtResource("15_wkdhs")]
+transform = Transform3D(0.986898, 0, -0.16134547, 0, 1, 0, 0.16134547, 0, 0.986898, -2.0591226, -1.9540226, -10.75547)
+collision_layer = 11
+collision_mask = 2147483651
+mass = 5.0
+gravity_scale = 0.1
+prop_gravity = 0.05
+
+[node name="PropPhysbox2" parent="Entities/Physics" instance=ExtResource("15_wkdhs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9539807, -0.9231928, -10.874296)
+collision_layer = 11
+collision_mask = 2147483651
+mass = 5.0
+gravity_scale = 0.1
+prop_gravity = 0.05
+
+[node name="PropPhysbox3" parent="Entities/Physics" instance=ExtResource("15_wkdhs")]
+transform = Transform3D(0.9425599, 0, 0.33403718, 0, 1, 0, -0.33403718, 0, 0.9425599, -1.1718764, -1.9298182, -12.629439)
+collision_layer = 11
+collision_mask = 2147483651
+mass = 5.0
+gravity_scale = 0.1
+prop_gravity = 0.05
+
+[node name="PropPhysbox4" parent="Entities/Physics" instance=ExtResource("15_wkdhs")]
+transform = Transform3D(0.78605115, 0, 0.6181615, 0, 1, 0, -0.6181615, 0, 0.78605115, -3.5650215, -1.9008024, -12.205624)
+collision_layer = 11
+collision_mask = 2147483651
+mass = 5.0
+gravity_scale = 0.1
+prop_gravity = 0.05
+
+[node name="PropPhysbox5" parent="Entities/Physics" instance=ExtResource("15_wkdhs")]
+transform = Transform3D(-0.43347034, 0, 0.90116787, 0, 1, 0, -0.90116787, 0, -0.43347034, -3.4442756, -0.8431641, -12.537858)
+collision_layer = 11
+collision_mask = 2147483651
+mass = 5.0
+gravity_scale = 0.1
+prop_gravity = 0.05
+
+[node name="PropPhysbox6" parent="Entities/Physics" instance=ExtResource("15_wkdhs")]
+transform = Transform3D(-0.3611851, 0, -0.93249416, 0, 1, 0, 0.93249416, 0, -0.3611851, -3.4442756, 0.20016754, -12.537858)
+collision_layer = 11
+collision_mask = 2147483651
+mass = 5.0
+gravity_scale = 0.1
+prop_gravity = 0.05
+
+[node name="Lights" type="Node3D" parent="Entities"]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Entities/Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 6.7060714, -2.9313168e-07)
+light_color = Color(0.91, 0.91, 0.91, 1)
+light_energy = 20.0
+light_bake_mode = 1
+spot_range = 14.412
+spot_attenuation = 1.89
+spot_angle = 74.53
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Entities/Lights"]
+transform = Transform3D(-0.9919527, -0.015835796, -0.12561464, -0.08847919, 0.7963674, 0.5983065, 0.09056069, 0.6046059, -0.7913599, -9.630769, 40.191566, -60.74501)
+light_energy = 20.0
+light_bake_mode = 1
+spot_range = 124.62341
+spot_angle = 33.77922
+
+[node name="World Teleports" type="Node3D" parent="Entities"]
+
+[node name="BackstageWorldTeleport" type="StaticBody3D" parent="Entities/World Teleports"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -2, -20)
+collision_layer = 9
+collision_mask = 0
+script = ExtResource("13_tdro0")
+condition_mode = 2
+use_ui_failure = false
+interact_delay = 1.0
+can_interact = true
+
+[node name="MapPlayerLevelChange" type="Node" parent="Entities/World Teleports/BackstageWorldTeleport"]
+script = ExtResource("22_y3anp")
+level = "uid://ivpp1l2ui86f"
+spawnpoint = "from_nexus"
+transition_type = ExtResource("23_svav5")
+transition_duration = 1.0
+play_sound = true
+teleport_sound = ExtResource("24_5cqu2")
+metadata/_custom_type_script = "uid://cxskkr6k8urre"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/World Teleports/BackstageWorldTeleport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1178894, 0)
+shape = SubResource("BoxShape3D_e1ka8")
+
+[node name="PsychicWorldTeleport" type="StaticBody3D" parent="Entities/World Teleports"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -2, -33.989902)
+collision_layer = 9
+collision_mask = 0
+script = ExtResource("13_tdro0")
+condition_mode = 2
+use_ui_failure = false
+interact_delay = 1.0
+can_interact = true
+
+[node name="MapPlayerLevelChange" type="Node" parent="Entities/World Teleports/PsychicWorldTeleport"]
+script = ExtResource("22_y3anp")
+level = "uid://cwbu2u3elcgcs"
+spawnpoint = "from_nexus"
+transition_type = ExtResource("23_svav5")
+transition_duration = 1.0
+play_sound = true
+teleport_sound = ExtResource("24_5cqu2")
+metadata/_custom_type_script = "uid://cxskkr6k8urre"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/World Teleports/PsychicWorldTeleport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0267181, 0)
+shape = SubResource("BoxShape3D_js3ko")
+
+[node name="HorseWorldTeleport" type="StaticBody3D" parent="Entities/World Teleports"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -2, -27)
+collision_layer = 9
+collision_mask = 0
+script = ExtResource("13_tdro0")
+condition_mode = 2
+use_ui_failure = false
+interact_delay = 1.0
+can_interact = true
+
+[node name="MapPlayerLevelChange" type="Node" parent="Entities/World Teleports/HorseWorldTeleport"]
+script = ExtResource("22_y3anp")
+level = "uid://2llcs583f3tp"
+spawnpoint = "from_nexus"
+transition_type = ExtResource("23_svav5")
+transition_duration = 1.0
+play_sound = true
+teleport_sound = ExtResource("24_5cqu2")
+metadata/_custom_type_script = "uid://cxskkr6k8urre"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/World Teleports/HorseWorldTeleport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1178894, 0)
+shape = SubResource("BoxShape3D_e1ka8")
+
+[node name="spawnpoint_default" type="Marker3D" parent="Entities"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.21305704, 0, -1.4713782)
+script = ExtResource("9_28kpg")
+spawn_point_name = "default"
+metadata/_custom_type_script = "uid://ul0kbjravm0b"
+
+[node name="MSP_FromBackstage" type="Marker3D" parent="Entities"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5.0103307, -2.5, -19.99775)
+script = ExtResource("9_28kpg")
+spawn_point_name = "from_backstage"
+metadata/_custom_type_script = "uid://ul0kbjravm0b"
+
+[node name="MSP_FromPP" type="Marker3D" parent="Entities"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5.01033, -2.5, -33.99775)
+script = ExtResource("9_28kpg")
+spawn_point_name = "from_pp"
+metadata/_custom_type_script = "uid://ul0kbjravm0b"
+
+[node name="MSP_FromHH" type="Marker3D" parent="Entities"]
+transform = Transform3D(-5.9604645e-08, 0, 1, 0, 1, 0, -1, 0, -5.9604645e-08, 4.604228, -2.5, -26.99775)
+script = ExtResource("9_28kpg")
+spawn_point_name = "from_hh"
+metadata/_custom_type_script = "uid://ul0kbjravm0b"
+
+[node name="MSP_StatuesArea" type="Marker3D" parent="Entities"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.010330677, -2.5, -23.49775)
+script = ExtResource("9_28kpg")
+spawn_point_name = "statues_area"
+metadata/_custom_type_script = "uid://ul0kbjravm0b"
+
+[node name="Decal" type="Decal" parent="Entities"]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0.936365, -2.07658, -9.527737)
+texture_albedo = ExtResource("12_x8xre")
+
+[node name="Decal2" type="Decal" parent="Entities"]
+transform = Transform3D(-76.23008, -1.4345426e-21, 7.2476246e-06, -6.6642456e-06, -2.2640455e-07, -82.90316, 2.9130339e-13, -5.1795325, 3.6238118e-06, 32.741543, -0.6919, -8.55994)
+texture_albedo = ExtResource("13_3g6lq")
+cull_mask = 4
+
+[node name="MapInteractAuto" type="Node3D" parent="Entities"]
+script = ExtResource("15_u7kdy")
+metadata/_custom_type_script = "uid://c0irewagqysai"
+
+[node name="InteractableEffectPlayMusic" type="Node" parent="Entities/MapInteractAuto"]
+script = ExtResource("16_8wj33")
+music_resource = ExtResource("17_8wj33")
+metadata/_custom_type_script = "uid://cw4axrxes7bwd"
+
+[editable path="World/srs_site433"]
+[editable path="World/srs_site433_dream"]
+[editable path="World/prop_surveillance_camera2"]
+[editable path="World/prop_bed2"]
+[editable path="World/prop_computer2"]
+[editable path="World/prop_computer_monitor2"]

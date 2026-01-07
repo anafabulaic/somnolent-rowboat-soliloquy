@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="FootstepMatResource" load_steps=7 format=3 uid="uid://dwrlck5egrnbq"]
+
+[ext_resource type="AudioStream" uid="uid://dwo5eyk5jkjye" path="res://sounds/player/footsteps/linoleum/Linoleum_Mono_01.wav" id="1_5ap6f"]
+[ext_resource type="Script" uid="uid://cbpfafuovhkib" path="res://components/sound/footstep_mat_resource.gd" id="1_c40af"]
+[ext_resource type="AudioStream" uid="uid://cpe6ub3wdaowb" path="res://sounds/player/footsteps/linoleum/Linoleum_Mono_02.wav" id="2_g3eh6"]
+[ext_resource type="AudioStream" uid="uid://dqs8nqg487i8y" path="res://sounds/player/footsteps/linoleum/Linoleum_Mono_03.wav" id="3_f5ejw"]
+[ext_resource type="AudioStream" uid="uid://cu4kl7ifycpet" path="res://sounds/player/footsteps/linoleum/Linoleum_Mono_04.wav" id="4_l4od5"]
+[ext_resource type="AudioStream" uid="uid://b3wjs0n2mhl5s" path="res://sounds/player/footsteps/linoleum/Linoleum_Mono_05.wav" id="5_v576g"]
+
+[resource]
+script = ExtResource("1_c40af")
+footsteps = Array[AudioStream]([ExtResource("1_5ap6f"), ExtResource("2_g3eh6"), ExtResource("3_f5ejw"), ExtResource("4_l4od5"), ExtResource("5_v576g")])
+metadata/_custom_type_script = "uid://cbpfafuovhkib"

@@ -1,0 +1,252 @@
+[gd_scene load_steps=8 format=3 uid="uid://cd37gtx5rhapw"]
+
+[ext_resource type="Theme" uid="uid://clflpm5yxrp5j" path="res://scenes/ui/options_menu/options_theme.tres" id="1_r4unu"]
+[ext_resource type="Script" uid="uid://gvs7bb51qsn2" path="res://scenes/ui/options_menu/options_menu.gd" id="2_hyg8v"]
+[ext_resource type="StyleBox" uid="uid://cnhj3b5w5vrs1" path="res://scenes/ui/options_menu/tab_panel_inner.tres" id="2_kyv63"]
+[ext_resource type="Script" uid="uid://cxsyp7hl0ldbe" path="res://scenes/ui/options_menu/UIOptionsMenuTab.gd" id="3_hyg8v"]
+[ext_resource type="StyleBox" uid="uid://cjm8liwsvqful" path="res://scenes/ui/hl_style_panel_outer.tres" id="5_yujr4"]
+[ext_resource type="StyleBox" uid="uid://gk1qx0toxjlf" path="res://scenes/ui/hl_style_panel_inner.tres" id="6_w8s0e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hyg8v"]
+content_margin_left = 5.0
+content_margin_right = 25.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_bottom = 1
+
+[node name="OptionsMenu" type="CenterContainer" node_paths=PackedStringArray("current_tab")]
+offset_right = 450.0
+offset_bottom = 300.0
+theme = ExtResource("1_r4unu")
+script = ExtResource("2_hyg8v")
+current_tab = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Game")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(450, 300)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 8
+
+[node name="Header" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_type_variation = &"MenuHeader"
+text = "OPTIONS"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"OptionsMenuTabHBox"
+
+[node name="Game" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("button", "inner2", "panel")]
+layout_mode = 2
+theme_type_variation = &"OptionsMenuTabBG"
+script = ExtResource("3_hyg8v")
+button = NodePath("TabInner/TabInner2/Button")
+inner2 = NodePath("TabInner/TabInner2")
+panel = NodePath("../../PanelContainer/PanelContainer2/MarginContainer/GamePanel")
+
+[node name="TabInner" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Game"]
+layout_mode = 2
+theme_type_variation = &"OptionsMenuTabBGInner"
+
+[node name="TabInner2" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Game/TabInner"]
+layout_mode = 2
+theme_type_variation = &"OptionsMenuTabBGUnselected"
+
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Game/TabInner/TabInner2"]
+layout_mode = 2
+focus_mode = 0
+theme_type_variation = &"OptionsMenuTabButton"
+text = "Game"
+
+[node name="Video" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("button", "inner2", "panel")]
+layout_mode = 2
+theme_type_variation = &"OptionsMenuTabBG"
+script = ExtResource("3_hyg8v")
+button = NodePath("TabInner/TabInner2/Button")
+inner2 = NodePath("TabInner/TabInner2")
+panel = NodePath("../../PanelContainer/PanelContainer2/MarginContainer/VideoPanel")
+
+[node name="TabInner" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Video"]
+layout_mode = 2
+theme_type_variation = &"OptionsMenuTabBGInner"
+
+[node name="TabInner2" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Video/TabInner"]
+layout_mode = 2
+theme_type_variation = &"OptionsMenuTabBGUnselected"
+
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Video/TabInner/TabInner2"]
+layout_mode = 2
+focus_mode = 0
+theme_type_variation = &"OptionsMenuTabButton"
+text = "Video"
+
+[node name="Audio" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("button", "inner2", "panel")]
+layout_mode = 2
+theme_type_variation = &"OptionsMenuTabBG"
+script = ExtResource("3_hyg8v")
+button = NodePath("TabInner/TabInner2/Button")
+inner2 = NodePath("TabInner/TabInner2")
+panel = NodePath("../../PanelContainer/PanelContainer2/MarginContainer/AudioPanel")
+
+[node name="TabInner" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Audio"]
+layout_mode = 2
+theme_type_variation = &"OptionsMenuTabBGInner"
+
+[node name="TabInner2" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Audio/TabInner"]
+layout_mode = 2
+theme_type_variation = &"OptionsMenuTabBGUnselected"
+
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Audio/TabInner/TabInner2"]
+layout_mode = 2
+focus_mode = 0
+theme_type_variation = &"OptionsMenuTabButton"
+text = "Audio"
+
+[node name="Filler" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_hyg8v")
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"OptionsMenuTabPanel"
+
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("2_kyv63")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/PanelContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="GamePanel" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/PanelContainer2/MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/PanelContainer2/MarginContainer/GamePanel"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/PanelContainer2/MarginContainer/GamePanel/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/PanelContainer2/MarginContainer/GamePanel/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"OptionsMenuPanelLabel"
+text = "Game panel"
+
+[node name="VideoPanel" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/PanelContainer2/MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/PanelContainer2/MarginContainer/VideoPanel"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/PanelContainer2/MarginContainer/VideoPanel/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/PanelContainer2/MarginContainer/VideoPanel/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"OptionsMenuPanelLabel"
+text = "Video panel"
+
+[node name="AudioPanel" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/PanelContainer2/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/PanelContainer2/MarginContainer/AudioPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/PanelContainer2/MarginContainer/AudioPanel/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"OptionsMenuPanelLabel"
+text = "Master volume"
+
+[node name="HSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/PanelContainer2/MarginContainer/AudioPanel/VBoxContainer"]
+layout_mode = 2
+tick_count = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/PanelContainer2/MarginContainer/AudioPanel"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/PanelContainer2/MarginContainer/AudioPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/PanelContainer2/MarginContainer/AudioPanel/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_type_variation = &"OptionsMenuPanelLabel"
+text = "Effects volume"
+
+[node name="HSlider2" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/PanelContainer2/MarginContainer/AudioPanel/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+tick_count = 12
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/PanelContainer2/MarginContainer/AudioPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/PanelContainer2/MarginContainer/AudioPanel/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+theme_type_variation = &"OptionsMenuPanelLabel"
+text = "Effects volume"
+
+[node name="HSlider3" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/PanelContainer2/MarginContainer/AudioPanel/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+tick_count = 12
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+alignment = 2
+
+[node name="Tab" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer2"]
+layout_mode = 2
+theme_type_variation = &"OptionsMenuTabBG"
+theme_override_styles/panel = ExtResource("5_yujr4")
+
+[node name="TabInner" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer2/Tab"]
+layout_mode = 2
+theme_type_variation = &"OptionsMenuTabBGInner"
+theme_override_styles/panel = ExtResource("6_w8s0e")
+
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer2/Tab/TabInner"]
+layout_mode = 2
+theme_type_variation = &"OptionsMenuTabButton"
+text = "OK"
+
+[node name="Tab2" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer2"]
+layout_mode = 2
+theme_type_variation = &"OptionsMenuTabBG"
+theme_override_styles/panel = ExtResource("5_yujr4")
+
+[node name="TabInner" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer2/Tab2"]
+layout_mode = 2
+theme_type_variation = &"OptionsMenuTabBGInner"
+theme_override_styles/panel = ExtResource("6_w8s0e")
+
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer2/Tab2/TabInner"]
+layout_mode = 2
+theme_type_variation = &"OptionsMenuTabButton"
+text = "Cancel"

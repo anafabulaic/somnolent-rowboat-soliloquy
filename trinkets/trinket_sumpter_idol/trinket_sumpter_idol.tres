@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="TrinketReference" load_steps=4 format=3 uid="uid://cidbgrtlau06i"]
+
+[ext_resource type="Script" uid="uid://dmtvbyjjyocmw" path="res://components/trinkets/base/trinket_reference.gd" id="1_awcj8"]
+[ext_resource type="Texture2D" uid="uid://ditodu126ato3" path="res://trinkets/trinket_sumpter_idol/trinket_sumpter_idol.png" id="1_oskyn"]
+[ext_resource type="PackedScene" uid="uid://cmiyjl7b14drv" path="res://trinkets/trinket_sumpter_idol/trinket_sumpter_idol.tscn" id="3_boley"]
+
+[resource]
+script = ExtResource("1_awcj8")
+id = "trinket_sumpter_idol"
+name = "SUMPTER IDOL"
+icon = ExtResource("1_oskyn")
+desc = "Neigh."
+trinket_scene = ExtResource("3_boley")
+metadata/_custom_type_script = "uid://dmtvbyjjyocmw"

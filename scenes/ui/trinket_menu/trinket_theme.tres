@@ -1,0 +1,65 @@
+[gd_resource type="Theme" load_steps=16 format=3 uid="uid://dekd57fh3tglp"]
+
+[ext_resource type="FontFile" uid="uid://dnkywiuaeww1n" path="res://fonts/Caladea-Bold.ttf" id="1_npoa8"]
+[ext_resource type="FontFile" uid="uid://c8nbbwmd4xt2i" path="res://fonts/Caladea-Regular.ttf" id="1_oai3e"]
+[ext_resource type="StyleBox" uid="uid://dnn24eac46ms1" path="res://scenes/ui/trinket_menu/trinket_selection_panel.tres" id="2_npoa8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w57oh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_87w8u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ah6u5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vvdfn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bja1p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kcgee"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iwttp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oai3e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eeb1h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_npoa8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_diq14"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eeb1h"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 0.49803922)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[resource]
+Button/fonts/font = ExtResource("1_npoa8")
+Button/styles/disabled = SubResource("StyleBoxEmpty_w57oh")
+Button/styles/focus = SubResource("StyleBoxEmpty_87w8u")
+Button/styles/hover = SubResource("StyleBoxEmpty_ah6u5")
+Button/styles/normal = SubResource("StyleBoxEmpty_vvdfn")
+Button/styles/pressed = SubResource("StyleBoxEmpty_bja1p")
+Label/fonts/font = ExtResource("1_oai3e")
+TrinketSelectionButton/base_type = &"Button"
+TrinketSelectionButton/styles/disabled = SubResource("StyleBoxEmpty_kcgee")
+TrinketSelectionButton/styles/focus = SubResource("StyleBoxEmpty_iwttp")
+TrinketSelectionButton/styles/hover = SubResource("StyleBoxEmpty_oai3e")
+TrinketSelectionButton/styles/hover_pressed = SubResource("StyleBoxEmpty_eeb1h")
+TrinketSelectionButton/styles/normal = SubResource("StyleBoxEmpty_npoa8")
+TrinketSelectionButton/styles/pressed = SubResource("StyleBoxEmpty_diq14")
+TrinketSelectionLabelVBox/base_type = &"VBoxContainer"
+TrinketSelectionLabelVBox/constants/separation = 0
+TrinketSelectionNameLabel/base_type = &"Label"
+TrinketSelectionPanel/base_type = &"PanelContainer"
+TrinketSelectionPanel/styles/panel = ExtResource("2_npoa8")
+TrinketSelectionPanelHover/base_type = &"PanelContainer"
+TrinketSelectionPanelHover/styles/panel = SubResource("StyleBoxFlat_eeb1h")

@@ -1,0 +1,26 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://cqp4c6ty342ny"]
+
+[ext_resource type="Texture2D" uid="uid://dhecr5mqvelm1" path="res://materials/sky/site433_skybox_sunset.hdr" id="1_6vnh8"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_5aaa8"]
+panorama = ExtResource("1_6vnh8")
+
+[sub_resource type="Sky" id="Sky_3k5el"]
+sky_material = SubResource("PanoramaSkyMaterial_5aaa8")
+
+[resource]
+background_mode = 2
+background_color = Color(0.70818555, 0.25163016, 0.25163016, 1)
+sky = SubResource("Sky_3k5el")
+sky_custom_fov = 107.8
+sky_rotation = Vector3(0, 1.5707964, 0)
+ambient_light_source = 1
+reflected_light_source = 1
+tonemap_mode = 2
+glow_enabled = true
+glow_normalized = true
+glow_mix = 0.2
+glow_bloom = 1.0
+fog_light_color = Color(0, 0.028220654, 1, 1)
+adjustment_enabled = true
+adjustment_saturation = 0.5

@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://c3kk1iv5q7ia6"]
+
+[ext_resource type="Script" uid="uid://xgfrita2wnj1" path="res://components/entities/temporary_effect.gd" id="1_qmlwn"]
+[ext_resource type="Material" uid="uid://b2lxxiypr46ty" path="res://materials/water/watersplash_material.tres" id="2_qmlwn"]
+[ext_resource type="Material" uid="uid://dgcjosgqg6fg2" path="res://materials/water/water_splash_particle_material.tres" id="3_c8fbg"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ewlcw"]
+material = ExtResource("2_qmlwn")
+
+[sub_resource type="Curve" id="Curve_5ld0i"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_qmlwn"]
+colors = PackedColorArray(0.4284, 0.5667801, 0.68, 1, 0.4284, 0.5709733, 0.68, 0)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qmlwn"]
+material = ExtResource("3_c8fbg")
+orientation = 2
+
+[sub_resource type="Gradient" id="Gradient_c8fbg"]
+colors = PackedColorArray(1, 1, 1, 1, 0.97, 0.97, 0.97, 1)
+
+[node name="TemporaryEffect" type="Node3D"]
+script = ExtResource("1_qmlwn")
+metadata/_custom_type_script = "uid://xgfrita2wnj1"
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0061191916, 0)
+sorting_offset = 5.0
+emitting = false
+amount = 1
+one_shot = true
+explosiveness = 0.5
+mesh = SubResource("PlaneMesh_ewlcw")
+particle_flag_rotate_y = true
+gravity = Vector3(0, 0.01, 0)
+angle_min = -90.0
+angle_max = 90.0
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_5ld0i")
+color_ramp = SubResource("Gradient_qmlwn")
+
+[node name="CPUParticles3D2" type="CPUParticles3D" parent="."]
+emitting = false
+amount = 4
+one_shot = true
+explosiveness = 0.94
+randomness = 0.29
+mesh = SubResource("PlaneMesh_qmlwn")
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 3.0
+initial_velocity_max = 4.0
+angular_velocity_min = -50.0
+angular_velocity_max = 50.0
+angle_min = -90.0
+angle_max = 90.0
+scale_amount_min = 0.3
+scale_amount_max = 0.8
+color = Color(1, 1, 1, 0.2509804)
+color_initial_ramp = SubResource("Gradient_c8fbg")

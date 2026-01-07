@@ -1,0 +1,3897 @@
+[gd_scene load_steps=26 format=3 uid="uid://mqyt0ecwsbpp"]
+
+[ext_resource type="Script" uid="uid://buckq04u7fn0t" path="res://components/entities/map_scene.gd" id="1_hqe6c"]
+[ext_resource type="Texture2D" uid="uid://mx2guquwixuj" path="res://materials/sky/backstage_world_skybox.hdr" id="2_hqe6c"]
+[ext_resource type="Script" uid="uid://in6xgodf72dk" path="res://components/game/image_sky_environment.gd" id="3_s70ij"]
+[ext_resource type="ArrayOccluder3D" uid="uid://csis0riumelkl" path="res://maps/srs_horseless_world/srs_horseless_world.occ" id="4_byi3q"]
+[ext_resource type="LightmapGIData" uid="uid://wf3g3oe8jhn1" path="res://maps/srs_horseless_world/srs_horseless_world.lmbake" id="5_hqe6c"]
+[ext_resource type="PackedScene" uid="uid://dt83ml86etg3s" path="res://maps/srs_horseless_horse_world/srs_horseless_horse_world.glb" id="6_3judj"]
+[ext_resource type="Script" uid="uid://ul0kbjravm0b" path="res://components/entities/map_spawnpoint.gd" id="7_5oxoi"]
+[ext_resource type="PackedScene" uid="uid://dacmwavvkabdp" path="res://models/prop_tree1/prop_tree1.glb" id="8_4lngc"]
+[ext_resource type="Script" uid="uid://b65ry1hptnufj" path="res://components/entities/interactive/map_trinket.gd" id="9_cuyuu"]
+[ext_resource type="Script" uid="uid://gpfdxtmbylmt" path="res://components/entities/interactive/base/interactable_conditional.gd" id="9_kx6lq"]
+[ext_resource type="Script" uid="uid://c0irewagqysai" path="res://components/entities/interactive/map_interact_auto.gd" id="9_ult4f"]
+[ext_resource type="Script" uid="uid://cxskkr6k8urre" path="res://components/entities/interactive/effects/map_player_level_change.gd" id="10_3judj"]
+[ext_resource type="Script" uid="uid://cw4axrxes7bwd" path="res://components/entities/interactive/effects/effect_play_music.gd" id="10_cuyuu"]
+[ext_resource type="Resource" uid="uid://cidbgrtlau06i" path="res://trinkets/trinket_sumpter_idol/trinket_sumpter_idol.tres" id="10_qmgcn"]
+[ext_resource type="Resource" uid="uid://c512e4wcq5vt3" path="res://scenes/ui/transition_effect/fade_transition_effect.tres" id="11_5oxoi"]
+[ext_resource type="Resource" uid="uid://uuww4x0qed8i" path="res://resources/music/mus_res_horseless_dark.tres" id="11_aiojt"]
+[ext_resource type="Texture2D" uid="uid://ditodu126ato3" path="res://trinkets/trinket_sumpter_idol/trinket_sumpter_idol.png" id="11_cuyuu"]
+[ext_resource type="AudioStream" uid="uid://covsgfk7e2gj0" path="res://sounds/entities/doors/qubodup-DoorOpen01.ogg" id="12_4lngc"]
+[ext_resource type="Script" uid="uid://smxebn1sb80y" path="res://components/entities/interactive/effects/effect_multiple.gd" id="14_5oxoi"]
+[ext_resource type="Script" uid="uid://diry24ij7ve2h" path="res://components/entities/interactive/effects/effect_play_2D_sound.gd" id="17_4lngc"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_byi3q"]
+panorama = ExtResource("2_hqe6c")
+
+[sub_resource type="Sky" id="Sky_hqe6c"]
+sky_material = SubResource("PanoramaSkyMaterial_byi3q")
+
+[sub_resource type="Environment" id="Environment_aiojt"]
+background_mode = 2
+sky = SubResource("Sky_hqe6c")
+tonemap_mode = 2
+tonemap_exposure = 0.55
+glow_mix = 0.472
+glow_bloom = 1.0
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.18772167, 0.18772167, 0.18772167, 1)
+fog_density = 0.2
+fog_sky_affect = 0.262
+fog_depth_curve = 0.22531253
+fog_depth_begin = 0.0
+fog_depth_end = 500.0
+adjustment_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pkvet"]
+size = Vector3(5.6845703, 0.17242432, 8.575195)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ult4f"]
+
+[node name="SrsHorselessWorld" type="Node3D" node_paths=PackedStringArray("spawnpoints")]
+script = ExtResource("1_hqe6c")
+map_name = "srs_horseless_world"
+spawnpoints = [NodePath("World/MSP_FromNexus"), NodePath("World/SP_FromSubworld")]
+metadata/_custom_type_script = "uid://buckq04u7fn0t"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_aiojt")
+script = ExtResource("3_s70ij")
+
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="."]
+occluder = ExtResource("4_byi3q")
+bake_mask = 4294967293
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+quality = 0
+light_data = ExtResource("5_hqe6c")
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="srs_horseless_horse_world" parent="World" instance=ExtResource("6_3judj")]
+
+[node name="invis_floor_007" parent="World/srs_horseless_horse_world" index="0"]
+gi_lightmap_texel_scale = 0.5
+
+[node name="treeline-detail" parent="World/srs_horseless_horse_world" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.016937256, 0.011062622, 0.014545441)
+
+[node name="Horses" parent="World/srs_horseless_horse_world" index="5"]
+process_mode = 4
+visible = false
+
+[node name="SP_FromSubworld" type="Marker3D" parent="World"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -110.52527, 0.11299324, -141.00955)
+script = ExtResource("7_5oxoi")
+spawn_point_name = "from_subworld"
+metadata/_custom_type_script = "uid://ul0kbjravm0b"
+
+[node name="MSP_FromNexus" type="Marker3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.024057, 0.57203627, -7.756004)
+script = ExtResource("7_5oxoi")
+spawn_point_name = "from_nexus"
+metadata/_custom_type_script = "uid://ul0kbjravm0b"
+
+[node name="Trees" type="Node3D" parent="World"]
+
+[node name="prop_tree4" parent="World/Trees" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245185, 0, 1, 0, -0.86245185, 0, 0.50613916, -10.036782, 0.30452275, -15.049572)
+
+[node name="tree1" parent="World/Trees/prop_tree4" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees/prop_tree4" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree5" parent="World/Trees" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.1031571, 0, 0.9946651, 0, 1, 0, -0.9946651, 0, -0.1031571, -0.9339156, 0.25427818, -27.623768)
+
+[node name="tree1" parent="World/Trees/prop_tree5" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees/prop_tree5" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree6" parent="World/Trees" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.931818, 0, 0.36292598, 0, 1, 0, -0.36292598, 0, 0.931818, -17.761414, 0.0377388, -25.746765)
+
+[node name="tree1" parent="World/Trees/prop_tree6" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees/prop_tree6" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree7" parent="World/Trees" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.029369712, 0, 0.99956864, 0, 1, 0, -0.99956864, 0, 0.029369712, -22.479942, 0.07530689, -15.580875)
+
+[node name="tree1" parent="World/Trees/prop_tree7" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees/prop_tree7" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree8" parent="World/Trees" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245185, 0, 1, 0, -0.86245185, 0, 0.50613916, -26.193092, 0.00039672852, -32.14888)
+
+[node name="tree1" parent="World/Trees/prop_tree8" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees/prop_tree8" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree9" parent="World/Trees" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245185, 0, 1, 0, -0.86245185, 0, 0.50613916, -31.585085, 0.0019187927, -18.954659)
+
+[node name="tree1" parent="World/Trees/prop_tree9" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees/prop_tree9" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree10" parent="World/Trees" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.64273417, 0, 0.7660893, 0, 1, 0, -0.7660893, 0, 0.64273417, -38.646347, 1.2516975e-05, -31.584408)
+
+[node name="tree1" parent="World/Trees/prop_tree10" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees/prop_tree10" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree11" parent="World/Trees" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245185, 0, 1, 0, -0.86245185, 0, 0.50613916, -51.433018, 0, -32.10636)
+
+[node name="tree1" parent="World/Trees/prop_tree11" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees/prop_tree11" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree12" parent="World/Trees" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245185, 0, 1, 0, -0.86245185, 0, 0.50613916, -35.422813, 0.000910759, -42.29033)
+
+[node name="tree1" parent="World/Trees/prop_tree12" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees/prop_tree12" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree13" parent="World/Trees" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245185, 0, 1, 0, -0.86245185, 0, 0.50613916, 12.985571, 0.7304783, -29.858109)
+
+[node name="tree1" parent="World/Trees/prop_tree13" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees/prop_tree13" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree14" parent="World/Trees" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.64273417, 0, 0.7660893, 0, 1, 0, -0.7660893, 0, 0.64273417, -7.963209, 0.03188324, -37.215027)
+
+[node name="tree1" parent="World/Trees/prop_tree14" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees/prop_tree14" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree15" parent="World/Trees" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245185, 0, 1, 0, -0.86245185, 0, 0.50613916, -26.789362, 0.0049324036, -43.637516)
+
+[node name="tree1" parent="World/Trees/prop_tree15" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees/prop_tree15" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree16" parent="World/Trees" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245185, 0, 1, 0, -0.86245185, 0, 0.50613916, -12.565298, 0.048934937, -49.89811)
+
+[node name="tree1" parent="World/Trees/prop_tree16" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees/prop_tree16" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree17" parent="World/Trees" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.931818, 0, 0.36292598, 0, 1, 0, -0.36292598, 0, 0.931818, 4.1340313, 0.20859528, -36.58542)
+
+[node name="tree1" parent="World/Trees/prop_tree17" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees/prop_tree17" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree18" parent="World/Trees" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956924, 0, -0.8032127, 0, 1, 0, 0.8032127, 0, -0.5956924, -14.759195, 0.27105522, -76.531845)
+
+[node name="tree1" parent="World/Trees/prop_tree18" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees/prop_tree18" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree19" parent="World/Trees" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956924, 0, -0.8032127, 0, 1, 0, 0.8032127, 0, -0.5956924, -24.10107, 0.053738594, -64.8188)
+
+[node name="tree1" parent="World/Trees/prop_tree19" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees/prop_tree19" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree20" parent="World/Trees" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956924, 0, -0.8032127, 0, 1, 0, 0.8032127, 0, -0.5956924, -8.226031, 0.17610455, -65.0681)
+
+[node name="tree1" parent="World/Trees/prop_tree20" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees/prop_tree20" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree21" parent="World/Trees" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956924, 0, -0.8032127, 0, 1, 0, 0.8032127, 0, -0.5956924, -2.4447298, 0.8396969, -74.669464)
+
+[node name="tree1" parent="World/Trees/prop_tree21" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees/prop_tree21" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree22" parent="World/Trees" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.965359, 0, -0.26092562, 0, 1, 0, 0.26092562, 0, -0.965359, -0.5293832, 0.179183, -57.79885)
+
+[node name="tree1" parent="World/Trees/prop_tree22" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees/prop_tree22" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree23" parent="World/Trees" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.1363728, 0, -0.9906577, 0, 1, 0, 0.9906577, 0, -0.1363728, 6.246193, 1.2039618, -70.3389)
+
+[node name="tree1" parent="World/Trees/prop_tree23" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees/prop_tree23" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree24" parent="World/Trees" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956924, 0, -0.8032127, 0, 1, 0, 0.8032127, 0, -0.5956924, 14.593096, 0.84722567, -60.852833)
+
+[node name="tree1" parent="World/Trees/prop_tree24" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees/prop_tree24" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree25" parent="World/Trees" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956924, 0, -0.8032127, 0, 1, 0, 0.8032127, 0, -0.5956924, 5.567959, 2.6271882, -91.1947)
+
+[node name="tree1" parent="World/Trees/prop_tree25" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees/prop_tree25" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree26" parent="World/Trees" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956924, 0, -0.8032127, 0, 1, 0, 0.8032127, 0, -0.5956924, 7.55978, 0.16566515, -46.726265)
+
+[node name="tree1" parent="World/Trees/prop_tree26" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees/prop_tree26" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree27" parent="World/Trees" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.965359, 0, -0.26092562, 0, 1, 0, 0.26092562, 0, -0.965359, -39.236588, 0.006875038, -64.2771)
+
+[node name="tree1" parent="World/Trees/prop_tree27" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees/prop_tree27" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree28" parent="World/Trees" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.1363728, 0, -0.9906577, 0, 1, 0, 0.9906577, 0, -0.1363728, -19.197365, 0.037299633, -54.71649)
+
+[node name="tree1" parent="World/Trees/prop_tree28" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees/prop_tree28" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree29" parent="World/Trees" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956924, 0, -0.8032127, 0, 1, 0, 0.8032127, 0, -0.5956924, -1.1683464, 0.084224224, -46.312515)
+
+[node name="tree1" parent="World/Trees/prop_tree29" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees/prop_tree29" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree30" parent="World/Trees" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.965359, 0, -0.26092562, 0, 1, 0, 0.26092562, 0, -0.965359, -15.9816675, 0.011487484, -41.61309)
+
+[node name="tree1" parent="World/Trees/prop_tree30" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees/prop_tree30" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree31" parent="World/Trees" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956924, 0, -0.8032127, 0, 1, 0, 0.8032127, 0, -0.5956924, -31.157364, 0.010611057, -56.639523)
+
+[node name="tree1" parent="World/Trees/prop_tree31" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees/prop_tree31" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="Trees2" type="Node3D" parent="World"]
+transform = Transform3D(0.9995452, 0, -0.030154718, 0, 1, 0, 0.030154718, 0, 0.9995452, -12.6604805, 0.74815476, 83.7538)
+
+[node name="prop_tree4" parent="World/Trees2" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.5061394, 0, 0.8624521, 0, 1, 0, -0.8624521, 0, 0.5061394, 14.606307, -0.082642436, -101.8469)
+
+[node name="tree1" parent="World/Trees2/prop_tree4" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees2/prop_tree4" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree5" parent="World/Trees2" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.02936971, 0, 0.9995689, 0, 1, 0, -0.9995689, 0, 0.02936971, -42.98352, 0.45450866, -47.789932)
+
+[node name="tree1" parent="World/Trees2/prop_tree5" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees2/prop_tree5" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree6" parent="World/Trees2" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.9318181, 0, 0.36292604, 0, 1, 0, -0.36292604, 0, 0.9318181, -45.52295, 0.37214482, -58.9179)
+
+[node name="tree1" parent="World/Trees2/prop_tree6" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees2/prop_tree6" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree7" parent="World/Trees2" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.02936971, 0, 0.9995689, 0, 1, 0, -0.9995689, 0, 0.02936971, -47.278275, 0.5171741, -38.843758)
+
+[node name="tree1" parent="World/Trees2/prop_tree7" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees2/prop_tree7" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree8" parent="World/Trees2" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.5061392, 0, 0.8624519, 0, 1, 0, -0.8624519, 0, 0.5061392, -26.193096, 0.17912132, -32.148884)
+
+[node name="tree1" parent="World/Trees2/prop_tree8" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees2/prop_tree8" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree9" parent="World/Trees2" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.5061393, 0, 0.862452, 0, 1, 0, -0.862452, 0, 0.5061393, -60.482635, 0.4079336, -33.499023)
+
+[node name="tree1" parent="World/Trees2/prop_tree9" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees2/prop_tree9" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree10" parent="World/Trees2" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.6427342, 0, 0.7660894, 0, 1, 0, -0.7660894, 0, 0.6427342, -40.90096, 0.16432726, -27.491096)
+
+[node name="tree1" parent="World/Trees2/prop_tree10" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees2/prop_tree10" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree11" parent="World/Trees2" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.5061393, 0, 0.862452, 0, 1, 0, -0.862452, 0, 0.5061393, -57.008484, 0.29162157, -41.38184)
+
+[node name="tree1" parent="World/Trees2/prop_tree11" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees2/prop_tree11" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree12" parent="World/Trees2" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.5061392, 0, 0.8624519, 0, 1, 0, -0.8624519, 0, 0.5061392, -35.422817, -0.15458584, -42.290333)
+
+[node name="tree1" parent="World/Trees2/prop_tree12" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees2/prop_tree12" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree13" parent="World/Trees2" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613934, 0, 0.86245203, 0, 1, 0, -0.86245203, 0, 0.50613934, 11.081771, -0.059435487, -92.96388)
+
+[node name="tree1" parent="World/Trees2/prop_tree13" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees2/prop_tree13" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree14" parent="World/Trees2" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.6427342, 0, 0.7660894, 0, 1, 0, -0.7660894, 0, 0.6427342, -7.96321, 0.23850733, -37.21503)
+
+[node name="tree1" parent="World/Trees2/prop_tree14" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees2/prop_tree14" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree15" parent="World/Trees2" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.5061392, 0, 0.8624519, 0, 1, 0, -0.8624519, 0, 0.5061392, -26.789364, -0.11745024, -43.637524)
+
+[node name="tree1" parent="World/Trees2/prop_tree15" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees2/prop_tree15" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree16" parent="World/Trees2" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.5061392, 0, 0.8624519, 0, 1, 0, -0.8624519, 0, 0.5061392, -12.565299, -0.0657928, -49.898117)
+
+[node name="tree1" parent="World/Trees2/prop_tree16" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees2/prop_tree16" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree17" parent="World/Trees2" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.9318182, 0, 0.36292607, 0, 1, 0, -0.36292607, 0, 0.9318182, 13.1485, 0.18654358, -77.136696)
+
+[node name="tree1" parent="World/Trees2/prop_tree17" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees2/prop_tree17" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree18" parent="World/Trees2" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956924, 0, -0.80321276, 0, 1, 0, 0.80321276, 0, -0.5956924, -15.418206, -0.33644545, -63.007942)
+
+[node name="tree1" parent="World/Trees2/prop_tree18" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees2/prop_tree18" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree19" parent="World/Trees2" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956924, 0, -0.80321276, 0, 1, 0, 0.80321276, 0, -0.5956924, -23.162529, -0.4382168, -59.893944)
+
+[node name="tree1" parent="World/Trees2/prop_tree19" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees2/prop_tree19" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree20" parent="World/Trees2" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956924, 0, -0.80321276, 0, 1, 0, 0.80321276, 0, -0.5956924, -8.226031, -0.20876908, -65.06811)
+
+[node name="tree1" parent="World/Trees2/prop_tree20" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees2/prop_tree20" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree21" parent="World/Trees2" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956924, 0, -0.80321276, 0, 1, 0, 0.80321276, 0, -0.5956924, -2.4447308, -0.19145548, -74.66947)
+
+[node name="tree1" parent="World/Trees2/prop_tree21" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees2/prop_tree21" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree22" parent="World/Trees2" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.96535903, 0, -0.26092562, 0, 1, 0, 0.26092562, 0, -0.96535903, -0.52938366, 0.05816877, -57.79886)
+
+[node name="tree1" parent="World/Trees2/prop_tree22" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees2/prop_tree22" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree23" parent="World/Trees2" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.1363728, 0, -0.9906577, 0, 1, 0, 0.9906577, 0, -0.1363728, 6.246193, 0.07829678, -70.338905)
+
+[node name="tree1" parent="World/Trees2/prop_tree23" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees2/prop_tree23" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree24" parent="World/Trees2" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956924, 0, -0.80321276, 0, 1, 0, 0.80321276, 0, -0.5956924, 14.593097, 0.37861323, -60.852837)
+
+[node name="tree1" parent="World/Trees2/prop_tree24" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees2/prop_tree24" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree25" parent="World/Trees2" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956924, 0, -0.803213, 0, 1, 0, 0.803213, 0, -0.5956924, 5.226215, -0.09188676, -82.666016)
+
+[node name="tree1" parent="World/Trees2/prop_tree25" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees2/prop_tree25" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree26" parent="World/Trees2" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956924, 0, -0.80321276, 0, 1, 0, 0.80321276, 0, -0.5956924, 7.5597806, 0.36645198, -46.726273)
+
+[node name="tree1" parent="World/Trees2/prop_tree26" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees2/prop_tree26" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree27" parent="World/Trees2" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.96535903, 0, -0.26092562, 0, 1, 0, 0.26092562, 0, -0.96535903, -53.60931, -0.74693286, -62.856117)
+
+[node name="tree1" parent="World/Trees2/prop_tree27" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees2/prop_tree27" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree28" parent="World/Trees2" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.1363728, 0, -0.9906577, 0, 1, 0, 0.9906577, 0, -0.1363728, -19.197369, -0.26342463, -54.7165)
+
+[node name="tree1" parent="World/Trees2/prop_tree28" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees2/prop_tree28" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree29" parent="World/Trees2" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956924, 0, -0.80321276, 0, 1, 0, 0.80321276, 0, -0.5956924, -1.1683474, 0.20336735, -46.312523)
+
+[node name="tree1" parent="World/Trees2/prop_tree29" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees2/prop_tree29" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree30" parent="World/Trees2" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.96535903, 0, -0.26092562, 0, 1, 0, 0.26092562, 0, -0.96535903, -15.9816675, 0.053575456, -41.613094)
+
+[node name="tree1" parent="World/Trees2/prop_tree30" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees2/prop_tree30" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree31" parent="World/Trees2" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956924, 0, -0.80321276, 0, 1, 0, 0.80321276, 0, -0.5956924, -31.157368, -0.48963392, -56.639534)
+
+[node name="tree1" parent="World/Trees2/prop_tree31" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees2/prop_tree31" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="Trees3" type="Node3D" parent="World"]
+transform = Transform3D(-0.6737479, 0, 0.73896116, 0, 1, 0, -0.73896116, 0, -0.6737479, 65.42533, 0.74817, -4.9250717)
+
+[node name="prop_tree4" parent="World/Trees3" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613964, 0, 0.86245227, 0, 1, 0, -0.86245227, 0, 0.50613964, 304.5967, 3.1229887, 0.12044525)
+
+[node name="tree1" parent="World/Trees3/prop_tree4" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees3/prop_tree4" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree5" parent="World/Trees3" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.02937001, 0, 0.9995692, 0, 1, 0, -0.9995692, 0, 0.02937001, 312.62888, 5.1750917, -12.526665)
+
+[node name="tree1" parent="World/Trees3/prop_tree5" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees3/prop_tree5" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree6" parent="World/Trees3" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.9318181, 0, 0.36292604, 0, 1, 0, -0.36292604, 0, 0.9318181, 296.8721, 3.1583147, -10.576729)
+
+[node name="tree1" parent="World/Trees3/prop_tree6" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees3/prop_tree6" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree7" parent="World/Trees3" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.02937001, 0, 0.9995692, 0, 1, 0, -0.9995692, 0, 0.02937001, 292.15356, 1.0800885, -0.41083527)
+
+[node name="tree1" parent="World/Trees3/prop_tree7" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees3/prop_tree7" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree8" parent="World/Trees3" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.5061396, 0, 0.8624522, 0, 1, 0, -0.8624522, 0, 0.5061396, 288.44043, 0.3953141, -16.978844)
+
+[node name="tree1" parent="World/Trees3/prop_tree8" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees3/prop_tree8" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree9" parent="World/Trees3" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.5061396, 0, 0.8624522, 0, 1, 0, -0.8624522, 0, 0.5061396, 283.0484, -0.037182927, -3.7846375)
+
+[node name="tree1" parent="World/Trees3/prop_tree9" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees3/prop_tree9" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree10" parent="World/Trees3" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.6427342, 0, 0.76608944, 0, 1, 0, -0.76608944, 0, 0.6427342, 273.73245, -0.14944184, -12.321075)
+
+[node name="tree1" parent="World/Trees3/prop_tree10" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees3/prop_tree10" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree11" parent="World/Trees3" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.5061396, 0, 0.8624522, 0, 1, 0, -0.8624522, 0, 0.5061396, 267.86978, -0.14371789, 1.6522598)
+
+[node name="tree1" parent="World/Trees3/prop_tree11" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees3/prop_tree11" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree12" parent="World/Trees3" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.5061396, 0, 0.8624522, 0, 1, 0, -0.8624522, 0, 0.5061396, 279.21066, 0.09913719, -27.1203)
+
+[node name="tree1" parent="World/Trees3/prop_tree12" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees3/prop_tree12" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree13" parent="World/Trees3" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613964, 0, 0.86245227, 0, 1, 0, -0.86245227, 0, 0.50613964, 327.61902, 1.9671029, -14.688034)
+
+[node name="tree1" parent="World/Trees3/prop_tree13" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees3/prop_tree13" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree14" parent="World/Trees3" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.6427342, 0, 0.76608944, 0, 1, 0, -0.76608944, 0, 0.6427342, 306.67032, 6.0622244, -22.044983)
+
+[node name="tree1" parent="World/Trees3/prop_tree14" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees3/prop_tree14" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree15" parent="World/Trees3" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.5061396, 0, 0.8624522, 0, 1, 0, -0.8624522, 0, 0.5061396, 287.84412, 0.7080716, -28.467514)
+
+[node name="tree1" parent="World/Trees3/prop_tree15" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees3/prop_tree15" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree16" parent="World/Trees3" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.5061396, 0, 0.8624522, 0, 1, 0, -0.8624522, 0, 0.5061396, 302.0682, 5.169467, -34.72812)
+
+[node name="tree1" parent="World/Trees3/prop_tree16" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees3/prop_tree16" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree17" parent="World/Trees3" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.9318181, 0, 0.36292604, 0, 1, 0, -0.36292604, 0, 0.9318181, 318.76755, 4.194831, -21.415413)
+
+[node name="tree1" parent="World/Trees3/prop_tree17" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees3/prop_tree17" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree18" parent="World/Trees3" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.59569275, 0, -0.8032131, 0, 1, 0, 0.8032131, 0, -0.59569275, 299.21527, 3.636222, -47.837944)
+
+[node name="tree1" parent="World/Trees3/prop_tree18" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees3/prop_tree18" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree19" parent="World/Trees3" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.59569275, 0, -0.8032131, 0, 1, 0, 0.8032131, 0, -0.59569275, 291.47092, 1.8628739, -44.723946)
+
+[node name="tree1" parent="World/Trees3/prop_tree19" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees3/prop_tree19" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree20" parent="World/Trees3" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.59569275, 0, -0.8032131, 0, 1, 0, 0.8032131, 0, -0.59569275, 306.4075, 4.201703, -49.89808)
+
+[node name="tree1" parent="World/Trees3/prop_tree20" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees3/prop_tree20" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree21" parent="World/Trees3" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956928, 0, -0.8032132, 0, 1, 0, 0.8032132, 0, -0.5956928, 312.18887, 5.2843485, -59.499474)
+
+[node name="tree1" parent="World/Trees3/prop_tree21" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees3/prop_tree21" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree22" parent="World/Trees3" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.96535957, 0, -0.2609256, 0, 1, 0, 0.2609256, 0, -0.96535957, 314.10416, 4.880843, -42.62887)
+
+[node name="tree1" parent="World/Trees3/prop_tree22" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees3/prop_tree22" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree23" parent="World/Trees3" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.13637301, 0, -0.9906581, 0, 1, 0, 0.9906581, 0, -0.13637301, 320.87973, 4.382537, -55.168953)
+
+[node name="tree1" parent="World/Trees3/prop_tree23" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees3/prop_tree23" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree24" parent="World/Trees3" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956929, 0, -0.80321324, 0, 1, 0, 0.80321324, 0, -0.5956929, 329.2266, 3.1490889, -45.682808)
+
+[node name="tree1" parent="World/Trees3/prop_tree24" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees3/prop_tree24" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree25" parent="World/Trees3" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956929, 0, -0.80321324, 0, 1, 0, 0.80321324, 0, -0.5956929, 339.20306, 2.8846483, -39.964928)
+
+[node name="tree1" parent="World/Trees3/prop_tree25" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees3/prop_tree25" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree26" parent="World/Trees3" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956928, 0, -0.8032132, 0, 1, 0, 0.8032132, 0, -0.5956928, 322.19327, 4.4448977, -31.556236)
+
+[node name="tree1" parent="World/Trees3/prop_tree26" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees3/prop_tree26" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree27" parent="World/Trees3" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.9653595, 0, -0.26092556, 0, 1, 0, 0.26092556, 0, -0.9653595, 261.02417, 0.009323955, -47.68608)
+
+[node name="tree1" parent="World/Trees3/prop_tree27" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees3/prop_tree27" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree28" parent="World/Trees3" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.13637301, 0, -0.99065804, 0, 1, 0, 0.99065804, 0, -0.13637301, 295.43616, 2.709487, -39.546486)
+
+[node name="tree1" parent="World/Trees3/prop_tree28" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees3/prop_tree28" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree29" parent="World/Trees3" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956928, 0, -0.8032132, 0, 1, 0, 0.8032132, 0, -0.5956928, 313.46515, 6.015086, -31.142502)
+
+[node name="tree1" parent="World/Trees3/prop_tree29" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees3/prop_tree29" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree30" parent="World/Trees3" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.9653595, 0, -0.26092556, 0, 1, 0, 0.26092556, 0, -0.9653595, 298.65182, 4.3608828, -26.44307)
+
+[node name="tree1" parent="World/Trees3/prop_tree30" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees3/prop_tree30" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree31" parent="World/Trees3" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.59569275, 0, -0.8032131, 0, 1, 0, 0.8032131, 0, -0.59569275, 283.4761, 0.77578056, -41.469513)
+
+[node name="tree1" parent="World/Trees3/prop_tree31" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees3/prop_tree31" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="Trees6" type="Node3D" parent="World"]
+transform = Transform3D(-0.74602246, 0, 0.66592073, 0, 1, 0, -0.66592073, 0, -0.74602246, -118.94085, 47.10337, -146.96555)
+
+[node name="prop_tree4" parent="World/Trees6" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245203, 0, 1, 0, -0.86245203, 0, 0.50613916, -10.036804, -47.038273, -15.049576)
+
+[node name="tree1" parent="World/Trees6/prop_tree4" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees6/prop_tree4" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree5" parent="World/Trees6" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.029369682, 0, 0.99956894, 0, 1, 0, -0.99956894, 0, 0.029369682, -2.0046082, -46.646126, -27.696747)
+
+[node name="tree1" parent="World/Trees6/prop_tree5" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees6/prop_tree5" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree6" parent="World/Trees6" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.9318181, 0, 0.36292598, 0, 1, 0, -0.36292598, 0, 0.9318181, -17.761429, -47.082283, -25.74678)
+
+[node name="tree1" parent="World/Trees6/prop_tree6" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees6/prop_tree6" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree7" parent="World/Trees6" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.029369682, 0, 0.99956894, 0, 1, 0, -0.99956894, 0, 0.029369682, -22.47995, -47.09896, -15.580894)
+
+[node name="tree1" parent="World/Trees6/prop_tree7" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees6/prop_tree7" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree8" parent="World/Trees6" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245203, 0, 1, 0, -0.86245203, 0, 0.50613916, -26.193115, -46.884315, -32.148895)
+
+[node name="tree1" parent="World/Trees6/prop_tree8" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees6/prop_tree8" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree9" parent="World/Trees6" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245203, 0, 1, 0, -0.86245203, 0, 0.50613916, -31.585114, -47.10105, -18.954674)
+
+[node name="tree1" parent="World/Trees6/prop_tree9" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees6/prop_tree9" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree10" parent="World/Trees6" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.64273435, 0, 0.76608944, 0, 1, 0, -0.76608944, 0, 0.64273435, -40.90097, -47.01828, -27.491112)
+
+[node name="tree1" parent="World/Trees6/prop_tree10" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees6/prop_tree10" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree11" parent="World/Trees6" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.5061392, 0, 0.86245203, 0, 1, 0, -0.86245203, 0, 0.5061392, -46.763702, -47.10337, -13.517769)
+
+[node name="tree1" parent="World/Trees6/prop_tree11" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees6/prop_tree11" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree12" parent="World/Trees6" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245203, 0, 1, 0, -0.86245203, 0, 0.50613916, -35.42282, -46.260395, -42.29033)
+
+[node name="tree1" parent="World/Trees6/prop_tree12" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees6/prop_tree12" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree13" parent="World/Trees6" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245203, 0, 1, 0, -0.86245203, 0, 0.50613916, 12.985565, -45.280724, -29.858139)
+
+[node name="tree1" parent="World/Trees6/prop_tree13" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees6/prop_tree13" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree14" parent="World/Trees6" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.64273435, 0, 0.76608944, 0, 1, 0, -0.76608944, 0, 0.64273435, -7.9632263, -45.961567, -37.215034)
+
+[node name="tree1" parent="World/Trees6/prop_tree14" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees6/prop_tree14" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree15" parent="World/Trees6" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245203, 0, 1, 0, -0.86245203, 0, 0.50613916, -26.789383, -45.657406, -43.637535)
+
+[node name="tree1" parent="World/Trees6/prop_tree15" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees6/prop_tree15" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree16" parent="World/Trees6" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245203, 0, 1, 0, -0.86245203, 0, 0.50613916, -12.565292, -44.439495, -49.898148)
+
+[node name="tree1" parent="World/Trees6/prop_tree16" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees6/prop_tree16" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree17" parent="World/Trees6" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.9318181, 0, 0.36292598, 0, 1, 0, -0.36292598, 0, 0.9318181, 4.134033, -45.12331, -36.58545)
+
+[node name="tree1" parent="World/Trees6/prop_tree17" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees6/prop_tree17" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree18" parent="World/Trees6" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956925, 0, -0.8032128, 0, 1, 0, 0.8032128, 0, -0.5956925, -15.418213, -43.111473, -63.007942)
+
+[node name="tree1" parent="World/Trees6/prop_tree18" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees6/prop_tree18" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree19" parent="World/Trees6" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956925, 0, -0.8032128, 0, 1, 0, 0.8032128, 0, -0.5956925, -23.162537, -43.56496, -59.89396)
+
+[node name="tree1" parent="World/Trees6/prop_tree19" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees6/prop_tree19" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree20" parent="World/Trees6" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956925, 0, -0.8032128, 0, 1, 0, 0.8032128, 0, -0.5956925, -8.226044, -40.412323, -65.0681)
+
+[node name="tree1" parent="World/Trees6/prop_tree20" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees6/prop_tree20" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree21" parent="World/Trees6" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956925, 0, -0.8032128, 0, 1, 0, 0.8032128, 0, -0.5956925, -2.4447174, -32.314545, -74.669495)
+
+[node name="tree1" parent="World/Trees6/prop_tree21" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees6/prop_tree21" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree22" parent="World/Trees6" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.9653591, 0, -0.2609256, 0, 1, 0, 0.2609256, 0, -0.9653591, -0.52937317, -41.850307, -57.798874)
+
+[node name="tree1" parent="World/Trees6/prop_tree22" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees6/prop_tree22" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree23" parent="World/Trees6" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.1363729, 0, -0.9906578, 0, 1, 0, 0.9906578, 0, -0.1363729, -14.086456, -32.507965, -78.05527)
+
+[node name="tree1" parent="World/Trees6/prop_tree23" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees6/prop_tree23" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree24" parent="World/Trees6" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956925, 0, -0.8032128, 0, 1, 0, 0.8032128, 0, -0.5956925, 14.593094, -37.025284, -60.852844)
+
+[node name="tree1" parent="World/Trees6/prop_tree24" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees6/prop_tree24" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree25" parent="World/Trees6" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956925, 0, -0.8032128, 0, 1, 0, 0.8032128, 0, -0.5956925, 17.746033, -32.89946, -74.22958)
+
+[node name="tree1" parent="World/Trees6/prop_tree25" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees6/prop_tree25" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree26" parent="World/Trees6" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956925, 0, -0.8032128, 0, 1, 0, 0.8032128, 0, -0.5956925, 7.559784, -42.857586, -46.72628)
+
+[node name="tree1" parent="World/Trees6/prop_tree26" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees6/prop_tree26" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree27" parent="World/Trees6" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.9653591, 0, -0.2609256, 0, 1, 0, 0.2609256, 0, -0.9653591, -40.127045, -43.812134, -62.212967)
+
+[node name="tree1" parent="World/Trees6/prop_tree27" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees6/prop_tree27" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree28" parent="World/Trees6" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.1363729, 0, -0.9906578, 0, 1, 0, 0.9906578, 0, -0.1363729, -19.197388, -44.06412, -54.7165)
+
+[node name="tree1" parent="World/Trees6/prop_tree28" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees6/prop_tree28" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree29" parent="World/Trees6" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956925, 0, -0.8032128, 0, 1, 0, 0.8032128, 0, -0.5956925, -1.1683655, -44.229145, -46.31254)
+
+[node name="tree1" parent="World/Trees6/prop_tree29" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees6/prop_tree29" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree30" parent="World/Trees6" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.9653591, 0, -0.2609256, 0, 1, 0, 0.2609256, 0, -0.9653591, -15.981689, -45.669422, -41.6131)
+
+[node name="tree1" parent="World/Trees6/prop_tree30" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees6/prop_tree30" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree31" parent="World/Trees6" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956925, 0, -0.8032128, 0, 1, 0, 0.8032128, 0, -0.5956925, -31.15738, -44.00534, -56.63955)
+
+[node name="tree1" parent="World/Trees6/prop_tree31" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees6/prop_tree31" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="Trees7" type="Node3D" parent="World"]
+transform = Transform3D(-0.791469, 0, -0.6112093, 0, 1, 0, 0.6112093, 0, -0.791469, -137.42293, 33.81897, 4.14345)
+
+[node name="prop_tree4" parent="World/Trees7" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245203, 0, 1, 0, -0.86245203, 0, 0.50613916, -10.036774, -32.36115, -15.049583)
+
+[node name="tree1" parent="World/Trees7/prop_tree4" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees7/prop_tree4" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree5" parent="World/Trees7" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.029369712, 0, 0.99956894, 0, 1, 0, -0.99956894, 0, 0.029369712, -2.0046005, -33.111496, -27.696747)
+
+[node name="tree1" parent="World/Trees7/prop_tree5" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees7/prop_tree5" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree6" parent="World/Trees7" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.9318181, 0, 0.36292604, 0, 1, 0, -0.36292604, 0, 0.9318181, -17.761429, -33.579746, -25.74678)
+
+[node name="tree1" parent="World/Trees7/prop_tree6" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees7/prop_tree6" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree7" parent="World/Trees7" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.029369742, 0, 0.999569, 0, 1, 0, -0.999569, 0, 0.029369742, -22.479942, -33.216972, -15.580887)
+
+[node name="tree1" parent="World/Trees7/prop_tree7" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees7/prop_tree7" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree8" parent="World/Trees7" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245203, 0, 1, 0, -0.86245203, 0, 0.50613916, -26.193108, -33.816933, -32.14889)
+
+[node name="tree1" parent="World/Trees7/prop_tree8" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees7/prop_tree8" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree9" parent="World/Trees7" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245203, 0, 1, 0, -0.86245203, 0, 0.50613916, -31.58509, -33.69425, -18.954674)
+
+[node name="tree1" parent="World/Trees7/prop_tree9" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees7/prop_tree9" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree10" parent="World/Trees7" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.6427343, 0, 0.76608944, 0, 1, 0, -0.76608944, 0, 0.6427343, -40.900955, -33.81897, -27.49112)
+
+[node name="tree1" parent="World/Trees7/prop_tree10" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees7/prop_tree10" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree11" parent="World/Trees7" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.5061392, 0, 0.862452, 0, 1, 0, -0.862452, 0, 0.5061392, -46.76368, -33.776985, -13.517784)
+
+[node name="tree1" parent="World/Trees7/prop_tree11" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees7/prop_tree11" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree12" parent="World/Trees7" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245203, 0, 1, 0, -0.86245203, 0, 0.50613916, -35.42282, -33.81897, -42.290344)
+
+[node name="tree1" parent="World/Trees7/prop_tree12" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees7/prop_tree12" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree13" parent="World/Trees7" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245203, 0, 1, 0, -0.86245203, 0, 0.50613916, 12.98558, -32.87532, -29.858147)
+
+[node name="tree1" parent="World/Trees7/prop_tree13" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees7/prop_tree13" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree14" parent="World/Trees7" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.6427343, 0, 0.76608944, 0, 1, 0, -0.76608944, 0, 0.6427343, -7.963211, -33.69386, -37.215042)
+
+[node name="tree1" parent="World/Trees7/prop_tree14" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees7/prop_tree14" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree15" parent="World/Trees7" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245203, 0, 1, 0, -0.86245203, 0, 0.50613916, -26.789375, -33.81897, -43.63754)
+
+[node name="tree1" parent="World/Trees7/prop_tree15" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees7/prop_tree15" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree16" parent="World/Trees7" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245203, 0, 1, 0, -0.86245203, 0, 0.50613916, -12.565285, -33.811543, -49.898155)
+
+[node name="tree1" parent="World/Trees7/prop_tree16" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees7/prop_tree16" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree17" parent="World/Trees7" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.9318181, 0, 0.36292604, 0, 1, 0, -0.36292604, 0, 0.9318181, 4.134041, -33.372864, -36.58545)
+
+[node name="tree1" parent="World/Trees7/prop_tree17" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees7/prop_tree17" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree18" parent="World/Trees7" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956925, 0, -0.8032129, 0, 1, 0, 0.8032129, 0, -0.5956925, -15.418182, -33.701366, -63.00795)
+
+[node name="tree1" parent="World/Trees7/prop_tree18" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees7/prop_tree18" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree19" parent="World/Trees7" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956925, 0, -0.8032129, 0, 1, 0, 0.8032129, 0, -0.5956925, -23.162529, -33.77576, -59.89396)
+
+[node name="tree1" parent="World/Trees7/prop_tree19" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees7/prop_tree19" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree20" parent="World/Trees7" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956925, 0, -0.8032129, 0, 1, 0, 0.8032129, 0, -0.5956925, -8.226028, -33.65012, -65.0681)
+
+[node name="tree1" parent="World/Trees7/prop_tree20" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees7/prop_tree20" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree21" parent="World/Trees7" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956926, 0, -0.80321294, 0, 1, 0, 0.80321294, 0, -0.5956926, -94.600174, -33.447372, -98.151184)
+
+[node name="tree1" parent="World/Trees7/prop_tree21" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees7/prop_tree21" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree22" parent="World/Trees7" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.9653592, 0, -0.26092565, 0, 1, 0, 0.26092565, 0, -0.9653592, -0.52936554, -33.732365, -57.79887)
+
+[node name="tree1" parent="World/Trees7/prop_tree22" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees7/prop_tree22" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree23" parent="World/Trees7" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.13637286, 0, -0.9906579, 0, 1, 0, 0.9906579, 0, -0.13637286, -14.086449, -33.322685, -78.05528)
+
+[node name="tree1" parent="World/Trees7/prop_tree23" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees7/prop_tree23" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree24" parent="World/Trees7" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956926, 0, -0.80321294, 0, 1, 0, 0.80321294, 0, -0.5956926, -38.18052, -32.873333, 1.306633)
+
+[node name="tree1" parent="World/Trees7/prop_tree24" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees7/prop_tree24" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree25" parent="World/Trees7" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956926, 0, -0.80321294, 0, 1, 0, 0.80321294, 0, -0.5956926, -42.764137, -33.522617, -86.83148)
+
+[node name="tree1" parent="World/Trees7/prop_tree25" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees7/prop_tree25" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree26" parent="World/Trees7" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956925, 0, -0.8032129, 0, 1, 0, 0.8032129, 0, -0.5956925, 7.559799, -33.623516, -46.72629)
+
+[node name="tree1" parent="World/Trees7/prop_tree26" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees7/prop_tree26" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree27" parent="World/Trees7" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.9653592, 0, -0.26092565, 0, 1, 0, 0.26092565, 0, -0.9653592, -40.127037, -33.79497, -62.212982)
+
+[node name="tree1" parent="World/Trees7/prop_tree27" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees7/prop_tree27" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree28" parent="World/Trees7" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.13637286, 0, -0.9906579, 0, 1, 0, 0.9906579, 0, -0.13637286, -19.197365, -33.806538, -54.716503)
+
+[node name="tree1" parent="World/Trees7/prop_tree28" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees7/prop_tree28" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree29" parent="World/Trees7" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956925, 0, -0.8032129, 0, 1, 0, 0.8032129, 0, -0.5956925, -1.1683578, -33.734245, -46.312546)
+
+[node name="tree1" parent="World/Trees7/prop_tree29" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees7/prop_tree29" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree30" parent="World/Trees7" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.9653592, 0, -0.26092565, 0, 1, 0, 0.26092565, 0, -0.9653592, -15.981667, -33.81833, -41.613113)
+
+[node name="tree1" parent="World/Trees7/prop_tree30" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees7/prop_tree30" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree31" parent="World/Trees7" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956925, 0, -0.8032129, 0, 1, 0, 0.8032129, 0, -0.5956925, -31.157364, -33.81452, -56.63955)
+
+[node name="tree1" parent="World/Trees7/prop_tree31" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees7/prop_tree31" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="Trees8" type="Node3D" parent="World"]
+transform = Transform3D(-0.791469, 0, -0.6112093, 0, 1, 0, 0.6112093, 0, -0.791469, -145.20082, 33.81897, -80.22999)
+
+[node name="prop_tree4" parent="World/Trees8" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245203, 0, 1, 0, -0.86245203, 0, 0.50613916, -10.036774, -32.36115, -15.049583)
+
+[node name="tree1" parent="World/Trees8/prop_tree4" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees8/prop_tree4" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree5" parent="World/Trees8" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.029369712, 0, 0.99956894, 0, 1, 0, -0.99956894, 0, 0.029369712, -2.0046005, -33.111496, -27.696747)
+
+[node name="tree1" parent="World/Trees8/prop_tree5" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees8/prop_tree5" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree6" parent="World/Trees8" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.9318181, 0, 0.36292604, 0, 1, 0, -0.36292604, 0, 0.9318181, -17.761429, -33.579746, -25.74678)
+
+[node name="tree1" parent="World/Trees8/prop_tree6" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees8/prop_tree6" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree7" parent="World/Trees8" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.029369712, 0, 0.99956906, 0, 1, 0, -0.99956906, 0, 0.029369712, -22.479942, -32.511875, -15.580887)
+
+[node name="tree1" parent="World/Trees8/prop_tree7" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees8/prop_tree7" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree8" parent="World/Trees8" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.8624521, 0, 1, 0, -0.8624521, 0, 0.50613916, -26.193108, -33.161934, -32.148888)
+
+[node name="tree1" parent="World/Trees8/prop_tree8" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees8/prop_tree8" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree9" parent="World/Trees8" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.8624521, 0, 1, 0, -0.8624521, 0, 0.50613916, -31.58509, -33.50244, -18.954681)
+
+[node name="tree1" parent="World/Trees8/prop_tree9" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees8/prop_tree9" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree10" parent="World/Trees8" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.6427343, 0, 0.7660895, 0, 1, 0, -0.7660895, 0, 0.6427343, -40.900963, -33.700157, -27.49112)
+
+[node name="tree1" parent="World/Trees8/prop_tree10" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees8/prop_tree10" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree11" parent="World/Trees8" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245203, 0, 1, 0, -0.86245203, 0, 0.50613916, -46.763687, -33.775158, -13.5177765)
+
+[node name="tree1" parent="World/Trees8/prop_tree11" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees8/prop_tree11" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree12" parent="World/Trees8" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.8624521, 0, 1, 0, -0.8624521, 0, 0.50613916, -35.42282, -33.644657, -42.290344)
+
+[node name="tree1" parent="World/Trees8/prop_tree12" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees8/prop_tree12" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree13" parent="World/Trees8" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245215, 0, 1, 0, -0.86245215, 0, 0.50613916, -4.2855835, -33.81897, -106.57264)
+
+[node name="tree1" parent="World/Trees8/prop_tree13" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees8/prop_tree13" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree14" parent="World/Trees8" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.6427343, 0, 0.76608944, 0, 1, 0, -0.76608944, 0, 0.6427343, -7.963211, -33.69386, -37.215042)
+
+[node name="tree1" parent="World/Trees8/prop_tree14" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees8/prop_tree14" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree15" parent="World/Trees8" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.8624521, 0, 1, 0, -0.8624521, 0, 0.50613916, -26.789375, -33.153, -43.637535)
+
+[node name="tree1" parent="World/Trees8/prop_tree15" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees8/prop_tree15" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree16" parent="World/Trees8" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245203, 0, 1, 0, -0.86245203, 0, 0.50613916, -12.565285, -33.811543, -49.898155)
+
+[node name="tree1" parent="World/Trees8/prop_tree16" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees8/prop_tree16" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree17" parent="World/Trees8" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.9318181, 0, 0.36292604, 0, 1, 0, -0.36292604, 0, 0.9318181, 4.134041, -33.372864, -36.58545)
+
+[node name="tree1" parent="World/Trees8/prop_tree17" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees8/prop_tree17" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree18" parent="World/Trees8" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956926, 0, -0.80321294, 0, 1, 0, 0.80321294, 0, -0.5956926, -15.418182, -33.439022, -63.00795)
+
+[node name="tree1" parent="World/Trees8/prop_tree18" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees8/prop_tree18" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree19" parent="World/Trees8" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956926, 0, -0.80321294, 0, 1, 0, 0.80321294, 0, -0.5956926, -23.162529, -33.581112, -59.89395)
+
+[node name="tree1" parent="World/Trees8/prop_tree19" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees8/prop_tree19" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree20" parent="World/Trees8" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956926, 0, -0.80321294, 0, 1, 0, 0.80321294, 0, -0.5956926, -8.226028, -33.243927, -65.0681)
+
+[node name="tree1" parent="World/Trees8/prop_tree20" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees8/prop_tree20" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree21" parent="World/Trees8" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956926, 0, -0.80321294, 0, 1, 0, 0.80321294, 0, -0.5956926, -2.4447098, -33.443546, -74.669495)
+
+[node name="tree1" parent="World/Trees8/prop_tree21" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees8/prop_tree21" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree22" parent="World/Trees8" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.9653592, 0, -0.26092565, 0, 1, 0, 0.26092565, 0, -0.9653592, -0.52936554, -33.732365, -57.79887)
+
+[node name="tree1" parent="World/Trees8/prop_tree22" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees8/prop_tree22" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree23" parent="World/Trees8" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.1363728, 0, -0.9906579, 0, 1, 0, 0.9906579, 0, -0.1363728, -14.086449, -33.802513, -78.05528)
+
+[node name="tree1" parent="World/Trees8/prop_tree23" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees8/prop_tree23" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree24" parent="World/Trees8" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956925, 0, -0.8032129, 0, 1, 0, 0.8032129, 0, -0.5956925, 14.5931015, -33.64341, -60.852844)
+
+[node name="tree1" parent="World/Trees8/prop_tree24" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees8/prop_tree24" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree25" parent="World/Trees8" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956926, 0, -0.80321294, 0, 1, 0, 0.80321294, 0, -0.5956926, 17.74604, -32.63101, -74.22961)
+
+[node name="tree1" parent="World/Trees8/prop_tree25" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees8/prop_tree25" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree26" parent="World/Trees8" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956925, 0, -0.8032129, 0, 1, 0, 0.8032129, 0, -0.5956925, 7.559799, -33.623516, -46.72629)
+
+[node name="tree1" parent="World/Trees8/prop_tree26" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees8/prop_tree26" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree27" parent="World/Trees8" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.9653593, 0, -0.26092568, 0, 1, 0, 0.26092568, 0, -0.9653593, -25.847511, -33.81897, -77.281)
+
+[node name="tree1" parent="World/Trees8/prop_tree27" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees8/prop_tree27" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree28" parent="World/Trees8" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.1363728, 0, -0.9906579, 0, 1, 0, 0.9906579, 0, -0.1363728, -19.197365, -33.015945, -54.716507)
+
+[node name="tree1" parent="World/Trees8/prop_tree28" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees8/prop_tree28" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree29" parent="World/Trees8" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956926, 0, -0.80321294, 0, 1, 0, 0.80321294, 0, -0.5956926, -14.741241, -33.81897, -94.518265)
+
+[node name="tree1" parent="World/Trees8/prop_tree29" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees8/prop_tree29" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree30" parent="World/Trees8" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.9653592, 0, -0.26092565, 0, 1, 0, 0.26092565, 0, -0.9653592, -15.981667, -33.81833, -41.613113)
+
+[node name="tree1" parent="World/Trees8/prop_tree30" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees8/prop_tree30" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree31" parent="World/Trees8" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956926, 0, -0.80321294, 0, 1, 0, 0.80321294, 0, -0.5956926, -31.157368, -33.732037, -56.63954)
+
+[node name="tree1" parent="World/Trees8/prop_tree31" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees8/prop_tree31" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="Trees9" type="Node3D" parent="World"]
+transform = Transform3D(-0.791469, 0, -0.6112093, 0, 1, 0, 0.6112093, 0, -0.791469, -70.00749, 33.81897, -144.21054)
+
+[node name="prop_tree4" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.8624521, 0, 1, 0, -0.8624521, 0, 0.50613916, -10.0367775, -33.681404, -15.049576)
+
+[node name="tree1" parent="World/Trees9/prop_tree4" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree4" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree5" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.029369652, 0, 0.999569, 0, 1, 0, -0.999569, 0, 0.029369652, -2.0046005, -33.747944, -27.696747)
+
+[node name="tree1" parent="World/Trees9/prop_tree5" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree5" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree6" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.9318181, 0, 0.36292604, 0, 1, 0, -0.36292604, 0, 0.9318181, -17.761436, -33.53504, -25.746765)
+
+[node name="tree1" parent="World/Trees9/prop_tree6" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree6" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree7" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.029369652, 0, 0.99956906, 0, 1, 0, -0.99956906, 0, 0.029369652, -22.479946, -33.461723, -15.580887)
+
+[node name="tree1" parent="World/Trees9/prop_tree7" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree7" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree8" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245215, 0, 1, 0, -0.86245215, 0, 0.50613916, -26.193108, -33.277542, -32.148888)
+
+[node name="tree1" parent="World/Trees9/prop_tree8" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree8" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree9" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245215, 0, 1, 0, -0.86245215, 0, 0.50613916, -31.58509, -33.296, -18.954681)
+
+[node name="tree1" parent="World/Trees9/prop_tree9" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree9" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree10" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.6427343, 0, 0.76608956, 0, 1, 0, -0.76608956, 0, 0.6427343, -40.900963, -32.94375, -27.49112)
+
+[node name="tree1" parent="World/Trees9/prop_tree10" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree10" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree11" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.8624521, 0, 1, 0, -0.8624521, 0, 0.50613916, -46.763687, -33.10361, -13.5177765)
+
+[node name="tree1" parent="World/Trees9/prop_tree11" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree11" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree12" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.8624521, 0, 1, 0, -0.8624521, 0, 0.50613916, -35.42282, -33.644657, -42.290344)
+
+[node name="tree1" parent="World/Trees9/prop_tree12" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree12" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree13" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245227, 0, 1, 0, -0.86245227, 0, 0.50613916, -4.2855797, -33.601543, -106.57265)
+
+[node name="tree1" parent="World/Trees9/prop_tree13" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree13" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree14" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.6427343, 0, 0.7660895, 0, 1, 0, -0.7660895, 0, 0.6427343, -7.9632072, -33.643936, -37.215042)
+
+[node name="tree1" parent="World/Trees9/prop_tree14" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree14" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree15" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.86245215, 0, 1, 0, -0.86245215, 0, 0.50613916, -26.789375, -32.73432, -43.637527)
+
+[node name="tree1" parent="World/Trees9/prop_tree15" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree15" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree16" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.50613916, 0, 0.8624521, 0, 1, 0, -0.8624521, 0, 0.50613916, -12.565285, -33.346855, -49.898155)
+
+[node name="tree1" parent="World/Trees9/prop_tree16" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree16" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree17" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.9318181, 0, 0.36292604, 0, 1, 0, -0.36292604, 0, 0.9318181, 4.134041, -33.773697, -36.58544)
+
+[node name="tree1" parent="World/Trees9/prop_tree17" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree17" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree18" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956926, 0, -0.80321294, 0, 1, 0, 0.80321294, 0, -0.5956926, -15.418186, -32.872475, -63.007942)
+
+[node name="tree1" parent="World/Trees9/prop_tree18" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree18" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree19" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956926, 0, -0.80321294, 0, 1, 0, 0.80321294, 0, -0.5956926, -23.162529, -33.581112, -59.89395)
+
+[node name="tree1" parent="World/Trees9/prop_tree19" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree19" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree20" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956926, 0, -0.80321294, 0, 1, 0, 0.80321294, 0, -0.5956926, -8.226028, -33.28854, -65.0681)
+
+[node name="tree1" parent="World/Trees9/prop_tree20" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree20" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree21" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956926, 0, -0.80321294, 0, 1, 0, 0.80321294, 0, -0.5956926, -2.4447174, -33.52709, -74.669495)
+
+[node name="tree1" parent="World/Trees9/prop_tree21" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree21" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree22" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.9653593, 0, -0.26092568, 0, 1, 0, 0.26092568, 0, -0.9653593, -0.52936935, -33.644897, -57.798866)
+
+[node name="tree1" parent="World/Trees9/prop_tree22" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree22" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree23" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.13637275, 0, -0.990658, 0, 1, 0, 0.990658, 0, -0.13637275, -14.0864525, -32.88342, -78.05528)
+
+[node name="tree1" parent="World/Trees9/prop_tree23" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree23" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree24" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956926, 0, -0.80321294, 0, 1, 0, 0.80321294, 0, -0.5956926, 14.593105, -33.78901, -60.852844)
+
+[node name="tree1" parent="World/Trees9/prop_tree24" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree24" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree25" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956926, 0, -0.80321294, 0, 1, 0, 0.80321294, 0, -0.5956926, 17.74604, -33.793682, -74.22961)
+
+[node name="tree1" parent="World/Trees9/prop_tree25" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree25" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree26" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956926, 0, -0.80321294, 0, 1, 0, 0.80321294, 0, -0.5956926, 7.559799, -33.776684, -46.726288)
+
+[node name="tree1" parent="World/Trees9/prop_tree26" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree26" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree27" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.9653593, 0, -0.26092568, 0, 1, 0, 0.26092568, 0, -0.9653593, -25.847511, -33.81897, -77.281)
+
+[node name="tree1" parent="World/Trees9/prop_tree27" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree27" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree28" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.13637275, 0, -0.990658, 0, 1, 0, 0.990658, 0, -0.13637275, -19.197365, -32.80614, -54.716507)
+
+[node name="tree1" parent="World/Trees9/prop_tree28" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree28" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree29" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956926, 0, -0.80321294, 0, 1, 0, 0.80321294, 0, -0.5956926, -14.741241, -33.81897, -94.518265)
+
+[node name="tree1" parent="World/Trees9/prop_tree29" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree29" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree30" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.9653593, 0, -0.26092568, 0, 1, 0, 0.26092568, 0, -0.9653593, -15.98167, -33.43418, -41.613113)
+
+[node name="tree1" parent="World/Trees9/prop_tree30" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree30" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree31" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5956926, 0, -0.80321294, 0, 1, 0, 0.80321294, 0, -0.5956926, -31.157368, -33.732037, -56.63954)
+
+[node name="tree1" parent="World/Trees9/prop_tree31" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree31" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree32" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.06768474, 0, -0.99770737, 0, 1, 0, 0.99770737, 0, 0.06768474, -66.26959, -33.01544, -13.431473)
+
+[node name="tree1" parent="World/Trees9/prop_tree32" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree32" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree33" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.5388448, 0, -0.8424059, 0, 1, 0, 0.8424059, 0, 0.5388448, -65.78109, -33.08361, 1.5427704)
+
+[node name="tree1" parent="World/Trees9/prop_tree33" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree33" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree34" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.56542796, 0, -0.82479805, 0, 1, 0, 0.82479805, 0, -0.56542796, -53.86106, -33.065536, -8.945023)
+
+[node name="tree1" parent="World/Trees9/prop_tree34" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree34" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree35" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.5388449, 0, -0.84240586, 0, 1, 0, 0.84240586, 0, 0.5388449, -55.68953, -32.911236, -20.00238)
+
+[node name="tree1" parent="World/Trees9/prop_tree35" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree35" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree36" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.06768474, 0, -0.99770737, 0, 1, 0, 0.99770737, 0, 0.06768474, -43.288017, -33.12954, -8.405472)
+
+[node name="tree1" parent="World/Trees9/prop_tree36" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree36" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree37" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.06768474, 0, -0.99770737, 0, 1, 0, 0.99770737, 0, 0.06768474, -46.266068, -33.026253, -22.344315)
+
+[node name="tree1" parent="World/Trees9/prop_tree37" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree37" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree38" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.099458605, 0, -0.9950422, 0, 1, 0, 0.9950422, 0, -0.099458605, -33.76011, -33.250877, -20.539505)
+
+[node name="tree1" parent="World/Trees9/prop_tree38" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree38" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree39" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.06768474, 0, -0.99770737, 0, 1, 0, 0.99770737, 0, 0.06768474, -36.788162, -32.629875, -35.387283)
+
+[node name="tree1" parent="World/Trees9/prop_tree39" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree39" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree40" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.06768474, 0, -0.99770737, 0, 1, 0, 0.99770737, 0, 0.06768474, -29.949043, -33.295383, -5.225998)
+
+[node name="tree1" parent="World/Trees9/prop_tree40" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree40" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree41" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.06768471, 0, -0.9977073, 0, 1, 0, 0.9977073, 0, 0.06768471, -19.461494, -33.19369, 65.426315)
+
+[node name="tree1" parent="World/Trees9/prop_tree41" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree41" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree42" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.099458605, 0, -0.9950422, 0, 1, 0, 0.9950422, 0, -0.099458605, -55.49582, -33.05094, 6.050171)
+
+[node name="tree1" parent="World/Trees9/prop_tree42" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree42" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree43" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.06768474, 0, -0.99770737, 0, 1, 0, 0.99770737, 0, 0.06768474, -36.32322, -33.17659, 0.7507477)
+
+[node name="tree1" parent="World/Trees9/prop_tree43" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree43" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree44" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.06768474, 0, -0.99770737, 0, 1, 0, 0.99770737, 0, 0.06768474, -44.548462, -33.04813, 13.9366)
+
+[node name="tree1" parent="World/Trees9/prop_tree44" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree44" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree45" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.56542796, 0, -0.82479805, 0, 1, 0, 0.82479805, 0, -0.56542796, -65.845474, -33.082764, 12.344971)
+
+[node name="tree1" parent="World/Trees9/prop_tree45" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree45" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree46" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.039678514, 0, 0.999213, 0, 1, 0, -0.999213, 0, 0.039678514, -34.805878, -33.071564, 23.160889)
+
+[node name="tree1" parent="World/Trees9/prop_tree46" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree46" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree47" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.039678514, 0, 0.999213, 0, 1, 0, -0.999213, 0, 0.039678514, -30.161663, -33.146107, 16.225266)
+
+[node name="tree1" parent="World/Trees9/prop_tree47" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree47" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree48" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.039678514, 0, 0.999213, 0, 1, 0, -0.999213, 0, 0.039678514, -39.58757, -33.026474, 28.914764)
+
+[node name="tree1" parent="World/Trees9/prop_tree48" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree48" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree49" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.039678514, 0, 0.999213, 0, 1, 0, -0.999213, 0, 0.039678514, -38.955223, -33.01394, 40.104477)
+
+[node name="tree1" parent="World/Trees9/prop_tree49" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree49" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree50" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.6506025, 0, 0.7594193, 0, 1, 0, -0.7594193, 0, 0.6506025, -50.041832, -33.004326, 27.244751)
+
+[node name="tree1" parent="World/Trees9/prop_tree50" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree50" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree51" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.44541693, 0, 0.895324, 0, 1, 0, -0.895324, 0, -0.44541693, -27.429241, -33.09279, 36.34346)
+
+[node name="tree1" parent="World/Trees9/prop_tree51" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree51" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree52" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.039678514, 0, 0.999213, 0, 1, 0, -0.999213, 0, 0.039678514, -60.81579, -33.036026, 38.287247)
+
+[node name="tree1" parent="World/Trees9/prop_tree52" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree52" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree53" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.039678514, 0, 0.999213, 0, 1, 0, -0.999213, 0, 0.039678514, -55.884987, -33.001682, 51.11557)
+
+[node name="tree1" parent="World/Trees9/prop_tree53" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree53" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree54" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.039678514, 0, 0.999213, 0, 1, 0, -0.999213, 0, 0.039678514, -62.963013, -33.05803, 22.653442)
+
+[node name="tree1" parent="World/Trees9/prop_tree54" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree54" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree55" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.6506025, 0, 0.7594193, 0, 1, 0, -0.7594193, 0, 0.6506025, -18.148247, -33.20999, 29.07811)
+
+[node name="tree1" parent="World/Trees9/prop_tree55" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree55" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree56" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.44541693, 0, 0.895324, 0, 1, 0, -0.895324, 0, -0.44541693, -36.35447, -33.102596, 14.181351)
+
+[node name="tree1" parent="World/Trees9/prop_tree56" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree56" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree57" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.039678514, 0, 0.999213, 0, 1, 0, -0.999213, 0, 0.039678514, -17.613754, -33.174583, 49.576614)
+
+[node name="tree1" parent="World/Trees9/prop_tree57" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree57" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree58" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.6506025, 0, 0.7594193, 0, 1, 0, -0.7594193, 0, 0.6506025, -46.393166, -33.080097, 5.1666718)
+
+[node name="tree1" parent="World/Trees9/prop_tree58" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree58" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree59" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.039678514, 0, 0.999213, 0, 1, 0, -0.999213, 0, 0.039678514, -25.389595, -33.258743, 9.0325165)
+
+[node name="tree1" parent="World/Trees9/prop_tree59" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree59" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree60" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.9735079, 0, -0.2286565, 0, 1, 0, 0.2286565, 0, 0.9735079, -20.584343, -33.180393, 70.92972)
+
+[node name="tree1" parent="World/Trees9/prop_tree60" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree60" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree61" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.96360314, 0, 0.26733965, 0, 1, 0, -0.26733965, 0, 0.96360314, -6.1283417, -33.19693, 74.86557)
+
+[node name="tree1" parent="World/Trees9/prop_tree61" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree61" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree62" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.6220914, 0, -0.7829452, 0, 1, 0, 0.7829452, 0, 0.6220914, -12.647797, -33.239635, 60.38875)
+
+[node name="tree1" parent="World/Trees9/prop_tree62" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree62" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree63" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.963603, 0, 0.26733986, 0, 1, 0, -0.26733986, 0, 0.963603, -23.75399, -33.134186, 58.88527)
+
+[node name="tree1" parent="World/Trees9/prop_tree63" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree63" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree64" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.9735079, 0, -0.2286565, 0, 1, 0, 0.2286565, 0, 0.9735079, -9.023361, -33.259754, 50.441757)
+
+[node name="tree1" parent="World/Trees9/prop_tree64" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree64" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree65" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.9735079, 0, -0.2286565, 0, 1, 0, 0.2286565, 0, 0.9735079, -27.730515, -33.123055, 45.70784)
+
+[node name="tree1" parent="World/Trees9/prop_tree65" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree65" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree66" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.92181635, 0, -0.38762832, 0, 1, 0, 0.38762832, 0, 0.92181635, -17.819614, -33.184296, 37.767273)
+
+[node name="tree1" parent="World/Trees9/prop_tree66" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree66" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree67" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.9735079, 0, -0.2286565, 0, 1, 0, 0.2286565, 0, 0.9735079, -32.90142, -33.056576, 36.295868)
+
+[node name="tree1" parent="World/Trees9/prop_tree67" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree67" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree69" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.97350776, 0, -0.22865665, 0, 1, 0, 0.22865665, 0, 0.97350776, 68.5505, -33.19369, 49.376633)
+
+[node name="tree1" parent="World/Trees9/prop_tree69" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree69" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree70" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.92181635, 0, -0.38762832, 0, 1, 0, 0.38762832, 0, 0.92181635, 1.203949, -33.311527, 66.36018)
+
+[node name="tree1" parent="World/Trees9/prop_tree70" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree70" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree72" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.9735079, 0, -0.2286565, 0, 1, 0, 0.2286565, 0, 0.9735079, 11.960533, -33.42424, 58.21553)
+
+[node name="tree1" parent="World/Trees9/prop_tree72" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree72" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree73" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(0.6220914, 0, -0.7829452, 0, 1, 0, 0.7829452, 0, 0.6220914, 4.177452, -33.19699, 78.103226)
+
+[node name="tree1" parent="World/Trees9/prop_tree73" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree73" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree76" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.9433796, 0, 0.3317168, 0, 1, 0, -0.3317168, 0, -0.9433796, 27.735275, -33.458, 57.877853)
+
+[node name="tree1" parent="World/Trees9/prop_tree76" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree76" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree77" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.9433796, 0, 0.3317168, 0, 1, 0, -0.3317168, 0, -0.9433796, 38.61631, -33.30488, 60.56349)
+
+[node name="tree1" parent="World/Trees9/prop_tree77" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree77" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree78" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5345591, 0, 0.8451319, 0, 1, 0, -0.8451319, 0, -0.5345591, 23.065285, -33.3818, 67.37901)
+
+[node name="tree1" parent="World/Trees9/prop_tree78" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree78" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree79" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.9867121, 0, -0.16248232, 0, 1, 0, 0.16248232, 0, -0.9867121, 38.41044, -33.478382, 48.441147)
+
+[node name="tree1" parent="World/Trees9/prop_tree79" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree79" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree80" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.9433796, 0, 0.3317168, 0, 1, 0, -0.3317168, 0, -0.9433796, 30.451866, -32.955227, 80.92348)
+
+[node name="tree1" parent="World/Trees9/prop_tree80" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree80" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree81" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.9433796, 0, 0.3317168, 0, 1, 0, -0.3317168, 0, -0.9433796, 44.16294, -32.47703, 79.98244)
+
+[node name="tree1" parent="World/Trees9/prop_tree81" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree81" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree82" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.9433796, 0, 0.3317168, 0, 1, 0, -0.3317168, 0, -0.9433796, 14.877785, -33.23232, 78.379074)
+
+[node name="tree1" parent="World/Trees9/prop_tree82" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree82" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree83" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5345591, 0, 0.8451319, 0, 1, 0, -0.8451319, 0, -0.5345591, 34.19507, -33.577435, 37.43422)
+
+[node name="tree1" parent="World/Trees9/prop_tree83" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree83" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree85" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.9433796, 0, 0.3317168, 0, 1, 0, -0.3317168, 0, -0.9433796, 53.94465, -33.46223, 42.950394)
+
+[node name="tree1" parent="World/Trees9/prop_tree85" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree85" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree86" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.5345591, 0, 0.8451319, 0, 1, 0, -0.8451319, 0, -0.5345591, 3.0358658, -33.364716, 57.400146)
+
+[node name="tree1" parent="World/Trees9/prop_tree86" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree86" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="prop_tree87" parent="World/Trees9" instance=ExtResource("8_4lngc")]
+transform = Transform3D(-0.9433796, 0, 0.3317168, 0, 1, 0, -0.3317168, 0, -0.9433796, 12.906395, -33.47506, 38.46158)
+
+[node name="tree1" parent="World/Trees9/prop_tree87" index="0"]
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="tree1_leaves-detail" parent="World/Trees9/prop_tree87" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 1
+gi_mode = 1
+gi_lightmap_texel_scale = 0.2
+
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="MapTrinket" type="StaticBody3D" parent="Entities"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.73747, 0.86858404, -144.57507)
+script = ExtResource("9_cuyuu")
+trinket = ExtResource("10_qmgcn")
+metadata/_custom_type_script = "uid://b65ry1hptnufj"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/MapTrinket"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3359375, -0.41378784, 0)
+shape = SubResource("BoxShape3D_pkvet")
+
+[node name="Decal" type="Decal" parent="Entities/MapTrinket"]
+transform = Transform3D(-0.9606581, 0, -0.2777339, 0, 1, 0, 0.2777339, 0, -0.9606581, 0.059577942, -0.73413086, -0.13876343)
+size = Vector3(8, 0.532, 8)
+texture_albedo = ExtResource("11_cuyuu")
+
+[node name="WorldTeleport" type="StaticBody3D" parent="Entities"]
+transform = Transform3D(5.183522e-07, 0, -0.47401756, 0, 3.2733374, 0, 3.952839, 0, 6.21599e-08, -112.64575, 1.8394822, -141.00955)
+collision_layer = 9
+collision_mask = 0
+script = ExtResource("9_kx6lq")
+condition_mode = 2
+use_ui_failure = false
+interact_delay = 1.0
+can_interact = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/WorldTeleport"]
+shape = SubResource("BoxShape3D_ult4f")
+
+[node name="InteractableEffectMultiple" type="Node" parent="Entities/WorldTeleport"]
+script = ExtResource("14_5oxoi")
+use_children = true
+metadata/_custom_type_script = "uid://smxebn1sb80y"
+
+[node name="InteractableEffectPlay2DSound" type="Node" parent="Entities/WorldTeleport/InteractableEffectMultiple"]
+script = ExtResource("17_4lngc")
+sound = ExtResource("12_4lngc")
+volume = 0.0
+pitch = 0.7
+metadata/_custom_type_script = "uid://diry24ij7ve2h"
+
+[node name="MapPlayerLevelChange" type="Node" parent="Entities/WorldTeleport/InteractableEffectMultiple"]
+script = ExtResource("10_3judj")
+level = "uid://28q6ne7lfr6k"
+spawnpoint = "from_hh"
+transition_type = ExtResource("11_5oxoi")
+transition_duration = 2.0
+metadata/_custom_type_script = "uid://cxskkr6k8urre"
+
+[node name="Physics" type="Node3D" parent="Entities"]
+
+[node name="Lights" type="Node3D" parent="Entities"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Entities/Lights"]
+transform = Transform3D(-0.9139992, 0.31210798, -0.25921828, -1.04166435e-08, 0.6389156, 0.7692769, 0.405716, 0.70311844, -0.58396834, 3.5539064, 7.205748, -5.9203997)
+light_color = Color(0.23632471, 0.33766964, 0.54978347, 1)
+light_energy = 0.2
+light_bake_mode = 1
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Entities/Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -106.94889, 8.491181, -141.00955)
+light_color = Color(0.8901961, 0.7921569, 0.7176471, 1)
+light_energy = 5.0
+spot_range = 12.344241
+
+[node name="MapInteractAuto" type="Node3D" parent="Entities"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1340313, 0.20859528, -36.58542)
+script = ExtResource("9_ult4f")
+metadata/_custom_type_script = "uid://c0irewagqysai"
+
+[node name="InteractableEffectPlayMusic" type="Node" parent="Entities/MapInteractAuto"]
+script = ExtResource("10_cuyuu")
+music_resource = ExtResource("11_aiojt")
+metadata/_custom_type_script = "uid://cw4axrxes7bwd"
+
+[editable path="World/srs_horseless_horse_world"]
+[editable path="World/Trees/prop_tree4"]
+[editable path="World/Trees/prop_tree5"]
+[editable path="World/Trees/prop_tree6"]
+[editable path="World/Trees/prop_tree7"]
+[editable path="World/Trees/prop_tree8"]
+[editable path="World/Trees/prop_tree9"]
+[editable path="World/Trees/prop_tree10"]
+[editable path="World/Trees/prop_tree11"]
+[editable path="World/Trees/prop_tree12"]
+[editable path="World/Trees/prop_tree13"]
+[editable path="World/Trees/prop_tree14"]
+[editable path="World/Trees/prop_tree15"]
+[editable path="World/Trees/prop_tree16"]
+[editable path="World/Trees/prop_tree17"]
+[editable path="World/Trees/prop_tree18"]
+[editable path="World/Trees/prop_tree19"]
+[editable path="World/Trees/prop_tree20"]
+[editable path="World/Trees/prop_tree21"]
+[editable path="World/Trees/prop_tree22"]
+[editable path="World/Trees/prop_tree23"]
+[editable path="World/Trees/prop_tree24"]
+[editable path="World/Trees/prop_tree25"]
+[editable path="World/Trees/prop_tree26"]
+[editable path="World/Trees/prop_tree27"]
+[editable path="World/Trees/prop_tree28"]
+[editable path="World/Trees/prop_tree29"]
+[editable path="World/Trees/prop_tree30"]
+[editable path="World/Trees/prop_tree31"]
+[editable path="World/Trees2/prop_tree4"]
+[editable path="World/Trees2/prop_tree5"]
+[editable path="World/Trees2/prop_tree6"]
+[editable path="World/Trees2/prop_tree7"]
+[editable path="World/Trees2/prop_tree8"]
+[editable path="World/Trees2/prop_tree9"]
+[editable path="World/Trees2/prop_tree10"]
+[editable path="World/Trees2/prop_tree11"]
+[editable path="World/Trees2/prop_tree12"]
+[editable path="World/Trees2/prop_tree13"]
+[editable path="World/Trees2/prop_tree14"]
+[editable path="World/Trees2/prop_tree15"]
+[editable path="World/Trees2/prop_tree16"]
+[editable path="World/Trees2/prop_tree17"]
+[editable path="World/Trees2/prop_tree18"]
+[editable path="World/Trees2/prop_tree19"]
+[editable path="World/Trees2/prop_tree20"]
+[editable path="World/Trees2/prop_tree21"]
+[editable path="World/Trees2/prop_tree22"]
+[editable path="World/Trees2/prop_tree23"]
+[editable path="World/Trees2/prop_tree24"]
+[editable path="World/Trees2/prop_tree25"]
+[editable path="World/Trees2/prop_tree26"]
+[editable path="World/Trees2/prop_tree27"]
+[editable path="World/Trees2/prop_tree28"]
+[editable path="World/Trees2/prop_tree29"]
+[editable path="World/Trees2/prop_tree30"]
+[editable path="World/Trees2/prop_tree31"]
+[editable path="World/Trees3/prop_tree4"]
+[editable path="World/Trees3/prop_tree5"]
+[editable path="World/Trees3/prop_tree6"]
+[editable path="World/Trees3/prop_tree7"]
+[editable path="World/Trees3/prop_tree8"]
+[editable path="World/Trees3/prop_tree9"]
+[editable path="World/Trees3/prop_tree10"]
+[editable path="World/Trees3/prop_tree11"]
+[editable path="World/Trees3/prop_tree12"]
+[editable path="World/Trees3/prop_tree13"]
+[editable path="World/Trees3/prop_tree14"]
+[editable path="World/Trees3/prop_tree15"]
+[editable path="World/Trees3/prop_tree16"]
+[editable path="World/Trees3/prop_tree17"]
+[editable path="World/Trees3/prop_tree18"]
+[editable path="World/Trees3/prop_tree19"]
+[editable path="World/Trees3/prop_tree20"]
+[editable path="World/Trees3/prop_tree21"]
+[editable path="World/Trees3/prop_tree22"]
+[editable path="World/Trees3/prop_tree23"]
+[editable path="World/Trees3/prop_tree24"]
+[editable path="World/Trees3/prop_tree25"]
+[editable path="World/Trees3/prop_tree26"]
+[editable path="World/Trees3/prop_tree27"]
+[editable path="World/Trees3/prop_tree28"]
+[editable path="World/Trees3/prop_tree29"]
+[editable path="World/Trees3/prop_tree30"]
+[editable path="World/Trees3/prop_tree31"]
+[editable path="World/Trees6/prop_tree4"]
+[editable path="World/Trees6/prop_tree5"]
+[editable path="World/Trees6/prop_tree6"]
+[editable path="World/Trees6/prop_tree7"]
+[editable path="World/Trees6/prop_tree8"]
+[editable path="World/Trees6/prop_tree9"]
+[editable path="World/Trees6/prop_tree10"]
+[editable path="World/Trees6/prop_tree11"]
+[editable path="World/Trees6/prop_tree12"]
+[editable path="World/Trees6/prop_tree13"]
+[editable path="World/Trees6/prop_tree14"]
+[editable path="World/Trees6/prop_tree15"]
+[editable path="World/Trees6/prop_tree16"]
+[editable path="World/Trees6/prop_tree17"]
+[editable path="World/Trees6/prop_tree18"]
+[editable path="World/Trees6/prop_tree19"]
+[editable path="World/Trees6/prop_tree20"]
+[editable path="World/Trees6/prop_tree21"]
+[editable path="World/Trees6/prop_tree22"]
+[editable path="World/Trees6/prop_tree23"]
+[editable path="World/Trees6/prop_tree24"]
+[editable path="World/Trees6/prop_tree25"]
+[editable path="World/Trees6/prop_tree26"]
+[editable path="World/Trees6/prop_tree27"]
+[editable path="World/Trees6/prop_tree28"]
+[editable path="World/Trees6/prop_tree29"]
+[editable path="World/Trees6/prop_tree30"]
+[editable path="World/Trees6/prop_tree31"]
+[editable path="World/Trees7/prop_tree4"]
+[editable path="World/Trees7/prop_tree5"]
+[editable path="World/Trees7/prop_tree6"]
+[editable path="World/Trees7/prop_tree7"]
+[editable path="World/Trees7/prop_tree8"]
+[editable path="World/Trees7/prop_tree9"]
+[editable path="World/Trees7/prop_tree10"]
+[editable path="World/Trees7/prop_tree11"]
+[editable path="World/Trees7/prop_tree12"]
+[editable path="World/Trees7/prop_tree13"]
+[editable path="World/Trees7/prop_tree14"]
+[editable path="World/Trees7/prop_tree15"]
+[editable path="World/Trees7/prop_tree16"]
+[editable path="World/Trees7/prop_tree17"]
+[editable path="World/Trees7/prop_tree18"]
+[editable path="World/Trees7/prop_tree19"]
+[editable path="World/Trees7/prop_tree20"]
+[editable path="World/Trees7/prop_tree21"]
+[editable path="World/Trees7/prop_tree22"]
+[editable path="World/Trees7/prop_tree23"]
+[editable path="World/Trees7/prop_tree24"]
+[editable path="World/Trees7/prop_tree25"]
+[editable path="World/Trees7/prop_tree26"]
+[editable path="World/Trees7/prop_tree27"]
+[editable path="World/Trees7/prop_tree28"]
+[editable path="World/Trees7/prop_tree29"]
+[editable path="World/Trees7/prop_tree30"]
+[editable path="World/Trees7/prop_tree31"]
+[editable path="World/Trees8/prop_tree4"]
+[editable path="World/Trees8/prop_tree5"]
+[editable path="World/Trees8/prop_tree6"]
+[editable path="World/Trees8/prop_tree7"]
+[editable path="World/Trees8/prop_tree8"]
+[editable path="World/Trees8/prop_tree9"]
+[editable path="World/Trees8/prop_tree10"]
+[editable path="World/Trees8/prop_tree11"]
+[editable path="World/Trees8/prop_tree12"]
+[editable path="World/Trees8/prop_tree13"]
+[editable path="World/Trees8/prop_tree14"]
+[editable path="World/Trees8/prop_tree15"]
+[editable path="World/Trees8/prop_tree16"]
+[editable path="World/Trees8/prop_tree17"]
+[editable path="World/Trees8/prop_tree18"]
+[editable path="World/Trees8/prop_tree19"]
+[editable path="World/Trees8/prop_tree20"]
+[editable path="World/Trees8/prop_tree21"]
+[editable path="World/Trees8/prop_tree22"]
+[editable path="World/Trees8/prop_tree23"]
+[editable path="World/Trees8/prop_tree24"]
+[editable path="World/Trees8/prop_tree25"]
+[editable path="World/Trees8/prop_tree26"]
+[editable path="World/Trees8/prop_tree27"]
+[editable path="World/Trees8/prop_tree28"]
+[editable path="World/Trees8/prop_tree29"]
+[editable path="World/Trees8/prop_tree30"]
+[editable path="World/Trees8/prop_tree31"]
+[editable path="World/Trees9/prop_tree4"]
+[editable path="World/Trees9/prop_tree5"]
+[editable path="World/Trees9/prop_tree6"]
+[editable path="World/Trees9/prop_tree7"]
+[editable path="World/Trees9/prop_tree8"]
+[editable path="World/Trees9/prop_tree9"]
+[editable path="World/Trees9/prop_tree10"]
+[editable path="World/Trees9/prop_tree11"]
+[editable path="World/Trees9/prop_tree12"]
+[editable path="World/Trees9/prop_tree13"]
+[editable path="World/Trees9/prop_tree14"]
+[editable path="World/Trees9/prop_tree15"]
+[editable path="World/Trees9/prop_tree16"]
+[editable path="World/Trees9/prop_tree17"]
+[editable path="World/Trees9/prop_tree18"]
+[editable path="World/Trees9/prop_tree19"]
+[editable path="World/Trees9/prop_tree20"]
+[editable path="World/Trees9/prop_tree21"]
+[editable path="World/Trees9/prop_tree22"]
+[editable path="World/Trees9/prop_tree23"]
+[editable path="World/Trees9/prop_tree24"]
+[editable path="World/Trees9/prop_tree25"]
+[editable path="World/Trees9/prop_tree26"]
+[editable path="World/Trees9/prop_tree27"]
+[editable path="World/Trees9/prop_tree28"]
+[editable path="World/Trees9/prop_tree29"]
+[editable path="World/Trees9/prop_tree30"]
+[editable path="World/Trees9/prop_tree31"]
+[editable path="World/Trees9/prop_tree32"]
+[editable path="World/Trees9/prop_tree33"]
+[editable path="World/Trees9/prop_tree34"]
+[editable path="World/Trees9/prop_tree35"]
+[editable path="World/Trees9/prop_tree36"]
+[editable path="World/Trees9/prop_tree37"]
+[editable path="World/Trees9/prop_tree38"]
+[editable path="World/Trees9/prop_tree39"]
+[editable path="World/Trees9/prop_tree40"]
+[editable path="World/Trees9/prop_tree41"]
+[editable path="World/Trees9/prop_tree42"]
+[editable path="World/Trees9/prop_tree43"]
+[editable path="World/Trees9/prop_tree44"]
+[editable path="World/Trees9/prop_tree45"]
+[editable path="World/Trees9/prop_tree46"]
+[editable path="World/Trees9/prop_tree47"]
+[editable path="World/Trees9/prop_tree48"]
+[editable path="World/Trees9/prop_tree49"]
+[editable path="World/Trees9/prop_tree50"]
+[editable path="World/Trees9/prop_tree51"]
+[editable path="World/Trees9/prop_tree52"]
+[editable path="World/Trees9/prop_tree53"]
+[editable path="World/Trees9/prop_tree54"]
+[editable path="World/Trees9/prop_tree55"]
+[editable path="World/Trees9/prop_tree56"]
+[editable path="World/Trees9/prop_tree57"]
+[editable path="World/Trees9/prop_tree58"]
+[editable path="World/Trees9/prop_tree59"]
+[editable path="World/Trees9/prop_tree60"]
+[editable path="World/Trees9/prop_tree61"]
+[editable path="World/Trees9/prop_tree62"]
+[editable path="World/Trees9/prop_tree63"]
+[editable path="World/Trees9/prop_tree64"]
+[editable path="World/Trees9/prop_tree65"]
+[editable path="World/Trees9/prop_tree66"]
+[editable path="World/Trees9/prop_tree67"]
+[editable path="World/Trees9/prop_tree69"]
+[editable path="World/Trees9/prop_tree70"]
+[editable path="World/Trees9/prop_tree72"]
+[editable path="World/Trees9/prop_tree73"]
+[editable path="World/Trees9/prop_tree76"]
+[editable path="World/Trees9/prop_tree77"]
+[editable path="World/Trees9/prop_tree78"]
+[editable path="World/Trees9/prop_tree79"]
+[editable path="World/Trees9/prop_tree80"]
+[editable path="World/Trees9/prop_tree81"]
+[editable path="World/Trees9/prop_tree82"]
+[editable path="World/Trees9/prop_tree83"]
+[editable path="World/Trees9/prop_tree85"]
+[editable path="World/Trees9/prop_tree86"]
+[editable path="World/Trees9/prop_tree87"]

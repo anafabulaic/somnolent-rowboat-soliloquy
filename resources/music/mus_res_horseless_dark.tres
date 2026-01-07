@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MusicResource" load_steps=3 format=3 uid="uid://uuww4x0qed8i"]
+
+[ext_resource type="Script" uid="uid://c3m1qsfdsw0lv" path="res://components/game/music/music_resource.gd" id="1_unvn7"]
+[ext_resource type="AudioStream" uid="uid://cphcatgau5173" path="res://sounds/music/mus_horseless_dark.mp3" id="2_hdsyv"]
+
+[resource]
+script = ExtResource("1_unvn7")
+song = ExtResource("2_hdsyv")
+metadata/_custom_type_script = "uid://c3m1qsfdsw0lv"

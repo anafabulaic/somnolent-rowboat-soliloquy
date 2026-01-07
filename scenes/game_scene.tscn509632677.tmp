@@ -1,0 +1,120 @@
+[gd_scene load_steps=17 format=3 uid="uid://bu00hnw7hij3q"]
+
+[ext_resource type="Script" uid="uid://17ge6r4h2jnk" path="res://components/game/game.gd" id="1_w5aja"]
+[ext_resource type="Script" uid="uid://cof4svfsufhgb" path="res://scenes/ui/tooltip/tooltip_manager.gd" id="2_onqr8"]
+[ext_resource type="Script" uid="uid://dy0ex1f2sgktf" path="res://components/game/effect_manager.gd" id="2_rurhu"]
+[ext_resource type="PackedScene" uid="uid://drlyvdgddusao" path="res://scenes/ui/main_menu/main_menu.tscn" id="3_kk2rg"]
+[ext_resource type="Script" uid="uid://7i2dcdvufebj" path="res://scenes/ui/ui_manager.gd" id="3_tcjrq"]
+[ext_resource type="Script" uid="uid://datc4jqvt5fyv" path="res://components/game/trinket_manager.gd" id="3_tqxxy"]
+[ext_resource type="PackedScene" uid="uid://d1wm6i78gg04s" path="res://scenes/ui/tooltip/tooltip.tscn" id="3_ycayy"]
+[ext_resource type="Script" uid="uid://d0o6a8se7emdy" path="res://components/sound/audio_poly_player_2d.gd" id="4_bw6k5"]
+[ext_resource type="Material" uid="uid://cs1y82ia5xe3q" path="res://materials/ui/pause_bg/pause_bg_material.tres" id="4_rvs2r"]
+[ext_resource type="Material" uid="uid://s7adwfpfybo1" path="res://scenes/ui/transition_effect/zoom_transition_mat.tres" id="5_77hjl"]
+[ext_resource type="Script" uid="uid://ppogrudt61gn" path="res://scenes/ui/transition_effect/transition_effect.gd" id="5_s76x2"]
+[ext_resource type="Material" uid="uid://bvxlekjfg17dg" path="res://scenes/ui/transition_effect/strip_transition_mat.tres" id="7_6aqbo"]
+[ext_resource type="Material" uid="uid://c7vi3nnqm25sp" path="res://scenes/ui/transition_effect/fade_transition_mat.tres" id="8_ro0ie"]
+[ext_resource type="Script" uid="uid://1cvrmj1ywv4h" path="res://components/game/audio_manager.gd" id="14_ldkr4"]
+[ext_resource type="AudioStream" uid="uid://cnygpqlgl6bvf" path="res://sounds/ui/ui_hover.wav" id="15_liy57"]
+[ext_resource type="AudioStream" uid="uid://bl0dl6xygtpop" path="res://sounds/ui/ui_click.wav" id="16_mwyo0"]
+
+[node name="GameScene" type="Node3D" node_paths=PackedStringArray("scene_holder", "ui", "effects", "trinkets")]
+process_mode = 3
+script = ExtResource("1_w5aja")
+scene_holder = NodePath("SceneHolder")
+ui = NodePath("UIManager")
+effects = NodePath("EffectsManager")
+trinkets = NodePath("TrinketsManager")
+default_map = "uid://dtdnvis8ni0o"
+metadata/_custom_type_script = "uid://17ge6r4h2jnk"
+
+[node name="SceneHolder" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="EffectsManager" type="Node" parent="."]
+script = ExtResource("2_rurhu")
+metadata/_custom_type_script = "uid://dy0ex1f2sgktf"
+
+[node name="TrinketsManager" type="Node" parent="."]
+script = ExtResource("3_tqxxy")
+
+[node name="AudioManager" type="Node" parent="." node_paths=PackedStringArray("audio_player")]
+script = ExtResource("14_ldkr4")
+audio_player = NodePath("UIAudio")
+hover_sound = ExtResource("15_liy57")
+click_sound = ExtResource("16_mwyo0")
+
+[node name="UIAudio" type="AudioStreamPlayer2D" parent="AudioManager"]
+script = ExtResource("4_bw6k5")
+metadata/_custom_type_script = "uid://d0o6a8se7emdy"
+
+[node name="UIManager" type="Control" parent="." node_paths=PackedStringArray("background", "audio", "menu")]
+z_index = 50
+z_as_relative = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("3_tcjrq")
+background = NodePath("Background")
+audio = NodePath("../AudioManager")
+menu = NodePath("MenuManager")
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="UIManager"]
+copy_mode = 2
+
+[node name="Transition" type="TextureRect" parent="UIManager"]
+material = ExtResource("8_ro0ie")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("5_s76x2")
+zoom_transition = ExtResource("5_77hjl")
+strip_transition = ExtResource("7_6aqbo")
+fade_transition = ExtResource("8_ro0ie")
+
+[node name="Background" type="ColorRect" parent="UIManager"]
+material = ExtResource("4_rvs2r")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MenuManager" parent="UIManager" node_paths=PackedStringArray("manager") instance=ExtResource("3_kk2rg")]
+unique_name_in_owner = true
+layout_mode = 1
+mouse_filter = 1
+manager = NodePath("..")
+
+[node name="ToolTipContainer" type="MarginContainer" parent="UIManager"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -15.0
+offset_top = -45.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 40
+
+[node name="ToolTipManager" type="VBoxContainer" parent="UIManager/ToolTipContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+script = ExtResource("2_onqr8")
+tooltip_scene = ExtResource("3_ycayy")

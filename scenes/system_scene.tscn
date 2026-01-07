@@ -1,0 +1,27 @@
+[gd_scene load_steps=11 format=3 uid="uid://dupkj4ro8okqh"]
+
+[ext_resource type="Script" uid="uid://ckbgefilytov8" path="res://components/game/system_scene_script.gd" id="1_dmrfl"]
+[ext_resource type="Resource" uid="uid://b0b4nigr4yt0f" path="res://sounds/soundmat/default.tres" id="2_esgml"]
+[ext_resource type="Resource" uid="uid://c8nsxk1ypdoga" path="res://components/settings/default_settings.tres" id="3_n8sou"]
+[ext_resource type="AudioStream" uid="uid://cnygpqlgl6bvf" path="res://sounds/ui/ui_hover.wav" id="4_r52tl"]
+[ext_resource type="AudioStream" uid="uid://bl0dl6xygtpop" path="res://sounds/ui/ui_click.wav" id="5_qh250"]
+[ext_resource type="AudioStream" uid="uid://n0joyeb74gmf" path="res://sounds/effects/sfx_teleport.wav" id="6_qh250"]
+[ext_resource type="AudioStream" uid="uid://chlp4cpt8l1b6" path="res://sounds/ui/sfx_pop.mp3" id="7_vm4ry"]
+[ext_resource type="Script" uid="uid://lrre4v5tfkn6" path="res://components/game/library/SoundLibrary.gd" id="7_xkupp"]
+[ext_resource type="AudioStream" uid="uid://cpapree3e8pcj" path="res://sounds/ui/ui_trinket_get.wav" id="8_bb3og"]
+[ext_resource type="AudioStream" uid="uid://i8o8gsb4xtmi" path="res://sounds/ui/ding.wav" id="9_ttjqi"]
+
+[node name="System" type="Node" node_paths=PackedStringArray("sound")]
+script = ExtResource("1_dmrfl")
+sound = NodePath("Sound")
+default_soundmat = ExtResource("2_esgml")
+default_settings = ExtResource("3_n8sou")
+
+[node name="Sound" type="Node" parent="."]
+script = ExtResource("7_xkupp")
+ui_hover_sound = ExtResource("4_r52tl")
+ui_select_sound = ExtResource("5_qh250")
+ui_tooltip_sound = ExtResource("7_vm4ry")
+ui_trinket_get = ExtResource("8_bb3og")
+ui_ding = ExtResource("9_ttjqi")
+teleport_sound = ExtResource("6_qh250")

@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cme0ijaixu3ud"]
+
+[ext_resource type="Shader" uid="uid://dyepgl5sabj1n" path="res://materials/_shaders/CRT.gdshader" id="1_36rpm"]
+
+[resource]
+shader = ExtResource("1_36rpm")
+shader_parameter/res = Vector2(1920, 1080)
+shader_parameter/mask_type = 1
+shader_parameter/bloom_type = 0
+shader_parameter/hardScan = 0.0
+shader_parameter/hardPix = 0.0
+shader_parameter/hardBloomScan = 0.0
+shader_parameter/hardBloomPix = 0.0
+shader_parameter/bloomAmount = 16.0
+shader_parameter/warp = Vector2(64, 24)
+shader_parameter/maskDark = 0.400000019
+shader_parameter/maskLight = 0.400000019

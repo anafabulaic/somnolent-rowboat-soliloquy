@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MusicResource" load_steps=3 format=3 uid="uid://bl76h4kx2bmio"]
+
+[ext_resource type="Script" uid="uid://c3m1qsfdsw0lv" path="res://components/game/music/music_resource.gd" id="1_7ekue"]
+[ext_resource type="AudioStream" uid="uid://drc1tb4fl611j" path="res://sounds/music/mus_chip1.wav" id="2_7ekue"]
+
+[resource]
+script = ExtResource("1_7ekue")
+song = ExtResource("2_7ekue")
+metadata/_custom_type_script = "uid://c3m1qsfdsw0lv"

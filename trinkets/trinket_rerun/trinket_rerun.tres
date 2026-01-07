@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="TrinketReference" load_steps=4 format=3 uid="uid://dmsq4hkau82al"]
+
+[ext_resource type="Texture2D" uid="uid://d12162snh402p" path="res://trinkets/trinket_rerun/trinket_rerun.png" id="1_8k8l6"]
+[ext_resource type="Script" uid="uid://dmtvbyjjyocmw" path="res://components/trinkets/base/trinket_reference.gd" id="1_mwqe6"]
+[ext_resource type="PackedScene" uid="uid://ddqduf35i1moj" path="res://trinkets/trinket_rerun/trinket_rerun.tscn" id="3_b4scp"]
+
+[resource]
+script = ExtResource("1_mwqe6")
+id = "trinket_rerun"
+name = "RERUN TAPE"
+icon = ExtResource("1_8k8l6")
+desc = "Rewind this dream."
+trinket_scene = ExtResource("3_b4scp")
+metadata/_custom_type_script = "uid://dmtvbyjjyocmw"

@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cs1y82ia5xe3q"]
+
+[ext_resource type="Shader" uid="uid://ct357gx5qj6lw" path="res://materials/ui/pause_bg/pause_bg.gdshader" id="1_8q3kh"]
+
+[resource]
+shader = ExtResource("1_8q3kh")
+shader_parameter/intensity = 1.0
+shader_parameter/h = 0.90000004275
+shader_parameter/s = 0.750000035625
+shader_parameter/v = 0.50000002375
+shader_parameter/brightness_add = -0.19999996200000003
+shader_parameter/contrast_mult = 0.50000002375

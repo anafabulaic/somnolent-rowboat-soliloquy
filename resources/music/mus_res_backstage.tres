@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MusicResource" load_steps=3 format=3 uid="uid://cna4s5jwt1h37"]
+
+[ext_resource type="Script" uid="uid://c3m1qsfdsw0lv" path="res://components/game/music/music_resource.gd" id="1_n02nb"]
+[ext_resource type="AudioStream" uid="uid://bpseq3lpwa32d" path="res://sounds/music/mus_backstage.mp3" id="2_n02nb"]
+
+[resource]
+script = ExtResource("1_n02nb")
+song = ExtResource("2_n02nb")
+metadata/_custom_type_script = "uid://c3m1qsfdsw0lv"

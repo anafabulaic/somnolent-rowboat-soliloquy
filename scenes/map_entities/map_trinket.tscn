@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://d12yyyrxbcrxp"]
+
+[ext_resource type="Script" uid="uid://b65ry1hptnufj" path="res://components/entities/interactive/map_trinket.gd" id="1_exr6m"]
+[ext_resource type="Resource" uid="uid://c3k2ru0357134" path="res://trinkets/test_trinket/test_trinket.tres" id="2_0phs2"]
+[ext_resource type="Texture2D" uid="uid://cxoe5ajdq4l0k" path="res://icon.svg" id="3_wb2gr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e31rp"]
+
+[node name="MapTrinket" type="StaticBody3D"]
+script = ExtResource("1_exr6m")
+trinket = ExtResource("2_0phs2")
+metadata/_custom_type_script = "uid://b65ry1hptnufj"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_e31rp")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+billboard = 2
+texture = ExtResource("3_wb2gr")

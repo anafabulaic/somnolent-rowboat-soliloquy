@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://qkyqj348v3q8"]
+
+[ext_resource type="Shader" uid="uid://cmafnyr4tby3j" path="res://materials/_shaders/light_shaft_shader.gdshader" id="1_xdvj8"]
+[ext_resource type="Texture2D" uid="uid://c1h7od6rlj0i7" path="res://materials/effects/light_shaft1.png" id="2_fae4j"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_xdvj8")
+shader_parameter/shaft_texture = ExtResource("2_fae4j")
+shader_parameter/emission = 1.0
+shader_parameter/face_threshold = 0.1
+shader_parameter/mult = 1.225
+shader_parameter/modulate = Color(0.6881215, 0.5850283, 0, 1)

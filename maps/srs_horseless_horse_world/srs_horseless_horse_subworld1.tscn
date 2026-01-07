@@ -1,0 +1,153 @@
+[gd_scene load_steps=19 format=3 uid="uid://28q6ne7lfr6k"]
+
+[ext_resource type="Script" uid="uid://buckq04u7fn0t" path="res://components/entities/map_scene.gd" id="1_to3c8"]
+[ext_resource type="LightmapGIData" uid="uid://cy1phgga7d58" path="res://maps/srs_horseless_horse_world/srs_horseless_horse_subworld1.lmbake" id="2_5m6y8"]
+[ext_resource type="PackedScene" uid="uid://c262ioghf76s4" path="res://maps/srs_horseless_horse_world/srs_horseless_horse_subworld1.glb" id="2_pune6"]
+[ext_resource type="Script" uid="uid://ul0kbjravm0b" path="res://components/entities/map_spawnpoint.gd" id="3_1luhe"]
+[ext_resource type="PackedScene" uid="uid://8jboegj8l7dk" path="res://models/prop_horse/prop_horse.glb" id="5_lv6jo"]
+[ext_resource type="Script" uid="uid://gpfdxtmbylmt" path="res://components/entities/interactive/base/interactable_conditional.gd" id="6_1d01p"]
+[ext_resource type="Script" uid="uid://smxebn1sb80y" path="res://components/entities/interactive/effects/effect_multiple.gd" id="7_d01jq"]
+[ext_resource type="Script" uid="uid://cxskkr6k8urre" path="res://components/entities/interactive/effects/map_player_level_change.gd" id="7_juq1q"]
+[ext_resource type="Resource" uid="uid://c512e4wcq5vt3" path="res://scenes/ui/transition_effect/fade_transition_effect.tres" id="8_lomdf"]
+[ext_resource type="AudioStream" uid="uid://covsgfk7e2gj0" path="res://sounds/entities/doors/qubodup-DoorOpen01.ogg" id="9_gflat"]
+[ext_resource type="Script" uid="uid://diry24ij7ve2h" path="res://components/entities/interactive/effects/effect_play_2D_sound.gd" id="9_ipg8r"]
+[ext_resource type="Script" uid="uid://c0irewagqysai" path="res://components/entities/interactive/map_interact_auto.gd" id="10_gflat"]
+[ext_resource type="Script" uid="uid://cw4axrxes7bwd" path="res://components/entities/interactive/effects/effect_play_music.gd" id="11_ipg8r"]
+[ext_resource type="Script" uid="uid://c3m1qsfdsw0lv" path="res://components/game/music/music_resource.gd" id="12_ipg8r"]
+[ext_resource type="AudioStream" uid="uid://ig01542bg1rg" path="res://sounds/ambience/ambience_horsesubworld.mp3" id="13_is14a"]
+
+[sub_resource type="Environment" id="Environment_5m6y8"]
+background_mode = 1
+ambient_light_energy = 0.0
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.06552577, 0.06552577, 0.06552577, 1)
+fog_density = 0.4684
+fog_sky_affect = 0.0
+fog_depth_begin = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ipg8r"]
+
+[sub_resource type="Resource" id="Resource_d01jq"]
+script = ExtResource("12_ipg8r")
+song = ExtResource("13_is14a")
+metadata/_custom_type_script = "uid://c3m1qsfdsw0lv"
+
+[node name="SrsHorselessHorseSubworld" type="Node3D" node_paths=PackedStringArray("spawnpoints")]
+script = ExtResource("1_to3c8")
+map_name = "srs_horseless_horse_subworld1"
+spawnpoints = [NodePath("Entities/SP_fromHH")]
+void_level = -500.0
+is_sub_world = true
+metadata/_custom_type_script = "uid://buckq04u7fn0t"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5m6y8")
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+quality = 0
+light_data = ExtResource("2_5m6y8")
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="prop_horse2" parent="World" instance=ExtResource("5_lv6jo")]
+transform = Transform3D(-1.3113416e-06, 0, 30, 0, 30, 0, -30, 0, -1.3113416e-06, -199.98405, -91.767395, 0)
+
+[node name="srs_horseless_horse_subworld1" parent="World" instance=ExtResource("2_pune6")]
+
+[node name="pillar-detail" parent="World/srs_horseless_horse_subworld1" index="4"]
+gi_lightmap_texel_scale = 0.1
+
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="Physics" type="Node3D" parent="Entities"]
+
+[node name="Lights" type="Node3D" parent="Entities"]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Entities/Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 9.483002, 0)
+light_color = Color(0.86206186, 0.77633566, 0.6313484, 1)
+light_energy = 5.0
+light_bake_mode = 1
+spot_range = 15.376706
+spot_angle = 50.171017
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Entities/Lights"]
+transform = Transform3D(0.9305135, -1.600963e-08, 0.36625767, -0.36625767, -4.067403e-08, 0.9305135, 0, -1, -4.3711385e-08, -111.37155, 53.87083, 0)
+light_energy = 10.0
+light_bake_mode = 1
+spot_range = 78.82212
+spot_angle = 28.513851
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Entities/Lights"]
+transform = Transform3D(1.9106855e-15, -1, -4.371139e-08, -4.371139e-08, -4.371139e-08, 1, -1, 0, -4.371139e-08, -209.92314, 302.93332, 0)
+light_energy = 10.0
+light_bake_mode = 1
+spot_range = 244.3839
+spot_angle = 66.09375
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Entities/Lights"]
+transform = Transform3D(1.9106855e-15, -1, -4.371139e-08, -4.371139e-08, -4.371139e-08, 1, -1, 0, -4.371139e-08, -456.0174, 302.93332, 0)
+light_energy = 10.0
+light_bake_mode = 1
+spot_range = 244.3839
+spot_angle = 66.09375
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="Entities/Lights"]
+transform = Transform3D(1.9106855e-15, -1, -4.371139e-08, -4.371139e-08, -4.371139e-08, 1, -1, 0, -4.371139e-08, -669.432, 302.93332, 0)
+light_energy = 10.0
+light_bake_mode = 1
+spot_range = 244.3839
+spot_angle = 66.09375
+
+[node name="SP_fromHH" type="Marker3D" parent="Entities"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2.8314242, 0.18509531, 0)
+script = ExtResource("3_1luhe")
+spawn_point_name = "from_hh"
+metadata/_custom_type_script = "uid://ul0kbjravm0b"
+
+[node name="WorldTeleport" type="StaticBody3D" parent="Entities"]
+transform = Transform3D(5.183522e-07, 0, -0.47401756, 0, 3.2733374, 0, 3.952839, 0, 6.21599e-08, 4.6393456, 1.8823771, 0)
+collision_layer = 9
+collision_mask = 0
+script = ExtResource("6_1d01p")
+condition_mode = 2
+use_ui_failure = false
+interact_delay = 1.0
+can_interact = true
+
+[node name="InteractableEffectMultiple" type="Node" parent="Entities/WorldTeleport"]
+script = ExtResource("7_d01jq")
+use_children = true
+metadata/_custom_type_script = "uid://smxebn1sb80y"
+
+[node name="MapPlayerLevelChange" type="Node" parent="Entities/WorldTeleport/InteractableEffectMultiple"]
+script = ExtResource("7_juq1q")
+level = "uid://mqyt0ecwsbpp"
+spawnpoint = "from_subworld"
+transition_type = ExtResource("8_lomdf")
+transition_duration = 2.0
+metadata/_custom_type_script = "uid://cxskkr6k8urre"
+
+[node name="InteractableEffectPlay2DSound" type="Node" parent="Entities/WorldTeleport/InteractableEffectMultiple"]
+script = ExtResource("9_ipg8r")
+sound = ExtResource("9_gflat")
+volume = 0.0
+pitch = 0.7
+metadata/_custom_type_script = "uid://diry24ij7ve2h"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/WorldTeleport"]
+shape = SubResource("BoxShape3D_ipg8r")
+
+[node name="MapInteractAuto" type="Node3D" parent="Entities"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1340313, 0.20859528, -36.58542)
+script = ExtResource("10_gflat")
+metadata/_custom_type_script = "uid://c0irewagqysai"
+
+[node name="InteractableEffectPlayMusic" type="Node" parent="Entities/MapInteractAuto"]
+script = ExtResource("11_ipg8r")
+music_resource = SubResource("Resource_d01jq")
+metadata/_custom_type_script = "uid://cw4axrxes7bwd"
+
+[editable path="World/prop_horse2"]
+[editable path="World/srs_horseless_horse_subworld1"]

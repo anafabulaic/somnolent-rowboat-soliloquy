@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c11p0ayttwbwv"]
+
+[ext_resource type="Shader" uid="uid://bvnnw4xj0al4p" path="res://materials/_shaders/Sharpen.gdshader" id="1_qenrx"]
+
+[resource]
+shader = ExtResource("1_qenrx")
+shader_parameter/sharpen_amount = 0.4

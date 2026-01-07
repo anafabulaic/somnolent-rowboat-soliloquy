@@ -1,0 +1,91 @@
+[gd_scene load_steps=5 format=3 uid="uid://dng7ursfcdctj"]
+
+[ext_resource type="Theme" uid="uid://c7qjkrab2qnam" path="res://scenes/ui/main_menu/main_menu_theme.tres" id="1_yquar"]
+[ext_resource type="Script" uid="uid://cxuscs2jyklj4" path="res://scenes/ui/main_menu/submenus/help_sub_menu.gd" id="2_bdy6f"]
+[ext_resource type="StyleBox" uid="uid://cyrgt5fvo3qxp" path="res://scenes/ui/trinket_menu/trinket_menu_panelcontainer.tres" id="2_yquar"]
+[ext_resource type="Script" uid="uid://s5fns5emnycq" path="res://scenes/ui/main_menu/main_menu_button.gd" id="3_bdy6f"]
+
+[node name="HelpSubMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_yquar")
+script = ExtResource("2_bdy6f")
+required_mode = 2
+metadata/_custom_type_script = "uid://dl472b4rhvohb"
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_yquar")
+
+[node name="RichTextLabel" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+text = "You are a ROWBOAT on an intrepid journey!
+
+• Enter the DREAM WORLD by using your BED
+• Exit the DREAM WORLD through the MENU
+• Use the COMPUTER to save your progress"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("2_yquar")
+
+[node name="RichTextLabel" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/PanelContainer2"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Basic Controls
+MOUSE - LOOK
+WASD - MOVE
+SPACE - JUMP
+CTRL - CROUCH
+E - USE/INTERACT
+F - FLASHLIGHT
+ESC - MENU
+TAB - TRINKETS"
+
+[node name="PanelContainer3" type="PanelContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("2_yquar")
+
+[node name="RichTextLabel" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/PanelContainer3"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Collect TRINKETS in the DREAM WORLD
+
+Equip TRINKETS in the MENU
+
+While equipped, press MOUSE1 to activate your TRINKET"
+autowrap_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="Return" type="Button" parent="CenterContainer/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+theme_type_variation = &"MainMenuButton"
+text = "RETURN"
+script = ExtResource("3_bdy6f")
+
+[connection signal="hidden" from="CenterContainer/VBoxContainer/MarginContainer/Return" to="." method="_on_return_hidden"]

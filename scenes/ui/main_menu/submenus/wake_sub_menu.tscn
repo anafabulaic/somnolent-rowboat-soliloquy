@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://cgu70eb8xvjhe"]
+
+[ext_resource type="Theme" uid="uid://c7qjkrab2qnam" path="res://scenes/ui/main_menu/main_menu_theme.tres" id="1_ifvj2"]
+[ext_resource type="Script" uid="uid://di8sjpodx1a6w" path="res://scenes/ui/main_menu/submenus/wake_sub_menu.gd" id="1_lvvvu"]
+[ext_resource type="StyleBox" uid="uid://cyrgt5fvo3qxp" path="res://scenes/ui/trinket_menu/trinket_menu_panelcontainer.tres" id="2_ifvj2"]
+[ext_resource type="AudioStream" uid="uid://n0joyeb74gmf" path="res://sounds/effects/sfx_teleport.wav" id="3_05j0e"]
+
+[node name="WakeSubMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ifvj2")
+script = ExtResource("1_lvvvu")
+teleport_sound = ExtResource("3_05j0e")
+required_mode = 2
+metadata/_custom_type_script = "uid://dl472b4rhvohb"
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_ifvj2")
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+text = "Are you sure?"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Yes" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"MainMenuButton"
+text = "YES"
+
+[node name="No" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"MainMenuButton"
+text = "NO"
+
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/HBoxContainer/Yes" to="." method="_on_hover"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Yes" to="." method="_on_yes_pressed"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/HBoxContainer/No" to="." method="_on_hover"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/No" to="." method="_on_no_pressed"]

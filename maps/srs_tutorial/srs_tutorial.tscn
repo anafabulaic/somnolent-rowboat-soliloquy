@@ -1,0 +1,322 @@
+[gd_scene load_steps=26 format=4 uid="uid://cham4e43o18rj"]
+
+[ext_resource type="Script" uid="uid://buckq04u7fn0t" path="res://components/entities/map_scene.gd" id="1_t56nr"]
+[ext_resource type="Texture2D" uid="uid://cv3smexoadnj5" path="res://materials/sky/skybox1.hdr" id="2_rsk0f"]
+[ext_resource type="ArrayOccluder3D" uid="uid://hckv8ukmxvlo" path="res://maps/srs_tutorial/srs_tutorial.occ" id="3_8kyyf"]
+[ext_resource type="LightmapGIData" uid="uid://cfupv41dvh6kl" path="res://maps/srs_tutorial/srs_tutorial.lmbake" id="4_qp66u"]
+[ext_resource type="PackedScene" uid="uid://dymj27q2wb0b6" path="res://models/levels/tutorial_level.glb" id="5_ef5fw"]
+[ext_resource type="PackedScene" uid="uid://bhsvqncif1vgx" path="res://models/prop_garbage_pile1/prop_garbage_pile1.glb" id="6_0hjdy"]
+[ext_resource type="PackedScene" uid="uid://dunpoadkoto00" path="res://models/prop_garbage_pile2/prop_garbage_pile2.glb" id="7_j4gj7"]
+[ext_resource type="Script" uid="uid://vu4en3txosrr" path="res://components/entities/physics/physics_prop.gd" id="8_bui3w"]
+[ext_resource type="Resource" uid="uid://mfqndggnsmfu" path="res://plastic.tres" id="9_q3nwk"]
+[ext_resource type="Material" uid="uid://iidfnonygxqt" path="res://materials/dev/dev_checkerboard_dark.tres" id="10_81x8g"]
+[ext_resource type="Script" uid="uid://ul0kbjravm0b" path="res://components/entities/map_spawnpoint.gd" id="11_jtypi"]
+[ext_resource type="PackedScene" uid="uid://b0y2mf801fj38" path="res://scenes/effects/light_shaft.tscn" id="12_vep06"]
+[ext_resource type="PackedScene" uid="uid://cwmp72pwppte1" path="res://scenes/map_entities/map_info_bubble.tscn" id="13_1odn0"]
+[ext_resource type="PackedScene" uid="uid://ciw48xbp1lrhy" path="res://scenes/map_entities/doors/map_door1.tscn" id="14_67xre"]
+[ext_resource type="Script" uid="uid://ckxapl0cw2ugx" path="res://components/entities/map_tooltip.gd" id="15_ssi3k"]
+[ext_resource type="PackedScene" uid="uid://dfpatff4d5okj" path="res://addons/godot_3d_cursor/3d_cursor.tscn" id="16_8kyyf"]
+[ext_resource type="Script" uid="uid://dt04kfvdc21nb" path="res://addons/godot_3d_cursor/3d_cursor.gd" id="17_qp66u"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1r6nv"]
+panorama = ExtResource("2_rsk0f")
+
+[sub_resource type="Sky" id="Sky_0srd3"]
+sky_material = SubResource("PanoramaSkyMaterial_1r6nv")
+
+[sub_resource type="Environment" id="Environment_usww3"]
+background_mode = 2
+sky = SubResource("Sky_0srd3")
+sky_rotation = Vector3(0, 3.551745, 0)
+ambient_light_source = 3
+reflected_light_source = 2
+glow_normalized = true
+glow_mix = 0.234
+glow_bloom = 0.45
+glow_blend_mode = 4
+fog_mode = 1
+fog_density = 1.0
+fog_sky_affect = 0.0
+fog_depth_begin = 0.0
+fog_depth_end = 50.0
+adjustment_enabled = true
+adjustment_saturation = 2.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_lgyq8"]
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1),
+"format": 34359742465,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"name": "dev_checkerboard_dark",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAvwAAAL8AAAA/AAAAvwAAAD8AAAC/AAAAvwAAAD8AAAA/AAAAvwAAAL8AAAC/AAAAPwAAAD8AAAC/AAAAPwAAAL8AAAA/AAAAPwAAAD8AAAA/AAAAPwAAAL8AAAC/")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_nixtr"]
+resource_name = "testlevel_Cube_008"
+lightmap_size_hint = Vector2i(22, 14)
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1),
+"attribute_data": PackedByteArray("AAAAPgAAkD+MLno/btt2PwAAAL4AAGA/AABAP7dtGz8AAAA+AABgP4wuej+3bRs/AAAAvgAAkD8AAEA/btt2PwAAAD4AAJA/jC66PCVJEj0AAAC+AABgPwAAgD6SJMk+AAAAPgAAYD+MLro8kiTJPgAAAL4AAJA/AACAPiVJEj0AAAA+AACQP0YXHT8lSRI9AAAAvgAAYD900cU+kiTJPgAAAD4AAGA/dNHFPiVJEj0AAAC+AACQP0YXHT+SJMk+AAAAPgAAkD900cU+t20bPwAAAL4AAGA/RhcdP27bdj8AAAA+AABgP3TRxT5u23Y/AAAAvgAAkD9GFx0/t20bPwAAAD4AAGA/AACAPrdtGz8AAAC+AACQP4wuujxu23Y/AAAAvgAAYD+MLro8t20bPwAAAD4AAJA/AACAPm7bdj8AAAA+AABgPwAAQD8lSRI9AAAAvgAAkD+MLno/kiTJPgAAAL4AAGA/AABAP5IkyT4AAAA+AACQP4wuej8lSRI9"),
+"format": 34359742519,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": ExtResource("10_81x8g"),
+"name": "dev_checkerboard_dark",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAvwAAAL8AAAA/AAAAvwAAAD8AAAC/AAAAvwAAAD8AAAA/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAPwAAAD8AAAC/AAAAvwAAAD8AAAC/AAAAPwAAAL8AAAC/AAAAPwAAAL8AAAC/AAAAPwAAAD8AAAA/AAAAPwAAAD8AAAC/AAAAPwAAAL8AAAA/AAAAPwAAAL8AAAA/AAAAvwAAAD8AAAA/AAAAPwAAAD8AAAA/AAAAvwAAAL8AAAA/AAAAvwAAAL8AAAC/AAAAPwAAAL8AAAA/AAAAPwAAAL8AAAC/AAAAvwAAAL8AAAA/AAAAPwAAAD8AAAC/AAAAvwAAAD8AAAA/AAAAvwAAAD8AAAC/AAAAPwAAAD8AAAA/AAD/f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//7//////AAD/v/////8AAP+//////wAA/7//////AAD/v////3//////////f/////////9//////////3///////3//f////7//f/9/////v/9//3////+//3//f////7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9///////+//3///////7//f///////v/9///////+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_lgyq8")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_u25bc"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1xnv0"]
+size = Vector3(12.125, 5.875, 5.375)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nixtr"]
+size = Vector3(23.04123, 4.8201904, 10.526367)
+
+[node name="TutorialLevel" type="Node3D" node_paths=PackedStringArray("spawnpoints")]
+script = ExtResource("1_t56nr")
+map_name = "srs_tutorial"
+spawnpoints = [NodePath("Entities/MapSpawnPoint"), NodePath("Entities/MapSpawnPoint2")]
+metadata/_custom_type_script = "uid://buckq04u7fn0t"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_usww3")
+
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="."]
+occluder = ExtResource("3_8kyyf")
+bake_mask = 4294967293
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+quality = 0
+supersampling = true
+denoiser_strength = 0.05
+light_data = ExtResource("4_qp66u")
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="tutorial_level" parent="World" instance=ExtResource("5_ef5fw")]
+
+[node name="prop_garbage_pile12" parent="World" instance=ExtResource("6_0hjdy")]
+transform = Transform3D(0.12611236, 0, 0.99201596, 0, 1, 0, -0.99201596, 0, 0.12611236, -0.631793, 0.15116155, 3.525299)
+
+[node name="prop_garbage_pile13" parent="World" instance=ExtResource("6_0hjdy")]
+transform = Transform3D(-0.033259764, 0, -0.99944675, 0, 1, 0, 0.99944675, 0, -0.033259764, 5.4786034, 0.15116131, -2.1272476)
+
+[node name="prop_garbage_pile22" parent="World" instance=ExtResource("7_j4gj7")]
+transform = Transform3D(0.6251882, 0, -0.78047395, 0, 1, 0, 0.78047395, 0, 0.6251882, -2.5589693, 0.008973092, 3.6451921)
+
+[node name="prop_garbage_pile23" parent="World" instance=ExtResource("7_j4gj7")]
+transform = Transform3D(0.92689586, 0, 0.37531856, 0, 1, 0, -0.37531856, 0, 0.92689586, 3.6423793, 0.00897333, -1.7932725)
+
+[node name="prop_garbage_pile24" parent="World" instance=ExtResource("7_j4gj7")]
+transform = Transform3D(0.9924523, 0, 0.12263161, 0, 1, 0, -0.12263161, 0, 0.9924523, -9.825886, 0.00897333, 0.5315771)
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="sun" type="DirectionalLight3D" parent="Lights"]
+transform = Transform3D(0.90044785, -0.36008704, 0.24398977, -7.450581e-09, 0.5609424, 0.8278549, -0.434964, -0.7454401, 0.5050994, 0, 13.212029, 0)
+light_color = Color(0.37410846, 0.41724837, 0.6270471, 1)
+light_bake_mode = 1
+shadow_enabled = true
+
+[node name="roomlight" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -1, 7.5, 0)
+light_color = Color(0.81267416, 0.77543557, 0.61607695, 1)
+light_energy = 16.0
+light_bake_mode = 1
+spot_range = 12.674
+spot_angle = 22.55
+
+[node name="entrancelight" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -21.406551, 7.13578, 9.454918e-05)
+light_color = Color(0.9004242, 0.87797856, 0.77315086, 1)
+light_energy = 16.0
+light_bake_mode = 1
+spot_range = 8.812322
+spot_angle = 42.06638
+
+[node name="jumproomlight" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -36.980778, 7.13578, 9.454918e-05)
+light_color = Color(0.9004242, 0.87797856, 0.77315086, 1)
+light_energy = 16.0
+light_bake_mode = 1
+spot_range = 8.812322
+spot_angle = 42.06638
+
+[node name="jumproomlight2" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -36.980778, 7.1357803, 8.952266)
+light_color = Color(0.9004242, 0.87797856, 0.77315086, 1)
+light_energy = 16.0
+light_bake_mode = 1
+spot_range = 8.812322
+spot_angle = 42.06638
+
+[node name="jumproomlight3" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -36.980778, 7.135781, 15.231784)
+light_color = Color(0.9004242, 0.87797856, 0.77315086, 1)
+light_energy = 16.0
+light_bake_mode = 1
+spot_range = 8.812322
+spot_angle = 42.06638
+
+[node name="hallwaylight" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -6.0289726, 0.50000006, 33.63432)
+light_color = Color(0.9004242, 0.87797856, 0.77315086, 1)
+light_energy = 16.0
+light_bake_mode = 1
+spot_range = 8.812322
+spot_angle = 42.06638
+
+[node name="hallwaylight2" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -14.501908, 0.50000006, 33.63432)
+light_color = Color(0.9004242, 0.87797856, 0.77315086, 1)
+light_energy = 16.0
+light_bake_mode = 1
+spot_range = 8.812322
+spot_angle = 42.06638
+
+[node name="hallwaylight3" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -48.454998, 0.50000024, 38.011074)
+light_color = Color(0.9004242, 0.87797856, 0.77315086, 1)
+light_energy = 16.0
+light_bake_mode = 1
+spot_range = 8.812322
+spot_angle = 42.06638
+
+[node name="jumproomstairlight" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 0.6443105, 0.76476395, 0, -0.76476395, 0.6443105, -37.5, 0.4310978, 35.291126)
+light_color = Color(0.9004242, 0.87797856, 0.77315086, 1)
+light_energy = 16.0
+light_bake_mode = 1
+spot_range = 8.812322
+spot_angle = 42.06638
+
+[node name="jumproompitlight" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.71598, -3.748218, 10.815894)
+light_color = Color(0.69, 0.7705, 0.92, 1)
+light_energy = 0.055
+light_bake_mode = 1
+omni_range = 1.7106276
+
+[node name="Physics" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.741734, 3.8146973e-06, 9.182884)
+
+[node name="physbox-rigid2" type="RigidBody3D" parent="Physics"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1651268, 0.5000001, -6.7719383)
+collision_layer = 2
+collision_mask = 3
+mass = 20.0
+script = ExtResource("8_bui3w")
+sound_mat = ExtResource("9_q3nwk")
+metadata/_custom_type_script = "uid://vu4en3txosrr"
+
+[node name="physbox-rigid" type="MeshInstance3D" parent="Physics/physbox-rigid2"]
+layers = 2
+gi_mode = 2
+mesh = SubResource("ArrayMesh_nixtr")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Physics/physbox-rigid2"]
+shape = SubResource("ConvexPolygonShape3D_u25bc")
+
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="MapSpawnPoint" type="Marker3D" parent="Entities"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+script = ExtResource("11_jtypi")
+spawn_point_name = "default_spawn"
+metadata/_custom_type_script = "uid://ul0kbjravm0b"
+
+[node name="MapSpawnPoint2" type="Marker3D" parent="Entities"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 7.8304634, 16.5, -3.0611515)
+script = ExtResource("11_jtypi")
+spawn_point_name = "test"
+metadata/_custom_type_script = "uid://ul0kbjravm0b"
+
+[node name="LightShaft" parent="Entities" instance=ExtResource("12_vep06")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 7.67775, 0)
+
+[node name="MapInfoBubble" parent="Entities" instance=ExtResource("13_1odn0")]
+transform = Transform3D(1, 0, 1.7484555e-07, 0, 1, 0, -1.7484555e-07, 0, 1, -10.415025, 1.397903, 1.3179995e-06)
+label_text = "YOU ARE WARMLY INVITED TO THE SURVEY...
+THE TEST IS ABOUT TO BEGIN!"
+
+[node name="MapDoor1" parent="Entities" instance=ExtResource("14_67xre")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -32.40921, 1, 10)
+locked = true
+
+[node name="TooltipTrigger" type="Area3D" parent="Entities"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.741734, 3.8146973e-06, 9.182884)
+collision_layer = 0
+collision_mask = 2147483648
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/TooltipTrigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3125, 2.9225001, -2.1875)
+shape = SubResource("BoxShape3D_1xnv0")
+
+[node name="MapToolTipJump" type="Node" parent="Entities/TooltipTrigger"]
+script = ExtResource("15_ssi3k")
+text = "SPACE - Jump"
+duration = 8.0
+metadata/_custom_type_script = "uid://ckxapl0cw2ugx"
+
+[node name="TooltipTrigger2" type="Area3D" parent="Entities"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.144783, 3.8146973e-06, 0.06748104)
+collision_layer = 0
+collision_mask = 2147483648
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/TooltipTrigger2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.292099, 2.3131723, 0)
+shape = SubResource("BoxShape3D_nixtr")
+
+[node name="MapToolTip" type="Node" parent="Entities/TooltipTrigger2"]
+script = ExtResource("15_ssi3k")
+text = "WASD - Move"
+duration = 30.0
+predelay = 0.5
+delay = 0.1
+cancellable = true
+metadata/_custom_type_script = "uid://ckxapl0cw2ugx"
+
+[node name="MapToolTip2" type="Node" parent="Entities/TooltipTrigger2"]
+script = ExtResource("15_ssi3k")
+text = "MOUSE1 - Look"
+duration = 30.0
+predelay = 0.5
+delay = 0.1
+cancellable = true
+metadata/_custom_type_script = "uid://ckxapl0cw2ugx"
+
+[node name="MapToolTip3" type="Node" parent="Entities/TooltipTrigger2"]
+script = ExtResource("15_ssi3k")
+text = "ESC - Menu"
+duration = 30.0
+predelay = 0.5
+delay = 0.1
+cancellable = true
+metadata/_custom_type_script = "uid://ckxapl0cw2ugx"
+
+[node name="jumproomreflectionprobe" type="ReflectionProbe" parent="Entities"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.044487, -2.2142215, 12.474866)
+blend_distance = 0.06
+size = Vector3(12.110748, 3.55896, 4.236782)
+box_projection = true
+interior = true
+
+[node name="3DCursor" type="Marker3D" parent="." instance=ExtResource("16_8kyyf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8304634, 16.5, -3.0611515)
+visible = false
+script = ExtResource("17_qp66u")

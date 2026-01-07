@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://328rlklud5r6"]
+
+[ext_resource type="Script" uid="uid://dojweycbpr3yy" path="res://trinkets/test_trinket/test_trinket.gd" id="1_dps4p"]
+
+[node name="TestTrinket" type="Node3D"]
+script = ExtResource("1_dps4p")

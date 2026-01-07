@@ -1,0 +1,304 @@
+[gd_scene load_steps=26 format=3 uid="uid://ivpp1l2ui86f"]
+
+[ext_resource type="Script" uid="uid://buckq04u7fn0t" path="res://components/entities/map_scene.gd" id="1_71cuq"]
+[ext_resource type="Shader" uid="uid://c2p6r1vssljxe" path="res://materials/sky/shader/image_sky.gdshader" id="2_3nyrx"]
+[ext_resource type="ArrayOccluder3D" uid="uid://cycdbqjacm3fu" path="res://maps/srs_backstage_world/srs_backstage_world.occ" id="2_71xos"]
+[ext_resource type="PackedScene" uid="uid://dil18jxwwwoxc" path="res://maps/srs_backstage_world/srs_backstage_world.glb" id="3_3tlvn"]
+[ext_resource type="Texture2D" uid="uid://mx2guquwixuj" path="res://materials/sky/backstage_world_skybox.hdr" id="3_dcl7t"]
+[ext_resource type="Script" uid="uid://in6xgodf72dk" path="res://components/game/image_sky_environment.gd" id="3_f1cya"]
+[ext_resource type="LightmapGIData" uid="uid://b1u00lnmoqgvx" path="res://maps/srs_backstage_world/srs_backstage_world.lmbake" id="3_kn1ly"]
+[ext_resource type="Texture2D" uid="uid://bv6soi858mhy7" path="res://materials/syuzhet/moon.png" id="3_lxicr"]
+[ext_resource type="Script" uid="uid://ul0kbjravm0b" path="res://components/entities/map_spawnpoint.gd" id="4_71xos"]
+[ext_resource type="Texture2D" uid="uid://1lwadpc3y3q" path="res://materials/syuzhet/gradient.png" id="9_lxicr"]
+[ext_resource type="Script" uid="uid://c0irewagqysai" path="res://components/entities/interactive/map_interact_auto.gd" id="9_rmjob"]
+[ext_resource type="Script" uid="uid://cw4axrxes7bwd" path="res://components/entities/interactive/effects/effect_play_music.gd" id="10_5pbdt"]
+[ext_resource type="Resource" uid="uid://cna4s5jwt1h37" path="res://resources/music/mus_res_backstage.tres" id="11_5pbdt"]
+[ext_resource type="Script" uid="uid://gpfdxtmbylmt" path="res://components/entities/interactive/base/interactable_conditional.gd" id="13_npkd8"]
+[ext_resource type="Script" uid="uid://cxskkr6k8urre" path="res://components/entities/interactive/effects/map_player_level_change.gd" id="14_dcl7t"]
+[ext_resource type="PackedScene" uid="uid://d12yyyrxbcrxp" path="res://scenes/map_entities/map_trinket.tscn" id="14_lopab"]
+[ext_resource type="Texture2D" uid="uid://d12162snh402p" path="res://trinkets/trinket_rerun/trinket_rerun.png" id="15_5wejy"]
+[ext_resource type="Resource" uid="uid://dmsq4hkau82al" path="res://trinkets/trinket_rerun/trinket_rerun.tres" id="15_8660f"]
+[ext_resource type="Resource" uid="uid://dmcki5trutijk" path="res://scenes/ui/transition_effect/zoom_transition_effect.tres" id="15_iupmr"]
+[ext_resource type="AudioStream" uid="uid://n0joyeb74gmf" path="res://sounds/effects/sfx_teleport.wav" id="16_lopab"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ceo7o"]
+shader = ExtResource("2_3nyrx")
+shader_parameter/sky_texture = ExtResource("3_lxicr")
+shader_parameter/sky_texture_modulate = Color(0.18772167, 0.18772167, 0.18772167, 1)
+shader_parameter/lock_aspect = false
+shader_parameter/aspect_ratio = 1.3333333
+shader_parameter/fov = Vector2(180, 90)
+shader_parameter/tiling = Vector2i(1, 1)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/use_bg = true
+shader_parameter/background = ExtResource("3_dcl7t")
+shader_parameter/background_color = Color(0, 0, 0, 1)
+shader_parameter/size = 0.32400001469148
+shader_parameter/cam_x = 0.0
+shader_parameter/cam_y = 0.0
+shader_parameter/viewport_size = Vector2(0, 0)
+shader_parameter/use_sin = false
+shader_parameter/scroll_speed = Vector2(0.01, 0.01)
+shader_parameter/sin_mult = 1.0
+shader_parameter/jitter = 0.2
+
+[sub_resource type="Sky" id="Sky_rmjob"]
+sky_material = SubResource("ShaderMaterial_ceo7o")
+
+[sub_resource type="Environment" id="Environment_5pbdt"]
+background_mode = 2
+sky = SubResource("Sky_rmjob")
+ambient_light_source = 2
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0, 0, 0, 1)
+fog_density = 1.0
+fog_sky_affect = 0.0
+fog_depth_begin = 0.0
+fog_depth_end = 300.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8660f"]
+size = Vector3(0.6796875, 0.484375, 0.5859375)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5wejy"]
+size = Vector3(0.3310547, 3.2357788, 1.6975098)
+
+[node name="SrsBackstageWorld" type="Node3D" node_paths=PackedStringArray("environment", "spawnpoints")]
+script = ExtResource("1_71cuq")
+map_name = "srs_backstage_world"
+environment = NodePath("ImageSky")
+spawnpoints = [NodePath("World/MSP_FromNexus")]
+use_world_bound = true
+use_world_bound_x = true
+use_world_bound_y = true
+use_world_bound_z = true
+world_bounds = Vector3(150, 50, 150)
+metadata/_custom_type_script = "uid://buckq04u7fn0t"
+
+[node name="ImageSky" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5pbdt")
+script = ExtResource("3_f1cya")
+
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="."]
+occluder = ExtResource("2_71xos")
+bake_mask = 4294967293
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+quality = 0
+supersampling = true
+bounce_indirect_energy = 2.0
+environment_mode = 0
+environment_custom_color = Color(0, 0, 0, 1)
+environment_custom_energy = 0.0
+light_data = ExtResource("3_kn1ly")
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="srs_backstage_world" parent="World" instance=ExtResource("3_3tlvn")]
+
+[node name="invis_floor_002" parent="World/srs_backstage_world" index="0"]
+ignore_occlusion_culling = true
+gi_lightmap_texel_scale = 0.2
+
+[node name="invis_floor_001" parent="World/srs_backstage_world" index="1"]
+ignore_occlusion_culling = true
+gi_lightmap_texel_scale = 0.2
+
+[node name="invis_floor_003" parent="World/srs_backstage_world" index="2"]
+ignore_occlusion_culling = true
+gi_lightmap_texel_scale = 0.2
+
+[node name="invis_floor_004" parent="World/srs_backstage_world" index="3"]
+ignore_occlusion_culling = true
+gi_lightmap_texel_scale = 0.2
+
+[node name="invis_floor_005" parent="World/srs_backstage_world" index="4"]
+ignore_occlusion_culling = true
+gi_lightmap_texel_scale = 0.2
+
+[node name="invis_floor_006" parent="World/srs_backstage_world" index="5"]
+ignore_occlusion_culling = true
+gi_lightmap_texel_scale = 0.2
+
+[node name="invis_floor_007" parent="World/srs_backstage_world" index="6"]
+ignore_occlusion_culling = true
+gi_lightmap_texel_scale = 0.2
+
+[node name="invis_floor_008" parent="World/srs_backstage_world" index="7"]
+ignore_occlusion_culling = true
+gi_lightmap_texel_scale = 0.2
+
+[node name="invis_floor_009" parent="World/srs_backstage_world" index="8"]
+ignore_occlusion_culling = true
+gi_lightmap_texel_scale = 0.2
+
+[node name="background" parent="World/srs_backstage_world" index="20"]
+layers = 5
+
+[node name="MSP_FromNexus" type="Marker3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.30050004, 0)
+script = ExtResource("4_71xos")
+spawn_point_name = "from_nexus"
+metadata/_custom_type_script = "uid://ul0kbjravm0b"
+
+[node name="Decal" type="Decal" parent="World"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2.0525842, 7.8241825)
+size = Vector3(19.232178, 0.49316406, 11.061035)
+texture_emission = ExtResource("9_lxicr")
+emission_energy = 0.39
+modulate = Color(0.0062708855, 0, 1, 1)
+cull_mask = 4
+
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="Physics" type="Node3D" parent="Entities"]
+
+[node name="Lights" type="Node3D" parent="Entities"]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Entities/Lights"]
+transform = Transform3D(-0.8660255, 0.3535534, -0.35355338, 0, 0.70710665, 0.7071068, 0.5000001, 0.6123724, -0.61237234, -10.292549, 11.269965, -8.506146)
+light_energy = 40.0
+light_bake_mode = 1
+spot_range = 18.682
+spot_angle = 60.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Entities/Lights"]
+transform = Transform3D(-0.7637849, -0.4564169, 0.45641685, 0, 0.7071068, 0.7071068, -0.645471, 0.5400775, -0.5400774, 10.161539, 11.269965, -8.506146)
+light_energy = 40.0
+light_bake_mode = 1
+spot_range = 18.681938
+spot_angle = 60.0
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Entities/Lights"]
+transform = Transform3D(-0.99998, 0.0044799782, -0.0044799787, 0, 0.7071068, 0.70710677, 0.006335646, 0.7070926, -0.70709264, 0, 11.188706, -8.645119)
+light_energy = 40.0
+light_bake_mode = 1
+spot_range = 18.681938
+spot_angle = 60.0
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Entities/Lights"]
+transform = Transform3D(-0.99998, 0.0044799764, -0.004479977, -0.006247067, -0.57938075, 0.8150331, 0.0010557167, 0.8150447, 0.57939714, 0, 0.7782171, 7.692502)
+light_color = Color(0.5482278, 0.7266439, 1, 1)
+light_energy = 10.0
+light_bake_mode = 1
+spot_range = 40.527
+spot_angle = 67.8
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="Entities/Lights"]
+transform = Transform3D(-0.99998, 0.0044799764, -0.004479977, -0.006247067, -0.57938075, 0.8150331, 0.0010557167, 0.8150447, 0.57939714, 8.538913, 0.7782171, 7.692502)
+light_color = Color(0.5482278, 0.7266439, 1, 1)
+light_energy = 10.0
+light_bake_mode = 1
+spot_range = 40.527
+spot_angle = 67.8
+
+[node name="SpotLight3D6" type="SpotLight3D" parent="Entities/Lights"]
+transform = Transform3D(-0.99998, 0.0044799764, -0.004479977, -0.006247067, -0.57938075, 0.8150331, 0.0010557167, 0.8150447, 0.57939714, -8.283653, 0.7782171, 7.692502)
+light_color = Color(0.5482278, 0.7266439, 1, 1)
+light_energy = 10.0
+light_bake_mode = 1
+spot_range = 40.527
+spot_angle = 67.8
+
+[node name="Lights2" type="Node3D" parent="Entities"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -121.25238, 1.9073486e-06, -121.68269)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Entities/Lights2"]
+transform = Transform3D(-0.8660255, 0.3535534, -0.35355338, 0, 0.70710665, 0.7071068, 0.5000001, 0.6123724, -0.61237234, -10.292549, 11.269965, -8.506146)
+light_energy = 40.0
+light_bake_mode = 1
+spot_range = 18.682
+spot_angle = 60.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Entities/Lights2"]
+transform = Transform3D(-0.7637849, -0.4564169, 0.45641685, 0, 0.7071068, 0.7071068, -0.645471, 0.5400775, -0.5400774, 10.161539, 11.269965, -8.506146)
+light_energy = 40.0
+light_bake_mode = 1
+spot_range = 18.681938
+spot_angle = 60.0
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Entities/Lights2"]
+transform = Transform3D(-0.99998, 0.0044799782, -0.0044799787, 0, 0.7071068, 0.70710677, 0.006335646, 0.7070926, -0.70709264, 0, 11.188706, -8.645119)
+light_energy = 40.0
+light_bake_mode = 1
+spot_range = 18.681938
+spot_angle = 60.0
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Entities/Lights2"]
+transform = Transform3D(-0.99998, 0.004480134, -0.0044799107, 0.0051715476, 0.16870108, -0.9856537, -0.0036600952, -0.9856571, -0.16872087, 0, 0.53272176, 7.692528)
+light_color = Color(0.5482278, 0.7266439, 1, 1)
+light_energy = 10.0
+light_bake_mode = 1
+spot_range = 40.527
+spot_angle = 86.42
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="Entities/Lights2"]
+transform = Transform3D(-0.99998, 0.004480134, -0.0044799107, 0.0051715476, 0.16870108, -0.9856537, -0.0036600952, -0.9856571, -0.16872087, 8.538902, 0.53272176, 7.6925125)
+light_color = Color(0.5482278, 0.7266439, 1, 1)
+light_energy = 10.0
+light_bake_mode = 1
+spot_range = 40.527
+spot_angle = 86.42
+
+[node name="SpotLight3D6" type="SpotLight3D" parent="Entities/Lights2"]
+transform = Transform3D(-0.99998, 0.004480134, -0.0044799107, 0.0051715476, 0.16870108, -0.9856537, -0.0036600952, -0.9856571, -0.16872087, -8.283653, 0.53272176, 7.692543)
+light_color = Color(0.5482278, 0.7266439, 1, 1)
+light_energy = 10.0
+light_bake_mode = 1
+spot_range = 40.527
+spot_angle = 86.42
+
+[node name="Lights3" type="Node3D" parent="Entities"]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Entities/Lights3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 136.36359, 1.8705082, 117.80288)
+light_color = Color(0.84395874, 0.71659356, 0.51448447, 1)
+light_energy = 50.0
+omni_range = 8.644596
+
+[node name="MapInteractAuto" type="Node3D" parent="Entities"]
+script = ExtResource("9_rmjob")
+metadata/_custom_type_script = "uid://c0irewagqysai"
+
+[node name="InteractableEffectPlayMusic" type="Node" parent="Entities/MapInteractAuto"]
+script = ExtResource("10_5pbdt")
+music_resource = ExtResource("11_5pbdt")
+metadata/_custom_type_script = "uid://cw4axrxes7bwd"
+
+[node name="MapTrinket" parent="Entities" instance=ExtResource("14_lopab")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -128.01505, 1.0948458, -122.636375)
+trinket = ExtResource("15_8660f")
+
+[node name="CollisionShape3D" parent="Entities/MapTrinket" index="0"]
+shape = SubResource("BoxShape3D_8660f")
+
+[node name="Sprite3D" parent="Entities/MapTrinket" index="1"]
+transform = Transform3D(0.145, 0, 0, 0, 0.145, 0, 0, 0, 0.145, 0, 0, 0)
+texture = ExtResource("15_5wejy")
+
+[node name="BackstageWorldTeleport" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.011388183, -0.3578443, 1.8875322)
+collision_layer = 9
+collision_mask = 0
+script = ExtResource("13_npkd8")
+condition_mode = 2
+use_ui_failure = false
+interact_delay = 1.0
+can_interact = true
+
+[node name="MapPlayerLevelChange" type="Node" parent="BackstageWorldTeleport"]
+script = ExtResource("14_dcl7t")
+level = "uid://dtdnvis8ni0o"
+spawnpoint = "from_backstage"
+transition_type = ExtResource("15_iupmr")
+transition_duration = 1.0
+play_sound = true
+teleport_sound = ExtResource("16_lopab")
+metadata/_custom_type_script = "uid://cxskkr6k8urre"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BackstageWorldTeleport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1178894, 0)
+shape = SubResource("BoxShape3D_5wejy")
+
+[editable path="World/srs_backstage_world"]
+[editable path="Entities/MapTrinket"]

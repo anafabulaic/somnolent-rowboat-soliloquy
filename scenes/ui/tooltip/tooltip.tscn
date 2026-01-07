@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://d1wm6i78gg04s"]
+
+[ext_resource type="Texture2D" uid="uid://bwdyhu31sw3cp" path="res://scenes/ui/tooltip/tooltip1.png" id="1_327l5"]
+[ext_resource type="Script" uid="uid://coby4dvhrg3xl" path="res://scenes/ui/tooltip/tooltip.gd" id="1_pvja6"]
+[ext_resource type="FontFile" uid="uid://dnkywiuaeww1n" path="res://fonts/Caladea-Bold.ttf" id="2_pvja6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w5aja"]
+content_margin_left = 4.0
+content_margin_top = 2.0
+content_margin_right = 4.0
+content_margin_bottom = 2.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ycayy"]
+
+[node name="ToolTip" type="MarginContainer"]
+offset_right = 84.0
+offset_bottom = 21.0
+size_flags_horizontal = 8
+mouse_filter = 2
+script = ExtResource("1_pvja6")
+
+[node name="Container" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_w5aja")
+
+[node name="HBox" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Container/HBox"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="IconTexture" type="TextureRect" parent="Container/HBox/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_327l5")
+expand_mode = 2
+
+[node name="IconText" type="Button" parent="Container/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 2
+theme_override_colors/font_disabled_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+theme_override_colors/icon_disabled_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+theme_override_constants/icon_max_width = 14
+theme_override_fonts/font = ExtResource("2_pvja6")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ycayy")
+disabled = true
+button_mask = 0
+text = "<empty>"

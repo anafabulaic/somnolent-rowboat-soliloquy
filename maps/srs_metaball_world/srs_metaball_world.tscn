@@ -1,0 +1,88 @@
+[gd_scene load_steps=12 format=3 uid="uid://ctxdt8kdfgn1s"]
+
+[ext_resource type="Script" uid="uid://buckq04u7fn0t" path="res://components/entities/map_scene.gd" id="1_mhxf8"]
+[ext_resource type="Texture2D" uid="uid://bom42gd4ct5uf" path="res://materials/sky/skybox1b.hdr" id="2_cxs2j"]
+[ext_resource type="LightmapGIData" uid="uid://dm4715hadq5yf" path="res://maps/srs_metaball_world/srs_metaball_world.lmbake" id="3_x5gre"]
+[ext_resource type="PackedScene" uid="uid://vfu83cbv5m01" path="res://maps/srs_metaball_world/srs_metaball_world.glb" id="4_7tqna"]
+[ext_resource type="Script" uid="uid://ul0kbjravm0b" path="res://components/entities/map_spawnpoint.gd" id="5_hpwyj"]
+[ext_resource type="Script" uid="uid://c0irewagqysai" path="res://components/entities/interactive/map_interact_auto.gd" id="6_hpwyj"]
+[ext_resource type="Script" uid="uid://cw4axrxes7bwd" path="res://components/entities/interactive/effects/effect_play_music.gd" id="7_8lp0y"]
+[ext_resource type="Resource" uid="uid://bl76h4kx2bmio" path="res://resources/music/mus_res_metaball.tres" id="8_8lp0y"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hpwyj"]
+panorama = ExtResource("2_cxs2j")
+
+[sub_resource type="Sky" id="Sky_8lp0y"]
+sky_material = SubResource("PanoramaSkyMaterial_hpwyj")
+
+[sub_resource type="Environment" id="Environment_kdeag"]
+background_mode = 2
+sky = SubResource("Sky_8lp0y")
+fog_enabled = true
+fog_mode = 1
+fog_density = 1.0
+fog_sky_affect = 0.575
+
+[node name="SrsMetaballWorld" type="Node3D" node_paths=PackedStringArray("environment", "spawnpoints")]
+script = ExtResource("1_mhxf8")
+map_name = "srs_metaball_world"
+environment = NodePath("WorldEnvironment")
+spawnpoints = [NodePath("Entities/MapSpawnPoint")]
+void_level = -9999.0
+use_world_bound = true
+use_world_bound_y = true
+world_bounds = Vector3(150, 550, 150)
+metadata/_custom_type_script = "uid://buckq04u7fn0t"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_kdeag")
+
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="."]
+bake_mask = 4294967293
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+supersampling = true
+light_data = ExtResource("3_x5gre")
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="srs_metaball_world" parent="World" instance=ExtResource("4_7tqna")]
+
+[node name="metaball" parent="World/srs_metaball_world" index="0"]
+transform = Transform3D(16, 0, 0, 0, 16, 0, 0, 0, 16, 0, 22.450317, 0)
+gi_lightmap_texel_scale = 0.1
+
+[node name="srs_metaball_world2" parent="World" instance=ExtResource("4_7tqna")]
+transform = Transform3D(0.6648915, 0, -0.74693996, 6.529957e-08, -1, 5.812666e-08, -0.74693996, -8.742278e-08, -0.6648915, 0, 0, 0)
+
+[node name="metaball" parent="World/srs_metaball_world2" index="0"]
+transform = Transform3D(16, 0, 0, 0, 16, 0, 0, 0, 16, 0, 22.450317, 0)
+gi_lightmap_texel_scale = 0.1
+
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="Physics" type="Node3D" parent="Entities"]
+
+[node name="Lights" type="Node3D" parent="Entities"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Entities/Lights"]
+transform = Transform3D(-0.19767788, 0.88830495, -0.4145334, 0.38235515, 0.45925432, 0.80180424, 0.90262294, 0, -0.43043235, -16.873035, 270.4958, 42.62884)
+light_bake_mode = 1
+
+[node name="MapSpawnPoint" type="Marker3D" parent="Entities"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 400, 0)
+script = ExtResource("5_hpwyj")
+spawn_point_name = "from_nexus"
+metadata/_custom_type_script = "uid://ul0kbjravm0b"
+
+[node name="MapInteractAuto" type="Node3D" parent="Entities"]
+script = ExtResource("6_hpwyj")
+metadata/_custom_type_script = "uid://c0irewagqysai"
+
+[node name="InteractableEffectPlayMusic" type="Node" parent="Entities/MapInteractAuto"]
+script = ExtResource("7_8lp0y")
+music_resource = ExtResource("8_8lp0y")
+metadata/_custom_type_script = "uid://cw4axrxes7bwd"
+
+[editable path="World/srs_metaball_world"]
+[editable path="World/srs_metaball_world2"]

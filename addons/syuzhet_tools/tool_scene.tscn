@@ -1,0 +1,78 @@
+[gd_scene load_steps=10 format=3 uid="uid://b0sn6oxpfinub"]
+
+[ext_resource type="Script" uid="uid://c555i5leigpy4" path="res://addons/syuzhet_tools/tool_script.gd" id="1_tn27v"]
+[ext_resource type="PackedScene" uid="uid://b24qeo2aa8va1" path="res://addons/syuzhet_tools/quick_material_tool_scene.tscn" id="1_tqwrr"]
+[ext_resource type="StyleBox" uid="uid://bbh5bjk27qlc5" path="res://addons/syuzhet_tools/header_label.tres" id="2_5imd6"]
+[ext_resource type="PackedScene" uid="uid://pdejia1kftaj" path="res://addons/syuzhet_tools/quick_bake_tool_scene.tscn" id="4_tn27v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5imd6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tn27v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_23wei"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e7vjh"]
+
+[sub_resource type="DPITexture" id="DPITexture_0nub4"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"M15 6v8a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-3h2v2h8V7h-3a1 1 0 0 1-1-1V3H5v4H3V2a1 1 0 0 1 1-1h6zm-9 6v-2H1V8h5V6l3 3z\"/></svg>
+"
+base_scale = 1.5
+saturation = 2.0
+color_map = {
+Color(1, 0.37254903, 0.37254903, 1): Color(1, 0.47, 0.42, 1),
+Color(0.37254903, 1, 0.5921569, 1): Color(0.45, 0.95, 0.5, 1),
+Color(1, 0.8666667, 0.39607844, 1): Color(1, 0.87, 0.4, 1)
+}
+
+[node name="ToolScene" type="Control" node_paths=PackedStringArray("quick_mat")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tn27v")
+quick_mat = NodePath("VBoxContainer/QuickMaterialScene")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 10
+
+[node name="TopHeaderContainer" type="PanelContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_5imd6")
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/MarginContainer/TopHeaderContainer"]
+layout_mode = 2
+
+[node name="TopHeader" type="Button" parent="VBoxContainer/MarginContainer/TopHeaderContainer/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 0.7058824)
+theme_override_colors/icon_disabled_color = Color(1, 1, 1, 0.7058824)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5imd6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_tn27v")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_23wei")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_e7vjh")
+disabled = true
+button_mask = 0
+text = "Syuzhet Tools"
+icon = SubResource("DPITexture_0nub4")
+alignment = 0
+
+[node name="QuickMaterialScene" parent="VBoxContainer" instance=ExtResource("1_tqwrr")]
+layout_mode = 2
+
+[node name="QuickBake" parent="VBoxContainer" instance=ExtResource("4_tn27v")]
+layout_mode = 2
+
+[connection signal="scene_changed" from="." to="VBoxContainer/QuickBake" method="_on_scene_changed"]

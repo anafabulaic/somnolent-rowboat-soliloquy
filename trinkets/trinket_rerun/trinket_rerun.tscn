@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddqduf35i1moj"]
+
+[ext_resource type="Script" uid="uid://7717mtas10ps" path="res://trinkets/trinket_rerun/trinket_rerun.gd" id="1_607v0"]
+[ext_resource type="AudioStream" uid="uid://c5vi64s00dm54" path="res://sounds/trinkets/trinket_rerun_rewind_sound.wav" id="2_7s0lb"]
+[ext_resource type="Resource" uid="uid://bki6n0buwhhg8" path="res://scenes/ui/transition_effect/strip_transition_effect.tres" id="2_yrvqd"]
+
+[node name="TrinketRerun" type="Node3D"]
+script = ExtResource("1_607v0")
+rewind_sound = ExtResource("2_7s0lb")
+transition = ExtResource("2_yrvqd")
+level_path = "uid://dtdnvis8ni0o"
+duration = 3.0
+metadata/_custom_type_script = "uid://7717mtas10ps"

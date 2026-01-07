@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0y2mf801fj38"]
+
+[ext_resource type="Material" uid="uid://qkyqj348v3q8" path="res://materials/_shaders/light_shaft_shader.tres" id="1_q4hsd"]
+[ext_resource type="Material" uid="uid://dmxkt7fn3stpo" path="res://materials/_shaders/light_glow_shader.tres" id="2_oj74j"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_r1m50"]
+size = Vector2(5, 5)
+
+[sub_resource type="QuadMesh" id="QuadMesh_08vot"]
+size = Vector2(4, 4)
+
+[node name="LightShaft" type="Node3D"]
+
+[node name="LightShaft" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.4091067, 0)
+layers = 2
+mesh = SubResource("QuadMesh_r1m50")
+surface_material_override/0 = ExtResource("1_q4hsd")
+
+[node name="LightGlow" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+layers = 2
+mesh = SubResource("QuadMesh_08vot")
+surface_material_override/0 = ExtResource("2_oj74j")

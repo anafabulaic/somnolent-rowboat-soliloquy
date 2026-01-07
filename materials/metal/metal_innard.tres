@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://eghp0byurcho"]
+
+[ext_resource type="Texture2D" uid="uid://xc2f77sru5eb" path="res://materials/metal/metal_innard.png" id="1_qnox0"]
+
+[resource]
+albedo_texture = ExtResource("1_qnox0")

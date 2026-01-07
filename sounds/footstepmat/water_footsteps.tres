@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FootstepMatResource" load_steps=13 format=3 uid="uid://dt63u0a74ym3j"]
+
+[ext_resource type="AudioStream" uid="uid://cfxeb4a4pl87q" path="res://sounds/player/footsteps/water/run/Footsteps_Water_Run_01.wav" id="1_2yt5a"]
+[ext_resource type="AudioStream" uid="uid://8inqsdbu8mjq" path="res://sounds/player/footsteps/water/run/Footsteps_Water_Run_02.wav" id="2_d7cha"]
+[ext_resource type="AudioStream" uid="uid://cr08n21fpdqeu" path="res://sounds/player/footsteps/water/run/Footsteps_Water_Run_03.wav" id="3_28svt"]
+[ext_resource type="AudioStream" uid="uid://xfpmg7gnjdie" path="res://sounds/player/footsteps/water/run/Footsteps_Water_Run_04.wav" id="4_y0cl5"]
+[ext_resource type="AudioStream" uid="uid://cyorbedg5p38u" path="res://sounds/player/footsteps/water/run/Footsteps_Water_Run_05.wav" id="5_msc8i"]
+[ext_resource type="AudioStream" uid="uid://c1jbmqyf2fnvf" path="res://sounds/player/footsteps/water/jump/Footsteps_Water_Jump_Light_01.wav" id="6_2yt5a"]
+[ext_resource type="Script" uid="uid://cbpfafuovhkib" path="res://components/sound/footstep_mat_resource.gd" id="6_kb1t8"]
+[ext_resource type="AudioStream" uid="uid://b4ae02p8ujs1i" path="res://sounds/player/footsteps/water/jump/Footsteps_Water_Jump_Light_02.wav" id="7_d7cha"]
+[ext_resource type="AudioStream" uid="uid://cbkf7jnvqe5v7" path="res://sounds/player/footsteps/water/jump/Footsteps_Water_Jump_Light_03.wav" id="8_28svt"]
+[ext_resource type="AudioStream" uid="uid://q2rb30qxajnu" path="res://sounds/player/footsteps/water/jump/Footsteps_Water_Jump_Light_04.wav" id="9_y0cl5"]
+[ext_resource type="AudioStream" uid="uid://wj2g1mc6dxmc" path="res://sounds/player/footsteps/water/jump/Footsteps_Water_Jump_Light_05.wav" id="10_msc8i"]
+[ext_resource type="AudioStream" uid="uid://b25biramue0vy" path="res://sounds/player/footsteps/water/jump/Footsteps_Water_Jump_Light_06.wav" id="11_v8ntc"]
+
+[resource]
+script = ExtResource("6_kb1t8")
+footsteps = Array[AudioStream]([ExtResource("1_2yt5a"), ExtResource("2_d7cha"), ExtResource("3_28svt"), ExtResource("4_y0cl5"), ExtResource("5_msc8i")])
+use_custom_jump = true
+jump_sounds = Array[AudioStream]([ExtResource("6_2yt5a"), ExtResource("7_d7cha"), ExtResource("8_28svt"), ExtResource("9_y0cl5"), ExtResource("10_msc8i"), ExtResource("11_v8ntc")])
+metadata/_custom_type_script = "uid://cbpfafuovhkib"

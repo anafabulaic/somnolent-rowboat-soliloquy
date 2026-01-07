@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://1mjg7r1xova"]
+
+[ext_resource type="Texture2D" uid="uid://bwnkllbhwoer" path="res://materials/syuzhet/sz_locker.png" id="1_35ojr"]
+
+[resource]
+albedo_texture = ExtResource("1_35ojr")

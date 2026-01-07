@@ -1,0 +1,382 @@
+[gd_scene load_steps=15 format=3 uid="uid://drlyvdgddusao"]
+
+[ext_resource type="Theme" uid="uid://c7qjkrab2qnam" path="res://scenes/ui/main_menu/main_menu_theme.tres" id="1_1ch07"]
+[ext_resource type="Script" uid="uid://xfsm1x6uqrqy" path="res://scenes/ui/main_menu/main_menu.gd" id="2_e8t4i"]
+[ext_resource type="Script" uid="uid://s5fns5emnycq" path="res://scenes/ui/main_menu/main_menu_button.gd" id="3_8ouhi"]
+[ext_resource type="Texture2D" uid="uid://dyuiv8xpx8ra2" path="res://materials/menu_bg.png" id="4_ataax"]
+[ext_resource type="PackedScene" uid="uid://c3nx48jj6r8rf" path="res://scenes/ui/main_menu/submenus/trinkets_sub_menu.tscn" id="4_cmwxi"]
+[ext_resource type="Shader" uid="uid://poqpeit5fmkl" path="res://materials/_shaders/ripple_shader.gdshader" id="4_x31oe"]
+[ext_resource type="PackedScene" uid="uid://cgu70eb8xvjhe" path="res://scenes/ui/main_menu/submenus/wake_sub_menu.tscn" id="5_r70wa"]
+[ext_resource type="PackedScene" uid="uid://dng7ursfcdctj" path="res://scenes/ui/main_menu/submenus/help_sub_menu.tscn" id="6_52x6y"]
+[ext_resource type="PackedScene" uid="uid://crc4jtxi1nwer" path="res://scenes/ui/main_menu/submenus/settings_sub_menu.tscn" id="7_8ouhi"]
+[ext_resource type="PackedScene" uid="uid://d1m1upaiwr0lx" path="res://scenes/ui/main_menu/submenus/start_game_sub_menu.tscn" id="8_5mqxt"]
+[ext_resource type="PackedScene" uid="uid://crx47vyion8sm" path="res://scenes/ui/main_menu/submenus/load_game_sub_menu.tscn" id="9_tk7lu"]
+[ext_resource type="PackedScene" uid="uid://s5e434vpghd1" path="res://scenes/ui/main_menu/submenus/quit_game_sub_menu.tscn" id="10_chxti"]
+[ext_resource type="PackedScene" uid="uid://28tvrw6kyj4b" path="res://scenes/ui/main_menu/submenus/quit_to_menu_sub_menu.tscn" id="11_2pxis"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_idvnp"]
+shader = ExtResource("4_x31oe")
+shader_parameter/wave_count = 20.0
+shader_parameter/speed = 3.0
+shader_parameter/height = 0.003
+shader_parameter/radius = 0.22
+shader_parameter/softness = 0.38
+shader_parameter/intensity = 2.0
+shader_parameter/contrast = 2.2
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_1ch07")
+script = ExtResource("2_e8t4i")
+
+[node name="Menus" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="MainMenuContainer" type="Control" parent="Menus"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="TextureRect" parent="Menus/MainMenuContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_ataax")
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="Menus/MainMenuContainer"]
+position = Vector2(0, -16)
+copy_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="Menus/MainMenuContainer"]
+material = SubResource("ShaderMaterial_idvnp")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Menus/MainMenuContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 75
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/MainMenuContainer/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Menus/MainMenuContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 20
+
+[node name="LOGO" type="Label" parent="Menus/MainMenuContainer/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_1ch07")
+theme_type_variation = &"LogoLabel"
+text = "SOMNOLENT
+ ROWBOAT
+  SOLILOQUY"
+
+[node name="MainMenu" type="VBoxContainer" parent="Menus/MainMenuContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="START" type="Button" parent="Menus/MainMenuContainer/MarginContainer/VBoxContainer/MainMenu"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+focus_mode = 0
+theme_type_variation = &"MainMenuButton"
+text = "START"
+alignment = 0
+script = ExtResource("3_8ouhi")
+wanted_submenu = 5
+
+[node name="LOAD" type="Button" parent="Menus/MainMenuContainer/MarginContainer/VBoxContainer/MainMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+focus_mode = 0
+theme_type_variation = &"MainMenuButton"
+text = "CONTINUE"
+alignment = 0
+script = ExtResource("3_8ouhi")
+wanted_submenu = 6
+
+[node name="LoadSeparator" type="HSeparator" parent="Menus/MainMenuContainer/MarginContainer/VBoxContainer/MainMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="OPTIONS" type="Button" parent="Menus/MainMenuContainer/MarginContainer/VBoxContainer/MainMenu"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+focus_mode = 0
+theme_type_variation = &"MainMenuButton"
+text = "OPTIONS"
+alignment = 0
+script = ExtResource("3_8ouhi")
+wanted_submenu = 4
+
+[node name="HSeparator2" type="HSeparator" parent="Menus/MainMenuContainer/MarginContainer/VBoxContainer/MainMenu"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="QUIT" type="Button" parent="Menus/MainMenuContainer/MarginContainer/VBoxContainer/MainMenu"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+focus_mode = 0
+theme_type_variation = &"MainMenuButton"
+text = "QUIT"
+alignment = 0
+script = ExtResource("3_8ouhi")
+wanted_submenu = 8
+
+[node name="MarginContainer3" type="MarginContainer" parent="Menus/MainMenuContainer"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -81.0
+offset_top = -29.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="VERSION" type="Label" parent="Menus/MainMenuContainer/MarginContainer3"]
+layout_mode = 2
+text = "VER 0.01"
+
+[node name="PauseMenuContainer" type="Control" parent="Menus"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseMenu" type="MarginContainer" parent="Menus/PauseMenuContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 75
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/PauseMenuContainer/PauseMenu"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Menus/PauseMenuContainer/PauseMenu/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 20
+
+[node name="LOGO" type="Label" parent="Menus/PauseMenuContainer/PauseMenu/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_1ch07")
+theme_type_variation = &"LogoLabel"
+text = "SOMNOLENT
+ ROWBOAT
+  SOLILOQUY"
+
+[node name="PauseMenu" type="VBoxContainer" parent="Menus/PauseMenuContainer/PauseMenu/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TRINKETS" type="Button" parent="Menus/PauseMenuContainer/PauseMenu/VBoxContainer/PauseMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+focus_mode = 0
+theme_type_variation = &"MainMenuButton"
+text = "TRINKETS"
+alignment = 0
+script = ExtResource("3_8ouhi")
+wanted_submenu = 1
+
+[node name="TERMINATE" type="Button" parent="Menus/PauseMenuContainer/PauseMenu/VBoxContainer/PauseMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+focus_mode = 0
+theme_type_variation = &"MainMenuButton"
+text = "TERMINATE DREAM"
+alignment = 0
+script = ExtResource("3_8ouhi")
+wanted_submenu = 2
+
+[node name="WakeSeparator" type="HSeparator" parent="Menus/PauseMenuContainer/PauseMenu/VBoxContainer/PauseMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="HELP" type="Button" parent="Menus/PauseMenuContainer/PauseMenu/VBoxContainer/PauseMenu"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+focus_mode = 0
+theme_type_variation = &"MainMenuButton"
+text = "HELP"
+alignment = 0
+script = ExtResource("3_8ouhi")
+wanted_submenu = 3
+
+[node name="OPTIONS" type="Button" parent="Menus/PauseMenuContainer/PauseMenu/VBoxContainer/PauseMenu"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+focus_mode = 0
+theme_type_variation = &"MainMenuButton"
+text = "OPTIONS"
+alignment = 0
+script = ExtResource("3_8ouhi")
+wanted_submenu = 4
+
+[node name="HSeparator2" type="HSeparator" parent="Menus/PauseMenuContainer/PauseMenu/VBoxContainer/PauseMenu"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="QUIT" type="Button" parent="Menus/PauseMenuContainer/PauseMenu/VBoxContainer/PauseMenu"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+focus_mode = 0
+theme_type_variation = &"MainMenuButton"
+text = "QUIT"
+alignment = 0
+script = ExtResource("3_8ouhi")
+wanted_submenu = 7
+
+[node name="MarginContainer4" type="MarginContainer" parent="Menus/PauseMenuContainer"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -81.0
+offset_top = -29.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="VERSION" type="Label" parent="Menus/PauseMenuContainer/MarginContainer4"]
+layout_mode = 2
+text = "VER 0.01"
+
+[node name="SubMenus" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TrinketsSubMenu" parent="SubMenus" instance=ExtResource("4_cmwxi")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="WakeSubMenu" parent="SubMenus" instance=ExtResource("5_r70wa")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="HelpSubMenu" parent="SubMenus" instance=ExtResource("6_52x6y")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="SettingsSubMenu" parent="SubMenus" instance=ExtResource("7_8ouhi")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="StartGameSubMenu" parent="SubMenus" instance=ExtResource("8_5mqxt")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="LoadGameSubMenu" parent="SubMenus" instance=ExtResource("9_tk7lu")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="QuitGameSubMenu" parent="SubMenus" instance=ExtResource("10_chxti")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+required_mode = 1
+
+[node name="QuitToMenuSubMenu" parent="SubMenus" instance=ExtResource("11_2pxis")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+required_mode = 2

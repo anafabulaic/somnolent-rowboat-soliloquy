@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://bylva6df53gap"]
+
+[ext_resource type="Script" uid="uid://buckq04u7fn0t" path="res://components/entities/map_scene.gd" id="1_y0dmk"]
+
+[node name="DebugEmptyScene" type="Node3D"]
+script = ExtResource("1_y0dmk")
+map_name = "debug_empty_scene"
+metadata/_custom_type_script = "uid://buckq04u7fn0t"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="."]
+bake_mask = 4294967293
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+supersampling = true
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="Physics" type="Node3D" parent="Entities"]
+
+[node name="Lights" type="Node3D" parent="Entities"]

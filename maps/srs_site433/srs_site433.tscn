@@ -1,0 +1,296 @@
+[gd_scene load_steps=42 format=3 uid="uid://dub1onpbrvudv"]
+
+[ext_resource type="PackedScene" uid="uid://b2bxn0ayjxw5m" path="res://maps/srs_site433/srs_site433.glb" id="1_elpp0"]
+[ext_resource type="Environment" uid="uid://cqp4c6ty342ny" path="res://resources/environments/srs_site433_day.tres" id="2_5aybh"]
+[ext_resource type="ArrayOccluder3D" uid="uid://c4ke0bxkayyhm" path="res://maps/srs_site433/srs_site433.occ" id="2_h7trb"]
+[ext_resource type="Script" uid="uid://buckq04u7fn0t" path="res://components/entities/map_scene.gd" id="2_vnfp8"]
+[ext_resource type="LightmapGIData" uid="uid://c1he6eyhl68lr" path="res://maps/srs_site433/srs_site433.lmbake" id="3_x141k"]
+[ext_resource type="Script" uid="uid://ul0kbjravm0b" path="res://components/entities/map_spawnpoint.gd" id="5_hr2do"]
+[ext_resource type="PackedScene" uid="uid://b5jatwf525aqn" path="res://models/prop_surveillance_camera/prop_surveillance_camera.glb" id="7_3fmim"]
+[ext_resource type="PackedScene" uid="uid://ciw48xbp1lrhy" path="res://scenes/map_entities/doors/map_door1.tscn" id="8_5aaa8"]
+[ext_resource type="PackedScene" uid="uid://bnji3mrlb5is7" path="res://models/prop_bed/prop_bed.glb" id="8_lawgy"]
+[ext_resource type="AudioStream" uid="uid://c7pub5bah3h8q" path="res://sounds/ambience/ambient_hum.wav" id="10_3k5el"]
+[ext_resource type="Material" uid="uid://cutc44cu3vb8n" path="res://models/prop_computer_monitor/prop_computer_monitor.tres" id="11_oq44e"]
+[ext_resource type="Script" uid="uid://gpfdxtmbylmt" path="res://components/entities/interactive/base/interactable_conditional.gd" id="11_r8huv"]
+[ext_resource type="Script" uid="uid://gkki0ci4yiks" path="res://components/entities/interactive/conditionals/interact_condition_delay.gd" id="12_une24"]
+[ext_resource type="Script" uid="uid://cxskkr6k8urre" path="res://components/entities/interactive/effects/map_player_level_change.gd" id="13_a0vqj"]
+[ext_resource type="Script" uid="uid://cesyrsqwylcnw" path="res://components/entities/interactive/effects/effect_do_tooltip.gd" id="13_l7p2p"]
+[ext_resource type="Script" uid="uid://smxebn1sb80y" path="res://components/entities/interactive/effects/effect_multiple.gd" id="13_lrq1b"]
+[ext_resource type="Script" uid="uid://borwndhokbx0y" path="res://components/entities/interactive/effects/effect_save_game.gd" id="13_wu1f1"]
+[ext_resource type="Resource" uid="uid://c512e4wcq5vt3" path="res://scenes/ui/transition_effect/fade_transition_effect.tres" id="14_a0vqj"]
+[ext_resource type="Script" uid="uid://cyjtyjlb257m7" path="res://components/entities/interactive/effects/effect_play_3D_sound.gd" id="14_lrq1b"]
+[ext_resource type="AudioStream" uid="uid://begfhd1k1g73a" path="res://sounds/ui/sfx_retro_win.mp3" id="15_5ve6i"]
+[ext_resource type="Script" uid="uid://diry24ij7ve2h" path="res://components/entities/interactive/effects/effect_play_2D_sound.gd" id="15_6rwvl"]
+[ext_resource type="AudioStream" uid="uid://c6607fpy6ksxp" path="res://sounds/effects/sfx_sleep.wav" id="15_xke4m"]
+[ext_resource type="Script" uid="uid://b142d5fnhwjin" path="res://components/entities/interactive/effects/effect_trigger_method.gd" id="15_y716u"]
+[ext_resource type="Script" uid="uid://c0irewagqysai" path="res://components/entities/interactive/map_interact_auto.gd" id="16_k8dub"]
+[ext_resource type="Script" uid="uid://difyoaw1mhdog" path="res://components/entities/interactive/effects/effect_random.gd" id="17_kplnm"]
+[ext_resource type="Material" uid="uid://0taqp7u5jp73" path="res://models/prop_computer_monitor/prop_computer_monitor_on.tres" id="17_par46"]
+[ext_resource type="Script" uid="uid://cw4axrxes7bwd" path="res://components/entities/interactive/effects/effect_play_music.gd" id="17_r31kd"]
+[ext_resource type="Script" uid="uid://c3m1qsfdsw0lv" path="res://components/game/music/music_resource.gd" id="18_r31kd"]
+[ext_resource type="Script" uid="uid://itx5x5jes5bc" path="res://components/entities/interactive/effects/effect_set_environment.gd" id="18_s0kyv"]
+[ext_resource type="Environment" uid="uid://dqkwmbbni6yna" path="res://resources/environments/srs_site433_envnight.tres" id="19_s0kyv"]
+[ext_resource type="Material" uid="uid://cjmq202mqf3op" path="res://models/prop_computer_monitor/prop_computer_monitor_on3.tres" id="20_6rwvl"]
+[ext_resource type="Texture2D" uid="uid://bvtwaptib1dec" path="res://materials/sky/site433_skybox_day.hdr" id="20_codyu"]
+[ext_resource type="PackedScene" uid="uid://dfvx637jrbef7" path="res://models/prop_computer/prop_computer.glb" id="25_8ml2l"]
+[ext_resource type="PackedScene" uid="uid://cfq1hnulhcmgq" path="res://models/prop_computer_monitor/prop_computer_monitor.glb" id="26_wu1f1"]
+[ext_resource type="Script" uid="uid://bj3wjw3gbbud6" path="res://components/entities/interactive/effects/effect_help.gd" id="34_mc7vu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ml2l"]
+size = Vector3(0.6485596, 0.5967407, 0.58496094)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_rtr2p"]
+data = PackedVector3Array(-14.840463, -0.05700779, -8.853273, -14.841678, 21.471117, -6.827547, -14.840463, -0.05700779, -6.82876, -14.840463, -0.05700779, -8.853273, -14.841678, 21.471117, -8.85449, -14.841678, 21.471117, -6.827547, 15.162216, -0.055233, -8.853272, 15.161001, 21.472893, -6.827546, 15.161001, 21.472893, -8.854489, 15.162216, -0.055233, -8.853272, 15.162216, -0.055233, -6.828759, 15.161001, 21.472893, -6.827546, -14.840463, -0.05700779, -6.82876, 15.161001, 21.472893, -6.827546, 15.162216, -0.055233, -6.828759, -14.840463, -0.05700779, -6.82876, -14.841678, 21.471117, -6.827547, 15.161001, 21.472893, -6.827546, -14.840463, -0.05700779, -8.853273, 15.162216, -0.055233, -6.828759, 15.162216, -0.055233, -8.853272, -14.840463, -0.05700779, -8.853273, -14.840463, -0.05700779, -6.82876, 15.162216, -0.055233, -6.828759, -14.841678, 21.471117, -6.827547, 15.161001, 21.472893, -8.854489, 15.161001, 21.472893, -6.827546, -14.841678, 21.471117, -6.827547, -14.841678, 21.471117, -8.85449, 15.161001, 21.472893, -8.854489, -14.841678, 21.471117, -8.85449, 15.162216, -0.055233, -8.853272, 15.161001, 21.472893, -8.854489, -14.841678, 21.471117, -8.85449, -14.840463, -0.05700779, -8.853273, 15.162216, -0.055233, -8.853272, -14.840479, -0.05700779, 41.669327, -14.841694, 17.720394, 43.695053, -14.840479, -0.05700779, 43.69384, -14.840479, -0.05700779, 41.669327, -14.841694, 17.720394, 41.668114, -14.841694, 17.720394, 43.695053, 15.1622, -0.055233, 41.66933, 15.160985, 17.72217, 43.695057, 15.160985, 17.72217, 41.668114, 15.1622, -0.055233, 41.66933, 15.1622, -0.055233, 43.693844, 15.160985, 17.72217, 43.695057, -14.840479, -0.05700779, 43.69384, 15.160985, 17.72217, 43.695057, 15.1622, -0.055233, 43.693844, -14.840479, -0.05700779, 43.69384, -14.841694, 17.720394, 43.695053, 15.160985, 17.72217, 43.695057, -14.840479, -0.05700779, 41.669327, 15.1622, -0.055233, 43.693844, 15.1622, -0.055233, 41.66933, -14.840479, -0.05700779, 41.669327, -14.840479, -0.05700779, 43.69384, 15.1622, -0.055233, 43.693844, -14.841694, 17.720394, 43.695053, 15.160985, 17.72217, 41.668114, 15.160985, 17.72217, 43.695057, -14.841694, 17.720394, 43.695053, -14.841694, 17.720394, 41.668114, 15.160985, 17.72217, 41.668114, -14.841694, 17.720394, 41.668114, 15.1622, -0.055233, 41.66933, 15.160985, 17.72217, 41.668114, -14.841694, 17.720394, 41.668114, -14.840479, -0.05700779, 41.669327, 15.1622, -0.055233, 41.66933, -14.698456, 15.161885, -7.317856, 15.018995, -0.055233, -7.316639, 15.017792, 15.163661, -7.317856, -14.698456, 15.161885, -7.317856, -14.697252, -0.05700779, -7.3166428, 15.018995, -0.055233, -7.316639, -14.698472, 15.161885, 41.90666, 15.017792, 15.163661, -7.317856, 15.0177765, 15.163661, 41.906662, -14.698472, 15.161885, 41.90666, -14.698456, 15.161885, -7.317856, 15.017792, 15.163661, -7.317856, -14.697252, -0.05700779, -7.3166428, 15.01898, -0.055233, 41.90545, 15.018995, -0.055233, -7.316639, -14.697252, -0.05700779, -7.3166428, -14.6972685, -0.05700779, 41.905445, 15.01898, -0.055233, 41.90545, -14.6972685, -0.05700779, 41.905445, 15.0177765, 15.163661, 41.906662, 15.01898, -0.055233, 41.90545, -14.6972685, -0.05700779, 41.905445, -14.698472, 15.161885, 41.90666, 15.0177765, 15.163661, 41.906662, 15.018995, -0.055233, -7.316639, 15.0177765, 15.163661, 41.906662, 15.017792, 15.163661, -7.317856, 15.018995, -0.055233, -7.316639, 15.01898, -0.055233, 41.90545, 15.0177765, 15.163661, 41.906662, -14.697252, -0.05700779, -7.3166428, -14.698472, 15.161885, 41.90666, -14.6972685, -0.05700779, 41.905445, -14.697252, -0.05700779, -7.3166428, -14.698456, 15.161885, -7.317856, -14.698472, 15.161885, 41.90666)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_codyu"]
+panorama = ExtResource("20_codyu")
+
+[sub_resource type="Sky" id="Sky_ihvnb"]
+sky_material = SubResource("PanoramaSkyMaterial_codyu")
+
+[sub_resource type="Environment" id="Environment_8ml2l"]
+background_mode = 2
+background_color = Color(0.70818555, 0.25163016, 0.25163016, 1)
+sky = SubResource("Sky_ihvnb")
+sky_custom_fov = 107.8
+sky_rotation = Vector3(0, 1.5707964, 0)
+ambient_light_source = 1
+reflected_light_source = 1
+tonemap_mode = 2
+glow_enabled = true
+glow_normalized = true
+glow_mix = 0.2
+glow_bloom = 1.0
+fog_light_color = Color(0, 0.028220654, 1, 1)
+adjustment_enabled = true
+adjustment_saturation = 0.5
+
+[sub_resource type="Resource" id="Resource_kplnm"]
+script = ExtResource("18_r31kd")
+song = ExtResource("10_3k5el")
+metadata/_custom_type_script = "uid://c3m1qsfdsw0lv"
+
+[node name="srs_site433" type="Node3D" node_paths=PackedStringArray("spawnpoints")]
+script = ExtResource("2_vnfp8")
+map_name = "srs_site433"
+spawnpoints = [NodePath("Entities/MapSpawnPoint")]
+metadata/_custom_type_script = "uid://buckq04u7fn0t"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("2_5aybh")
+
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="."]
+occluder = ExtResource("2_h7trb")
+bake_mask = 4294967293
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+supersampling = true
+environment_mode = 0
+light_data = ExtResource("3_x141k")
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="srs_site433" parent="World" instance=ExtResource("1_elpp0")]
+
+[node name="bed" parent="World/srs_site433" index="4"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="prop_surveillance_camera2" parent="World" instance=ExtResource("7_3fmim")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6899247, 4.475905, -4.3468337)
+
+[node name="prop_surveillance_camera" parent="World/prop_surveillance_camera2" index="0"]
+cast_shadow = 1
+gi_mode = 1
+
+[node name="prop_bed2" parent="World" instance=ExtResource("8_lawgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7673439, 0.0076876665, 3.7581224)
+
+[node name="prop_bed" parent="World/prop_bed2" index="0"]
+transform = Transform3D(-0.9993496, 0, 0.036058865, 0, 1, 0, -0.036058865, 0, -0.9993496, -1.9201412, 0, 0.3127084)
+cast_shadow = 1
+gi_mode = 1
+
+[node name="MapDoor1" parent="World" instance=ExtResource("8_5aaa8")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.6539152, 0, -6.1022143)
+locked = true
+
+[node name="prop_computer2" parent="World" instance=ExtResource("25_8ml2l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.80853, 0.94106174, -4.612397)
+
+[node name="prop_computer" parent="World/prop_computer2" index="0"]
+cast_shadow = 1
+gi_mode = 1
+
+[node name="prop_computer_monitor2" parent="World" instance=ExtResource("26_wu1f1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8059214, 1.1211033, -4.621568)
+
+[node name="prop_computer_monitor" parent="World/prop_computer_monitor2" index="0"]
+cast_shadow = 1
+gi_mode = 1
+surface_material_override/1 = ExtResource("11_oq44e")
+
+[node name="save_interactable" type="StaticBody3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8256952, 0.9410616, -4.6030297)
+collision_layer = 9
+script = ExtResource("11_r8huv")
+condition_mode = 2
+use_ui_failure = false
+interact_delay = 2.5
+can_interact = true
+
+[node name="InteractableEffectMultiple" type="Node" parent="World/save_interactable"]
+script = ExtResource("13_lrq1b")
+use_children = true
+metadata/_custom_type_script = "uid://smxebn1sb80y"
+
+[node name="InteractableEffectDoTooltip" type="Node" parent="World/save_interactable/InteractableEffectMultiple"]
+script = ExtResource("13_l7p2p")
+text = "Saved!"
+duration = 2.0
+metadata/_custom_type_script = "uid://cesyrsqwylcnw"
+
+[node name="InteractableEffectPlay2DSound" type="Node" parent="World/save_interactable/InteractableEffectMultiple"]
+script = ExtResource("15_6rwvl")
+sound = ExtResource("15_5ve6i")
+use_random_pitch = true
+random_pitch_min = 0.8
+metadata/_custom_type_script = "uid://diry24ij7ve2h"
+
+[node name="InteractableEffectSaveGame" type="Node" parent="World/save_interactable/InteractableEffectMultiple"]
+script = ExtResource("13_wu1f1")
+metadata/_custom_type_script = "uid://borwndhokbx0y"
+
+[node name="InteractableEffectTriggerMethod" type="Node" parent="World/save_interactable/InteractableEffectMultiple" node_paths=PackedStringArray("target")]
+script = ExtResource("15_y716u")
+target = NodePath("../../../prop_computer_monitor2/prop_computer_monitor")
+method_name = "set_surface_override_material"
+method_args = [1, ExtResource("17_par46")]
+metadata/_custom_type_script = "uid://b142d5fnhwjin"
+
+[node name="InteractableEffectTriggerMethod2" type="Node" parent="World/save_interactable/InteractableEffectMultiple" node_paths=PackedStringArray("target")]
+script = ExtResource("15_y716u")
+target = NodePath("../../../prop_computer_monitor2/prop_computer_monitor")
+method_name = "set_surface_override_material"
+method_args = [1, ExtResource("20_6rwvl")]
+pre_delay = 0.2
+metadata/_custom_type_script = "uid://b142d5fnhwjin"
+
+[node name="InteractableEffectTriggerMethod3" type="Node" parent="World/save_interactable/InteractableEffectMultiple" node_paths=PackedStringArray("target")]
+script = ExtResource("15_y716u")
+target = NodePath("../../../prop_computer_monitor2/prop_computer_monitor")
+method_name = "set_surface_override_material"
+method_args = [1, ExtResource("11_oq44e")]
+pre_delay = 0.4
+metadata/_custom_type_script = "uid://b142d5fnhwjin"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/save_interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.017028809, 0.26327515, 0.029785156)
+shape = SubResource("BoxShape3D_8ml2l")
+
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="Physics" type="Node3D" parent="Entities"]
+
+[node name="Lights" type="Node3D" parent="Entities"]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Entities/Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 6.7060714, -2.9313168e-07)
+light_color = Color(0.8206272, 0.9118453, 0.80373496, 1)
+light_energy = 20.0
+light_bake_mode = 1
+spot_range = 14.412
+spot_attenuation = 1.89
+spot_angle = 74.53
+
+[node name="Interactables" type="Node3D" parent="Entities"]
+
+[node name="bed" type="StaticBody3D" parent="Entities/Interactables"]
+transform = Transform3D(-0.064505, 0, 0.0023274908, 0, 0.06454698, 0, -0.002327491, 0, -0.064505, -2.6901307, 0.01053834, 5.331167)
+collision_layer = 9
+collision_mask = 0
+script = ExtResource("11_r8huv")
+condition_mode = 2
+can_interact = true
+metadata/_custom_type_script = "uid://gpfdxtmbylmt"
+
+[node name="InteractConditionDelay" type="Node" parent="Entities/Interactables/bed"]
+script = ExtResource("12_une24")
+delay = 1.0
+metadata/_custom_type_script = "uid://gkki0ci4yiks"
+
+[node name="InteractableEffectMultiple" type="Node" parent="Entities/Interactables/bed/InteractConditionDelay" node_paths=PackedStringArray("effects")]
+script = ExtResource("13_lrq1b")
+effects = [NodePath("MapPlayerLevelChange"), NodePath("InteractableEffectPlay3DSound")]
+metadata/_custom_type_script = "uid://smxebn1sb80y"
+
+[node name="InteractableEffectPlay3DSound" type="Node" parent="Entities/Interactables/bed/InteractConditionDelay/InteractableEffectMultiple"]
+script = ExtResource("14_lrq1b")
+sound = ExtResource("15_xke4m")
+volume = 0.0
+bus = "Master"
+metadata/_custom_type_script = "uid://cyjtyjlb257m7"
+
+[node name="MapPlayerLevelChange" type="Node" parent="Entities/Interactables/bed/InteractConditionDelay/InteractableEffectMultiple"]
+script = ExtResource("13_a0vqj")
+level = "uid://dtdnvis8ni0o"
+spawnpoint = "default"
+transition_type = ExtResource("14_a0vqj")
+transition_duration = 4.0
+reference = true
+metadata/_custom_type_script = "uid://cxskkr6k8urre"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Interactables/bed"]
+shape = SubResource("ConcavePolygonShape3D_rtr2p")
+
+[node name="MapInteractAuto" type="Node3D" parent="Entities/Interactables"]
+script = ExtResource("16_k8dub")
+metadata/_custom_type_script = "uid://c0irewagqysai"
+
+[node name="InteractableEffectMultiple" type="Node" parent="Entities/Interactables/MapInteractAuto"]
+script = ExtResource("13_lrq1b")
+use_children = true
+metadata/_custom_type_script = "uid://smxebn1sb80y"
+
+[node name="InteractableEffectRandom" type="Node" parent="Entities/Interactables/MapInteractAuto/InteractableEffectMultiple"]
+script = ExtResource("17_kplnm")
+metadata/_custom_type_script = "uid://difyoaw1mhdog"
+
+[node name="InteractableEffectSetEnvironment" type="Node" parent="Entities/Interactables/MapInteractAuto/InteractableEffectMultiple/InteractableEffectRandom" node_paths=PackedStringArray("environment_node")]
+script = ExtResource("18_s0kyv")
+environment_node = NodePath("../../../../../../WorldEnvironment")
+environment = ExtResource("2_5aybh")
+metadata/_custom_type_script = "uid://itx5x5jes5bc"
+
+[node name="InteractableEffectSetEnvironment2" type="Node" parent="Entities/Interactables/MapInteractAuto/InteractableEffectMultiple/InteractableEffectRandom" node_paths=PackedStringArray("environment_node")]
+script = ExtResource("18_s0kyv")
+environment_node = NodePath("../../../../../../WorldEnvironment")
+environment = ExtResource("19_s0kyv")
+metadata/_custom_type_script = "uid://itx5x5jes5bc"
+
+[node name="InteractableEffectSetEnvironment3" type="Node" parent="Entities/Interactables/MapInteractAuto/InteractableEffectMultiple/InteractableEffectRandom" node_paths=PackedStringArray("environment_node")]
+script = ExtResource("18_s0kyv")
+environment_node = NodePath("../../../../../../WorldEnvironment")
+environment = SubResource("Environment_8ml2l")
+metadata/_custom_type_script = "uid://itx5x5jes5bc"
+
+[node name="InteractableEffectPlayMusic" type="Node" parent="Entities/Interactables/MapInteractAuto/InteractableEffectMultiple"]
+script = ExtResource("17_r31kd")
+music_resource = SubResource("Resource_kplnm")
+metadata/_custom_type_script = "uid://cw4axrxes7bwd"
+
+[node name="InteractableEffectHelp" type="Node" parent="Entities/Interactables/MapInteractAuto/InteractableEffectMultiple"]
+script = ExtResource("34_mc7vu")
+metadata/_custom_type_script = "uid://bj3wjw3gbbud6"
+
+[node name="MapSpawnPoint" type="Marker3D" parent="Entities"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.21305704, 0, -1.4713782)
+script = ExtResource("5_hr2do")
+spawn_point_name = "default"
+metadata/_custom_type_script = "uid://ul0kbjravm0b"
+
+[editable path="World/srs_site433"]
+[editable path="World/prop_surveillance_camera2"]
+[editable path="World/prop_bed2"]
+[editable path="World/prop_computer2"]
+[editable path="World/prop_computer_monitor2"]

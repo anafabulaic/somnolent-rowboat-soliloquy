@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TransitionEffectResource" load_steps=3 format=3 uid="uid://dmcki5trutijk"]
+
+[ext_resource type="Script" uid="uid://bnugub072vaha" path="res://components/ui/transition/transition_effect_resource.gd" id="1_nkhmt"]
+[ext_resource type="Material" uid="uid://s7adwfpfybo1" path="res://scenes/ui/transition_effect/zoom_transition_mat.tres" id="2_nkhmt"]
+
+[resource]
+script = ExtResource("1_nkhmt")
+transition_material = ExtResource("2_nkhmt")
+metadata/_custom_type_script = "uid://bnugub072vaha"

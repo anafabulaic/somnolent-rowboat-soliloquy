@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmiyjl7b14drv"]
+
+[ext_resource type="Script" uid="uid://dot6qinxvheiw" path="res://trinkets/trinket_sumpter_idol/trinket_sumpter_idol.gd" id="1_8jbhj"]
+[ext_resource type="AudioStream" uid="uid://dobp14u407vrc" path="res://sounds/trinkets/teto_neigh.wav" id="2_5lasa"]
+
+[node name="TrinketSumpterIdol" type="Node3D"]
+script = ExtResource("1_8jbhj")
+horse_neigh = ExtResource("2_5lasa")
+metadata/_custom_type_script = "uid://dot6qinxvheiw"

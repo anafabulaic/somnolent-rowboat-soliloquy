@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c7vi3nnqm25sp"]
+
+[ext_resource type="Shader" uid="uid://bqtx72f8fomxv" path="res://materials/ui/transitions/fade_transition_material.gdshader" id="1_0jxqe"]
+
+[resource]
+shader = ExtResource("1_0jxqe")
+shader_parameter/progress = 0.0

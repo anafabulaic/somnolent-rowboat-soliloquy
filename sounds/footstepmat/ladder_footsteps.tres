@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="FootstepMatResource" load_steps=6 format=3 uid="uid://dr3la6gklifuf"]
+
+[ext_resource type="AudioStream" uid="uid://cg6m0dpbj2q0l" path="res://sounds/player/footsteps/ladder/Footsteps_MetalV1_Jump_Land_01.wav" id="1_b5xch"]
+[ext_resource type="Script" uid="uid://cbpfafuovhkib" path="res://components/sound/footstep_mat_resource.gd" id="1_v4wmn"]
+[ext_resource type="AudioStream" uid="uid://caf1h4sah4ft2" path="res://sounds/player/footsteps/ladder/Footsteps_MetalV1_Jump_Land_02.wav" id="2_637t3"]
+[ext_resource type="AudioStream" uid="uid://kw7jmwrbpmkp" path="res://sounds/player/footsteps/ladder/Footsteps_MetalV1_Jump_Land_03.wav" id="3_32koi"]
+[ext_resource type="AudioStream" uid="uid://cvsyvtx5ihbwg" path="res://sounds/player/footsteps/ladder/Footsteps_MetalV1_Jump_Land_04.wav" id="4_qwahw"]
+
+[resource]
+script = ExtResource("1_v4wmn")
+footsteps = Array[AudioStream]([ExtResource("1_b5xch"), ExtResource("2_637t3"), ExtResource("3_32koi"), ExtResource("4_qwahw")])
+metadata/_custom_type_script = "uid://cbpfafuovhkib"

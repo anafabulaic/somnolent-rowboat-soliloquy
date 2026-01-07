@@ -1,0 +1,33 @@
+[gd_scene load_steps=8 format=3 uid="uid://ciw48xbp1lrhy"]
+
+[ext_resource type="Script" uid="uid://ct4ie2jx0tnh6" path="res://components/entities/interactive/map_door.gd" id="1_c1i6y"]
+[ext_resource type="PackedScene" uid="uid://cetm1hfjnbsm7" path="res://models/prop_door1/prop_door1.glb" id="2_kj00o"]
+[ext_resource type="AudioStream" uid="uid://covsgfk7e2gj0" path="res://sounds/entities/doors/qubodup-DoorOpen01.ogg" id="3_ifsd3"]
+[ext_resource type="AudioStream" uid="uid://df7pyg2c2ke16" path="res://sounds/entities/doors/qubodup-DoorClose06.ogg" id="4_c32js"]
+[ext_resource type="AudioStream" uid="uid://d34cukivcrs4u" path="res://sounds/entities/doors/door-locked.wav" id="5_c32js"]
+[ext_resource type="Script" uid="uid://c03vb5m5c5xf4" path="res://components/sound/audio_poly_player_3d.gd" id="6_jfjfr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kj00o"]
+size = Vector3(0.125, 2.5, 1.25)
+
+[node name="MapDoor1" type="AnimatableBody3D" node_paths=PackedStringArray("door_model", "audio_player")]
+collision_layer = 9
+collision_mask = 2147483651
+script = ExtResource("1_c1i6y")
+open_sound = ExtResource("3_ifsd3")
+closed_sound = ExtResource("4_c32js")
+locked_sound = ExtResource("5_c32js")
+door_model = NodePath("prop_door")
+audio_player = NodePath("door_player")
+can_interact = true
+
+[node name="prop_door" parent="." instance=ExtResource("2_kj00o")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0.625)
+shape = SubResource("BoxShape3D_kj00o")
+
+[node name="door_player" type="AudioStreamPlayer3D" parent="."]
+bus = &"Foley"
+script = ExtResource("6_jfjfr")
+metadata/_custom_type_script = "uid://c03vb5m5c5xf4"

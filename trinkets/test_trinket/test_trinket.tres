@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="TrinketReference" load_steps=4 format=3 uid="uid://c3k2ru0357134"]
+
+[ext_resource type="Texture2D" uid="uid://cxoe5ajdq4l0k" path="res://icon.svg" id="1_ab0ms"]
+[ext_resource type="Script" uid="uid://dmtvbyjjyocmw" path="res://components/trinkets/base/trinket_reference.gd" id="1_yfa34"]
+[ext_resource type="PackedScene" uid="uid://328rlklud5r6" path="res://trinkets/test_trinket/test_trinket.tscn" id="3_47jjt"]
+
+[resource]
+script = ExtResource("1_yfa34")
+id = "test_trinket"
+name = "Test Trinket"
+icon = ExtResource("1_ab0ms")
+desc = "This is a test trinket!"
+trinket_scene = ExtResource("3_47jjt")
+metadata/_custom_type_script = "uid://dmtvbyjjyocmw"

@@ -1,0 +1,384 @@
+[gd_scene load_steps=48 format=3 uid="uid://bec55rns5p0a8"]
+
+[ext_resource type="Script" uid="uid://buxntuo6rabco" path="res://components/player/player.gd" id="1_kfe3d"]
+[ext_resource type="Resource" uid="uid://c8nsxk1ypdoga" path="res://components/settings/default_settings.tres" id="2_mpawu"]
+[ext_resource type="Shape3D" uid="uid://b322mqvi4wgbr" path="res://components/player/player_collider_shape.tres" id="2_ph1f6"]
+[ext_resource type="Resource" uid="uid://15d2ac7mo6w1" path="res://components/player/stats/default_statsheet.tres" id="3_pxnim"]
+[ext_resource type="Script" uid="uid://sy3nxdj7cfn2" path="res://components/player/player_actions/base/player_action_manager.gd" id="4_02tnr"]
+[ext_resource type="Script" uid="uid://cdjc2ouy5nlmb" path="res://components/player/player_behaviors/base/player_behavior_manager.gd" id="4_pvtfm"]
+[ext_resource type="Script" uid="uid://dlgji80gs6cdf" path="res://components/player/player_states/base/player_state_machine.gd" id="5_02tnr"]
+[ext_resource type="Shape3D" uid="uid://cu2marpcodw6h" path="res://components/player/player_pickupbox_shape.tres" id="5_mae0f"]
+[ext_resource type="Script" uid="uid://c3c4cla40ktr1" path="res://components/player/player_physshadow.gd" id="5_o6vg2"]
+[ext_resource type="Script" uid="uid://pyh8jsc1y2ud" path="res://components/player/player_actions/jump_action.gd" id="6_v44tt"]
+[ext_resource type="Script" uid="uid://bb18s4g8po5h5" path="res://components/player/player_states/player_grounded_state.gd" id="7_02tnr"]
+[ext_resource type="Script" uid="uid://dyou7fghhuuch" path="res://components/player/player_states/player_falling_state.gd" id="7_bv0o5"]
+[ext_resource type="Script" uid="uid://bgfxws10br8d8" path="res://components/player/player_behaviors/movement/ground_movement_behavior.gd" id="7_fwwnh"]
+[ext_resource type="Script" uid="uid://x5olfy6wvvfd" path="res://components/player/player_actions/crouch_action.gd" id="7_pdxi8"]
+[ext_resource type="Script" uid="uid://cdxp2t20r0xa0" path="res://components/player/player_behaviors/player_camera_behavior.gd" id="7_wmnke"]
+[ext_resource type="Script" uid="uid://pkom4ilkca3k" path="res://components/player/player_actions/slowmove_action.gd" id="8_8rpwc"]
+[ext_resource type="Script" uid="uid://cmf7fl1508v1e" path="res://components/player/player_behaviors/movement/air_movement_behavior.gd" id="8_vxcs8"]
+[ext_resource type="Script" uid="uid://ddll7q8be4c85" path="res://components/player/player_behaviors/premove_behavior.gd" id="9_l1d2p"]
+[ext_resource type="Script" uid="uid://5hp4seg0wv10" path="res://components/player/player_behaviors/finish_move_behavior.gd" id="10_hc4cx"]
+[ext_resource type="Script" uid="uid://dwy18uuq32xwx" path="res://components/player/player_behaviors/flashlight_behavior.gd" id="11_rmd1h"]
+[ext_resource type="Script" uid="uid://bbe6udajenxwb" path="res://components/player/player_behaviors/postmove_behavior.gd" id="13_pdxi8"]
+[ext_resource type="Script" uid="uid://28sqrp1yq2me" path="res://components/player/player_behaviors/stairstep_behavior.gd" id="14_0h0ss"]
+[ext_resource type="Script" uid="uid://dc38c3jqjj84d" path="res://components/player/player_behaviors/movement/climbing_movement_behavior.gd" id="15_seecd"]
+[ext_resource type="Script" uid="uid://b5u4yw1ksc4vc" path="res://components/player/player_behaviors/debug_behavior.gd" id="16_5fydm"]
+[ext_resource type="Script" uid="uid://ul4ndyu5212m" path="res://components/player/player_behaviors/pickup_behavior.gd" id="18_dumqu"]
+[ext_resource type="AudioStream" uid="uid://bp3ydmod5lv5j" path="res://sounds/player/footsteps/metal/Footsteps_MetalV1_Walk_01.wav" id="18_hweye"]
+[ext_resource type="AudioStream" uid="uid://cwklywkq4kx8c" path="res://sounds/player/footsteps/metal/Footsteps_MetalV1_Walk_02.wav" id="19_vwfsy"]
+[ext_resource type="Material" uid="uid://cme0ijaixu3ud" path="res://materials/_shaders/CRT_material.tres" id="19_x3fw6"]
+[ext_resource type="AudioStream" uid="uid://ccqwdnnjj4rig" path="res://sounds/player/footsteps/metal/Footsteps_MetalV1_Walk_03.wav" id="20_2uxw3"]
+[ext_resource type="Material" uid="uid://i7i5a3gmol4v" path="res://materials/_shaders/VHS_material.tres" id="20_qhwjt"]
+[ext_resource type="Material" uid="uid://bfm1g86xps5r7" path="res://materials/_shaders/Dither_material.tres" id="20_vckwg"]
+[ext_resource type="Material" uid="uid://c11p0ayttwbwv" path="res://materials/_shaders/Sharpen_material.tres" id="21_4eo0i"]
+[ext_resource type="Script" uid="uid://c1y3jkf13tf31" path="res://components/player/player_behaviors/footstep_behavior.gd" id="21_o6vg2"]
+[ext_resource type="AudioStream" uid="uid://b5elnufssfb1s" path="res://sounds/player/footsteps/metal/Footsteps_MetalV1_Walk_04.wav" id="21_oqb3o"]
+[ext_resource type="AudioStream" uid="uid://vtlw67hx3m5d" path="res://sounds/player/footsteps/metal/Footsteps_MetalV1_Walk_05.wav" id="22_71ae4"]
+[ext_resource type="Script" uid="uid://rp1y7gy3c6" path="res://components/player/player_behaviors/physshadow_behavior.gd" id="23_gvdbl"]
+[ext_resource type="Script" uid="uid://dhmknehiwd7jq" path="res://components/player/player_behaviors/physshadow_postmove_behavior.gd" id="26_88xvn"]
+[ext_resource type="AudioStream" uid="uid://b2cbmow1r03wn" path="res://sounds/player/footsteps/metal/Footsteps_MetalV1_Walk_11.wav" id="28_ugtxn"]
+[ext_resource type="AudioStream" uid="uid://dxexk1m7onxdk" path="res://sounds/player/footsteps/metal/Footsteps_MetalV1_Walk_14.wav" id="31_4hn35"]
+[ext_resource type="AudioStream" uid="uid://32tbpu76v3aw" path="res://sounds/player/footsteps/metal/Footsteps_MetalV1_Walk_15.wav" id="32_0jy80"]
+[ext_resource type="Script" uid="uid://cxtx1uywaih8i" path="res://components/player/player_states/player_climbing_state.gd" id="32_tyeyr"]
+[ext_resource type="AudioStream" uid="uid://cakmqxumk4r3e" path="res://sounds/interaction/sfx_pickup.wav" id="34_iepf8"]
+[ext_resource type="AudioStream" uid="uid://y2wans328ovm" path="res://sounds/interaction/sfx_error.wav" id="35_c62y7"]
+[ext_resource type="AudioStream" uid="uid://bkfb6jci3ghu" path="res://sounds/interaction/sfx_flashlight.wav" id="38_es3tu"]
+[ext_resource type="PackedScene" uid="uid://p6epog8c5dgx" path="res://components/ui/crosshair/crosshair.tscn" id="41_tye5j"]
+[ext_resource type="Material" uid="uid://c3k87b45nsgnx" path="res://materials/_shaders/blur2_material.tres" id="46_es3tu"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gvdbl"]
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_state_machine", "_behavior_manager", "_action_manager", "_physshadow", "_collider", "_camera_head", "_camera_anchor", "_camera_marker", "_camera")]
+collision_layer = 2147483648
+collision_mask = 3
+floor_constant_speed = true
+floor_snap_length = 0.2
+platform_floor_layers = 4294967293
+platform_wall_layers = 2
+script = ExtResource("1_kfe3d")
+settings = ExtResource("2_mpawu")
+stats = ExtResource("3_pxnim")
+_state_machine = NodePath("PlayerStateMachine")
+_behavior_manager = NodePath("PlayerBehaviorManager")
+_action_manager = NodePath("PlayerActionManager")
+_physshadow = NodePath("PlayerPhysShadow")
+_collider = NodePath("Collision")
+_collider_shape = ExtResource("2_ph1f6")
+_camera_head = NodePath("CameraHead")
+_camera_anchor = NodePath("CameraAnchor")
+_camera_marker = NodePath("CameraHead/CameraSmooth/CameraMarker")
+_camera = NodePath("CameraAnchor/Camera3D")
+metadata/_custom_type_script = "uid://buxntuo6rabco"
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+shape = ExtResource("2_ph1f6")
+
+[node name="CameraAnchor" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CameraAnchor"]
+fov = 37.849285
+
+[node name="CameraHead" type="Node3D" parent="."]
+
+[node name="CameraSmooth" type="Node3D" parent="CameraHead"]
+
+[node name="CameraMarker" type="Node3D" parent="CameraHead/CameraSmooth"]
+
+[node name="PickupRayCast" type="RayCast3D" parent="CameraHead/CameraSmooth/CameraMarker"]
+physics_interpolation_mode = 2
+target_position = Vector3(0, 0, -3)
+collision_mask = 3
+
+[node name="Hand" type="Marker3D" parent="CameraHead/CameraSmooth/CameraMarker"]
+physics_interpolation_mode = 2
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="PlayerFlashlight" type="SpotLight3D" parent="CameraHead/CameraSmooth/CameraMarker"]
+visible = false
+light_specular = 0.0
+light_bake_mode = 0
+spot_range = 10.0
+spot_attenuation = 0.0
+spot_angle_attenuation = 0.39229524
+
+[node name="PickupShapeCast" type="ShapeCast3D" parent="CameraHead"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.762, -1.5122455)
+enabled = false
+shape = ExtResource("5_mae0f")
+target_position = Vector3(0, 0, 0)
+collision_mask = 2
+
+[node name="RayCastAhead" type="RayCast3D" parent="."]
+enabled = false
+target_position = Vector3(0, -0.55, 0)
+
+[node name="RayCastBelow" type="RayCast3D" parent="."]
+enabled = false
+
+[node name="PlayerPhysShadow" type="RigidBody3D" parent="." node_paths=PackedStringArray("player", "collider")]
+collision_layer = 2147483650
+collision_mask = 3
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+mass = 50.0
+physics_material_override = SubResource("PhysicsMaterial_gvdbl")
+can_sleep = false
+lock_rotation = true
+freeze_mode = 1
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 4
+script = ExtResource("5_o6vg2")
+player = NodePath("..")
+stats = ExtResource("3_pxnim")
+collider_shape = ExtResource("2_ph1f6")
+collider = NodePath("PhysCollision")
+metadata/_custom_type_script = "uid://c3c4cla40ktr1"
+
+[node name="PhysCollision" type="CollisionShape3D" parent="PlayerPhysShadow"]
+shape = ExtResource("2_ph1f6")
+
+[node name="PlayerActionManager" type="Node" parent="."]
+script = ExtResource("4_02tnr")
+metadata/_custom_type_script = "uid://sy3nxdj7cfn2"
+
+[node name="PlayerCrouchAction" type="Node" parent="PlayerActionManager" node_paths=PackedStringArray("collider")]
+script = ExtResource("7_pdxi8")
+collider = NodePath("../../Collision")
+collision_shape = ExtResource("2_ph1f6")
+metadata/_custom_type_script = "uid://x5olfy6wvvfd"
+
+[node name="PlayerJumpAction" type="Node" parent="PlayerActionManager"]
+script = ExtResource("6_v44tt")
+metadata/_custom_type_script = "uid://pyh8jsc1y2ud"
+
+[node name="PlayerSlowMoveAction" type="Node" parent="PlayerActionManager"]
+script = ExtResource("8_8rpwc")
+metadata/_custom_type_script = "uid://pkom4ilkca3k"
+
+[node name="PlayerBehaviorManager" type="Node" parent="."]
+script = ExtResource("4_pvtfm")
+metadata/_custom_type_script = "uid://cdjc2ouy5nlmb"
+
+[node name="Premove" type="Node" parent="PlayerBehaviorManager"]
+
+[node name="PlayerFlashlightBehavior" type="Node" parent="PlayerBehaviorManager/Premove" node_paths=PackedStringArray("flashlight", "flashlight_sound")]
+script = ExtResource("11_rmd1h")
+flashlight = NodePath("../../../CameraHead/CameraSmooth/CameraMarker/PlayerFlashlight")
+flashlight_sound = NodePath("../../../Audio/Flashlight")
+metadata/_custom_type_script = "uid://dwy18uuq32xwx"
+
+[node name="PlayerCameraBehavior" type="Node" parent="PlayerBehaviorManager/Premove" node_paths=PackedStringArray("camerahead", "cameramarker", "camera_anchor", "camera_smooth")]
+script = ExtResource("7_wmnke")
+camerahead = NodePath("../../../CameraHead")
+cameramarker = NodePath("../../../CameraHead/CameraSmooth/CameraMarker")
+camera_anchor = NodePath("../../../CameraAnchor")
+camera_smooth = NodePath("../../../CameraHead/CameraSmooth")
+metadata/_custom_type_script = "uid://cdxp2t20r0xa0"
+
+[node name="PremoveBehavior" type="Node" parent="PlayerBehaviorManager/Premove"]
+script = ExtResource("9_l1d2p")
+metadata/_custom_type_script = "uid://ddll7q8be4c85"
+
+[node name="Movement" type="Node" parent="PlayerBehaviorManager"]
+
+[node name="PlayerGroundMovementBehavior" type="Node" parent="PlayerBehaviorManager/Movement" node_paths=PackedStringArray("state_blacklist")]
+script = ExtResource("7_fwwnh")
+state_blacklist = [NodePath("../../../PlayerStateMachine/PlayerClimbingState")]
+metadata/_custom_type_script = "uid://bgfxws10br8d8"
+
+[node name="PlayerAirMovementBehavior" type="Node" parent="PlayerBehaviorManager/Movement" node_paths=PackedStringArray("state_blacklist")]
+script = ExtResource("8_vxcs8")
+state_blacklist = [NodePath("../../../PlayerStateMachine/PlayerClimbingState")]
+metadata/_custom_type_script = "uid://cmf7fl1508v1e"
+
+[node name="PlayerClimbingMovementBehavior" type="Node" parent="PlayerBehaviorManager/Movement"]
+script = ExtResource("15_seecd")
+metadata/_custom_type_script = "uid://dc38c3jqjj84d"
+
+[node name="PlayerPhysShadowBehavior" type="Node" parent="PlayerBehaviorManager" node_paths=PackedStringArray("physshadow")]
+script = ExtResource("23_gvdbl")
+physshadow = NodePath("../../PlayerPhysShadow")
+metadata/_custom_type_script = "uid://rp1y7gy3c6"
+
+[node name="PlayerStairstepBehavior" type="Node" parent="PlayerBehaviorManager" node_paths=PackedStringArray("stairs_below_raycast", "stairs_ahead_raycast", "camera_smooth")]
+script = ExtResource("14_0h0ss")
+stairs_below_raycast = NodePath("../../RayCastBelow")
+stairs_ahead_raycast = NodePath("../../RayCastAhead")
+camera_smooth = NodePath("../../CameraHead/CameraSmooth")
+metadata/_custom_type_script = "uid://28sqrp1yq2me"
+
+[node name="PlayerFootstepBehavior" type="Node" parent="PlayerBehaviorManager" node_paths=PackedStringArray("footstep_sound")]
+script = ExtResource("21_o6vg2")
+walk_sounds = Array[AudioStream]([ExtResource("18_hweye"), ExtResource("19_vwfsy"), ExtResource("20_2uxw3"), ExtResource("21_oqb3o"), ExtResource("22_71ae4"), ExtResource("28_ugtxn"), ExtResource("31_4hn35"), ExtResource("32_0jy80")])
+footstep_sound = NodePath("../../Audio/Footsteps")
+metadata/_custom_type_script = "uid://c1y3jkf13tf31"
+
+[node name="FinishMoveBehavior" type="Node" parent="PlayerBehaviorManager"]
+script = ExtResource("10_hc4cx")
+metadata/_custom_type_script = "uid://5hp4seg0wv10"
+
+[node name="Postmove" type="Node" parent="PlayerBehaviorManager"]
+
+[node name="PostmoveBehavior" type="Node" parent="PlayerBehaviorManager/Postmove" node_paths=PackedStringArray("physshadow")]
+script = ExtResource("13_pdxi8")
+physshadow = NodePath("../../../PlayerPhysShadow")
+metadata/_custom_type_script = "uid://bbe6udajenxwb"
+
+[node name="PlayerPhysShadowPostMoveBehavior" type="Node" parent="PlayerBehaviorManager/Postmove" node_paths=PackedStringArray("physshadow")]
+script = ExtResource("26_88xvn")
+physshadow = NodePath("../../../PlayerPhysShadow")
+metadata/_custom_type_script = "uid://dhmknehiwd7jq"
+
+[node name="DebugBehavior" type="Node" parent="PlayerBehaviorManager/Postmove" node_paths=PackedStringArray("debug_window")]
+script = ExtResource("16_5fydm")
+debug_window = NodePath("../../../Shaders/DebugWindow")
+metadata/_custom_type_script = "uid://b5u4yw1ksc4vc"
+
+[node name="PlayerPickupBehavior" type="Node" parent="PlayerBehaviorManager/Postmove" node_paths=PackedStringArray("camera_marker", "pickup_raycast", "pickup_shapecast", "hand", "physshadow", "pickup_sound", "pickup_error_sound", "crosshair")]
+script = ExtResource("18_dumqu")
+camera_marker = NodePath("../../../CameraHead/CameraSmooth/CameraMarker")
+pickup_raycast = NodePath("../../../CameraHead/CameraSmooth/CameraMarker/PickupRayCast")
+pickup_shapecast = NodePath("../../../CameraHead/PickupShapeCast")
+hand = NodePath("../../../CameraHead/CameraSmooth/CameraMarker/Hand")
+physshadow = NodePath("../../../PlayerPhysShadow")
+pickup_sound = NodePath("../../../Audio/PhysicsPickup")
+pickup_error_sound = NodePath("../../../Audio/PickupError")
+crosshair = NodePath("../../../Shaders/UI/Crosshair")
+metadata/_custom_type_script = "uid://ul4ndyu5212m"
+
+[node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("default_state")]
+script = ExtResource("5_02tnr")
+default_state = NodePath("PlayerFallingState")
+metadata/_custom_type_script = "uid://dlgji80gs6cdf"
+
+[node name="PlayerFallingState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("7_bv0o5")
+metadata/_custom_type_script = "uid://dyou7fghhuuch"
+
+[node name="PlayerGroundedState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("7_02tnr")
+metadata/_custom_type_script = "uid://bb18s4g8po5h5"
+
+[node name="PlayerClimbingState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("32_tyeyr")
+metadata/_custom_type_script = "uid://cxtx1uywaih8i"
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="Footsteps" type="AudioStreamPlayer2D" parent="Audio"]
+volume_db = 2.0
+max_polyphony = 6
+
+[node name="Flashlight" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("38_es3tu")
+
+[node name="PhysicsPickup" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("34_iepf8")
+volume_db = -2.0
+
+[node name="PickupError" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("35_c62y7")
+volume_db = -2.0
+
+[node name="Shaders" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CRT" type="ColorRect" parent="Shaders"]
+material = ExtResource("19_x3fw6")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="UI" type="Control" parent="Shaders"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Crosshair" parent="Shaders/UI" instance=ExtResource("41_tye5j")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="Shaders"]
+copy_mode = 2
+
+[node name="VHS" type="ColorRect" parent="Shaders"]
+material = ExtResource("20_qhwjt")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DebugWindow" type="Control" parent="Shaders"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BackBufferCopy2" type="BackBufferCopy" parent="Shaders"]
+copy_mode = 2
+
+[node name="Sharpen" type="ColorRect" parent="Shaders"]
+material = ExtResource("21_4eo0i")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BackBufferCopy3" type="BackBufferCopy" parent="Shaders"]
+copy_mode = 2
+
+[node name="Dither" type="ColorRect" parent="Shaders"]
+material = ExtResource("20_vckwg")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BackBufferCopy4" type="BackBufferCopy" parent="Shaders"]
+copy_mode = 2
+
+[node name="Blur" type="ColorRect" parent="Shaders"]
+material = ExtResource("46_es3tu")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[connection signal="jumped" from="PlayerActionManager/PlayerJumpAction" to="PlayerBehaviorManager/PlayerFootstepBehavior" method="_on_jumped"]
+[connection signal="entered" from="PlayerStateMachine/PlayerGroundedState" to="PlayerBehaviorManager/PlayerFootstepBehavior" method="_on_player_grounded_state_entered"]

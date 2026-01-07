@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bfm1g86xps5r7"]
+
+[ext_resource type="Shader" uid="uid://dh8mk6h2vcbl2" path="res://materials/_shaders/Dither.gdshader" id="1_qnj74"]
+
+[resource]
+shader = ExtResource("1_qnj74")
+shader_parameter/SCREEN_WIDTH = 1080.0
+shader_parameter/COLOR_FACTOR = 16.0
+shader_parameter/DITHERING_STRENTH = 0.006000000285
+shader_parameter/Shadows = Color(0, 0, 0, 1)
+shader_parameter/Midtones = Color(0, 0, 0, 1)
+shader_parameter/Hilights = Color(0, 0, 0, 1)

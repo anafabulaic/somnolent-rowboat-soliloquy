@@ -1,0 +1,25 @@
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://ca8bvt7wjvxip"]
+
+[ext_resource type="Material" uid="uid://c3pdan6f1jb74" path="res://materials/sky/test_sky.tres" id="1_gw00r"]
+
+[sub_resource type="Sky" id="Sky_iyx0m"]
+sky_material = ExtResource("1_gw00r")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_iyx0m")
+sdfgi_use_occlusion = true
+glow_normalized = true
+glow_mix = 0.3
+glow_bloom = 1.0
+glow_blend_mode = 4
+fog_enabled = true
+fog_mode = 1
+fog_density = 1.0
+fog_sky_affect = 0.326
+fog_depth_begin = 0.0
+fog_depth_end = 40.0
+volumetric_fog_density = 0.1
+volumetric_fog_ambient_inject = 5.0
+adjustment_enabled = true
+adjustment_saturation = 3.0

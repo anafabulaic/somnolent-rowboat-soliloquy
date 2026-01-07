@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b77j4pqrtj13n"]
+
+[ext_resource type="Texture2D" uid="uid://51qv48aa0cab" path="res://materials/tile/checker_tile.png" id="1_8vn74"]
+
+[resource]
+albedo_color = Color(1, 1, 1, 0.20784314)
+albedo_texture = ExtResource("1_8vn74")
+shadow_to_opacity = true
+distance_fade_min_distance = 3.0
+distance_fade_max_distance = 0.0

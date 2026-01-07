@@ -1,0 +1,149 @@
+[gd_scene load_steps=15 format=3 uid="uid://cyd2nkacvf8hq"]
+
+[ext_resource type="Script" uid="uid://bm673y1oitq15" path="res://components/player/player_base.gd" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://cm344k53s80rp" path="res://components/player/movement/player_movement.gd" id="2_g2els"]
+[ext_resource type="Shape3D" uid="uid://b322mqvi4wgbr" path="res://components/player/player_collider_shape.tres" id="2_qlg0r"]
+[ext_resource type="Script" uid="uid://2jtp3pu00o3k" path="res://components/player/stats/player_stats.gd" id="3_qhqgy"]
+[ext_resource type="Resource" uid="uid://c8nsxk1ypdoga" path="res://components/settings/default_settings.tres" id="3_tuyoq"]
+[ext_resource type="Resource" uid="uid://15d2ac7mo6w1" path="res://components/player/stats/default_statsheet.tres" id="4_d2wvv"]
+[ext_resource type="Script" uid="uid://ifqvosxorkei" path="res://components/player/player_camera.gd" id="4_dqkch"]
+[ext_resource type="Script" uid="uid://dh4o2xcrwd8kq" path="res://components/player/movement/player_stairstep.gd" id="5_smehm"]
+[ext_resource type="Script" uid="uid://dnrwub1n21p5k" path="res://components/player/movement/player_crouch.gd" id="6_y4r1p"]
+[ext_resource type="Script" uid="uid://cu0vwrl0gy1s1" path="res://components/player/player_physshadow.gd" id="7_fjrip"]
+[ext_resource type="Material" uid="uid://cme0ijaixu3ud" path="res://materials/_shaders/CRT_material.tres" id="9_ur7pv"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qlg0r"]
+
+[sub_resource type="Environment" id="Environment_qlg0r"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fjrip"]
+friction = 0.0
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("collider", "movement", "stat_manager", "camera", "physshadow")]
+collision_layer = 2147483648
+collision_mask = 3
+collision_priority = 8.0
+floor_constant_speed = true
+platform_on_leave = 2
+script = ExtResource("1_3vyb7")
+collider_shape = ExtResource("2_qlg0r")
+collider = NodePath("Collision")
+movement = NodePath("Movement")
+stat_manager = NodePath("Stats")
+camera = NodePath("PlayerCamera")
+physshadow = NodePath("PlayerPhysShadow")
+settings = ExtResource("3_tuyoq")
+statsheet = ExtResource("4_d2wvv")
+metadata/_custom_type_script = "uid://bm673y1oitq15"
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = ExtResource("2_qlg0r")
+
+[node name="Stats" type="Node" parent="." node_paths=PackedStringArray("character")]
+script = ExtResource("3_qhqgy")
+character = NodePath("..")
+gravity = Vector3(0, -15, 0)
+speed_cap = 200.0
+character_radius = 0.6
+ground_accel = 0.25
+ground_decel = 0.25
+crouch_jump_add = 0.7
+crouching_speed = 5.0
+air_accel = 5.0
+air_control_cap = 1.0
+air_speed_limit = 1000.0
+jump_force = 6.0
+metadata/_custom_type_script = "uid://2jtp3pu00o3k"
+
+[node name="Movement" type="Node" parent="." node_paths=PackedStringArray("player", "stairstep", "crouching")]
+script = ExtResource("2_g2els")
+player = NodePath("..")
+stats = ExtResource("4_d2wvv")
+stairstep = NodePath("PlayerStairStep")
+crouching = NodePath("PlayerCrouching")
+metadata/_custom_type_script = "uid://cm344k53s80rp"
+
+[node name="PlayerStairStep" type="Node" parent="Movement" node_paths=PackedStringArray("player", "stairs_below_raycast", "stairs_ahead_raycast", "camera", "camera_smooth")]
+script = ExtResource("5_smehm")
+player = NodePath("../..")
+stats = ExtResource("4_d2wvv")
+stairs_below_raycast = NodePath("RayCastBelow")
+stairs_ahead_raycast = NodePath("RayCastAhead")
+camera = NodePath("../../PlayerCamera/CameraShake/CameraSmooth/Camera3D")
+camera_smooth = NodePath("../../PlayerCamera/CameraShake/CameraSmooth")
+metadata/_custom_type_script = "uid://dh4o2xcrwd8kq"
+
+[node name="RayCastAhead" type="RayCast3D" parent="Movement/PlayerStairStep"]
+target_position = Vector3(0, -0.55, 0)
+
+[node name="RayCastBelow" type="RayCast3D" parent="Movement/PlayerStairStep"]
+
+[node name="PlayerCrouching" type="Node" parent="Movement" node_paths=PackedStringArray("player", "collider", "camera_holder")]
+script = ExtResource("6_y4r1p")
+player = NodePath("../..")
+stats = ExtResource("4_d2wvv")
+collider = NodePath("../../Collision")
+camera_holder = NodePath("../../PlayerCamera")
+collision_shape = ExtResource("2_qlg0r")
+metadata/_custom_type_script = "uid://dnrwub1n21p5k"
+
+[node name="PlayerCamera" type="Node3D" parent="." node_paths=PackedStringArray("camera", "camera_shake_node")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.524, 0)
+script = ExtResource("4_dqkch")
+camera = NodePath("CameraShake/CameraSmooth/Camera3D")
+camera_shake_node = NodePath("CameraShake")
+camera_shake_noise = SubResource("FastNoiseLite_qlg0r")
+shake_noise_speed = 100.0
+max_z = 0.0
+metadata/_custom_type_script = "uid://ifqvosxorkei"
+
+[node name="CameraShake" type="Node3D" parent="PlayerCamera"]
+
+[node name="CameraSmooth" type="Node3D" parent="PlayerCamera/CameraShake"]
+
+[node name="Camera3D" type="Camera3D" parent="PlayerCamera/CameraShake/CameraSmooth"]
+environment = SubResource("Environment_qlg0r")
+
+[node name="PlayerPhysShadow" type="RigidBody3D" parent="." node_paths=PackedStringArray("player", "collider")]
+collision_layer = 3
+collision_mask = 3
+collision_priority = 8.0
+mass = 100.0
+physics_material_override = SubResource("PhysicsMaterial_fjrip")
+gravity_scale = 0.0
+sleeping = true
+lock_rotation = true
+freeze = true
+freeze_mode = 1
+custom_integrator = true
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 16
+script = ExtResource("7_fjrip")
+player = NodePath("..")
+collider_shape = ExtResource("2_qlg0r")
+collider = NodePath("CollisionShape3D")
+metadata/_custom_type_script = "uid://cu0vwrl0gy1s1"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerPhysShadow"]
+shape = ExtResource("2_qlg0r")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+material = ExtResource("9_ur7pv")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

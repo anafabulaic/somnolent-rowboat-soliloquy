@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TransitionEffectResource" load_steps=3 format=3 uid="uid://c512e4wcq5vt3"]
+
+[ext_resource type="Script" uid="uid://bnugub072vaha" path="res://components/ui/transition/transition_effect_resource.gd" id="1_xo07p"]
+[ext_resource type="Material" uid="uid://c7vi3nnqm25sp" path="res://scenes/ui/transition_effect/fade_transition_mat.tres" id="2_opyde"]
+
+[resource]
+script = ExtResource("1_xo07p")
+transition_material = ExtResource("2_opyde")
+use_double_sided_fade = true
+metadata/_custom_type_script = "uid://bnugub072vaha"

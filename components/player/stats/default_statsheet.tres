@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PlayerStatSheet" load_steps=2 format=3 uid="uid://15d2ac7mo6w1"]
+
+[ext_resource type="Script" uid="uid://b0h25x7s1ip5u" path="res://components/player/stats/player_statsheet.gd" id="1_mich7"]
+
+[resource]
+script = ExtResource("1_mich7")
+crouch_jump_add = 0.9
+max_step_height = 0.5
+metadata/_custom_type_script = "uid://b0h25x7s1ip5u"

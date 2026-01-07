@@ -1,0 +1,33 @@
+[gd_resource type="VisualShader" load_steps=2 format=3 uid="uid://d3j35wm8f2d8d"]
+
+[sub_resource type="VisualShaderNodeBillboard" id="VisualShaderNodeBillboard_q0xsu"]
+billboard_type = 2
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, depth_test_default, cull_disabled, diffuse_lambert, specular_schlick_ggx;
+
+
+
+
+void vertex() {
+	mat4 n_out2p0;
+// GetBillboardMatrix:2
+	{
+		mat4 __mvm = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0], MODEL_MATRIX[1], vec4(normalize(cross(INV_VIEW_MATRIX[0].xyz, MODEL_MATRIX[1].xyz)), 0.0), MODEL_MATRIX[3]);
+		__mvm = __mvm * mat4(vec4(1.0, 0.0, 0.0, 0.0), vec4(0.0, 1.0 / length(MODEL_MATRIX[1].xyz), 0.0, 0.0), vec4(0.0, 0.0, 1.0, 0.0), vec4(0.0, 0.0, 0.0, 1.0));
+		n_out2p0 = __mvm;
+	}
+
+
+// Output:0
+	MODELVIEW_MATRIX = n_out2p0;
+
+
+}
+"
+modes/cull = 2
+nodes/vertex/0/position = Vector2(400, 140)
+nodes/vertex/2/node = SubResource("VisualShaderNodeBillboard_q0xsu")
+nodes/vertex/2/position = Vector2(-1240, 520)
+nodes/vertex/connections = PackedInt32Array(2, 0, 0, 10)

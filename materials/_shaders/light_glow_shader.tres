@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dmxkt7fn3stpo"]
+
+[ext_resource type="Shader" uid="uid://h3jhemjuo157" path="res://materials/_shaders/light_glow_shader.gdshader" id="1_ekmib"]
+[ext_resource type="Texture2D" uid="uid://bpuoxtiwmo1fx" path="res://materials/effects/star_05.png" id="2_jabpm"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ekmib")
+shader_parameter/emission = 1.0
+shader_parameter/main_tex = ExtResource("2_jabpm")
+shader_parameter/face_threshold = 0.63
+shader_parameter/brightness_mult = 3.725
+shader_parameter/size_mult = 0.115
+shader_parameter/modulate = Color(1, 0.9598277, 0.78588057, 1)

@@ -1,0 +1,29 @@
+[remap]
+
+importer="2d_array_texture"
+type="CompressedTexture2DArray"
+uid="uid://446pn6cjtkaw"
+path.bptc="res://.godot/imported/srs_horseless_horse_world.exr-d9993c831d487a5585bd848452baa761.bptc.ctexarray"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+
+[deps]
+
+source_file="res://maps/srs_horseless_horse_world/srs_horseless_horse_world.exr"
+dest_files=["res://.godot/imported/srs_horseless_horse_world.exr-d9993c831d487a5585bd848452baa761.bptc.ctexarray"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/uastc_level=0
+compress/rdo_quality_loss=0.0
+compress/hdr_compression=1
+compress/channel_pack=1
+mipmaps/generate=false
+mipmaps/limit=-1
+slices/horizontal=1
+slices/vertical=2

@@ -1,0 +1,100 @@
+[gd_resource type="Theme" load_steps=15 format=3 uid="uid://c7qjkrab2qnam"]
+
+[ext_resource type="FontFile" uid="uid://dnkywiuaeww1n" path="res://fonts/Caladea-Bold.ttf" id="1_d4i8x"]
+[ext_resource type="StyleBox" uid="uid://cyrgt5fvo3qxp" path="res://scenes/ui/trinket_menu/trinket_menu_panelcontainer.tres" id="2_7x01l"]
+[ext_resource type="FontFile" uid="uid://c8nbbwmd4xt2i" path="res://fonts/Caladea-Regular.ttf" id="2_8aqq4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d4i8x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d4i8x"]
+bg_color = Color(0.37, 0.37, 0.37, 1)
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
+border_blend = true
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+corner_detail = 16
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lbgmd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hc6aw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8aqq4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xox3l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7x01l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_02ogd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8aqq4"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.078431375, 0.08235294, 0.08235294, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dooro"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7x01l"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0, 0, 0.49803922)
+border_width_left = 2
+border_width_top = 8
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[resource]
+CheckBox/fonts/font = ExtResource("2_8aqq4")
+HSeparator/constants/separation = 16
+HSeparator/styles/separator = SubResource("StyleBoxEmpty_d4i8x")
+HSlider/styles/slider = SubResource("StyleBoxFlat_d4i8x")
+Label/fonts/font = ExtResource("1_d4i8x")
+LogoLabel/base_type = &"Label"
+LogoLabel/colors/font_color = Color(0, 0, 1, 1)
+LogoLabel/constants/line_spacing = -32
+LogoLabel/font_sizes/font_size = 64
+LogoLabel/fonts/font = ExtResource("1_d4i8x")
+MainMenuButton/base_type = &"Button"
+MainMenuButton/colors/font_color = Color(1, 1, 1, 1)
+MainMenuButton/colors/font_focus_color = Color(1, 1, 1, 1)
+MainMenuButton/colors/font_hover_color = Color(0.8862745, 0.8666667, 0.87058824, 1)
+MainMenuButton/colors/font_outline_color = Color(0.42, 0.42, 0.42, 0.5686275)
+MainMenuButton/constants/outline_size = 3
+MainMenuButton/fonts/font = ExtResource("1_d4i8x")
+MainMenuButton/styles/disabled = SubResource("StyleBoxEmpty_lbgmd")
+MainMenuButton/styles/focus = SubResource("StyleBoxEmpty_hc6aw")
+MainMenuButton/styles/hover = SubResource("StyleBoxEmpty_8aqq4")
+MainMenuButton/styles/hover_pressed = SubResource("StyleBoxEmpty_xox3l")
+MainMenuButton/styles/normal = SubResource("StyleBoxEmpty_7x01l")
+MainMenuButton/styles/pressed = SubResource("StyleBoxEmpty_02ogd")
+MenuButton/fonts/font = ExtResource("2_8aqq4")
+OptionButton/fonts/font = ExtResource("2_8aqq4")
+PopupMenu/constants/indent = 0
+PopupMenu/constants/item_end_padding = 0
+PopupMenu/constants/item_start_padding = 0
+PopupMenu/fonts/font = ExtResource("2_8aqq4")
+PopupMenu/styles/panel = SubResource("StyleBoxFlat_8aqq4")
+TabContainer/constants/side_margin = 0
+TabContainer/fonts/font = ExtResource("1_d4i8x")
+TabContainer/styles/tab_focus = SubResource("StyleBoxEmpty_dooro")
+TabContainer/styles/tab_hovered = ExtResource("2_7x01l")
+TabContainer/styles/tab_selected = SubResource("StyleBoxFlat_7x01l")

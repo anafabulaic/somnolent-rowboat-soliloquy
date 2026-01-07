@@ -1,0 +1,96 @@
+[gd_scene load_steps=9 format=3 uid="uid://bwom1wmahjd8n"]
+
+[ext_resource type="Texture2D" uid="uid://cxoe5ajdq4l0k" path="res://icon.svg" id="1_lpxwc"]
+[ext_resource type="Theme" uid="uid://dekd57fh3tglp" path="res://scenes/ui/trinket_menu/trinket_theme.tres" id="1_u7nxx"]
+[ext_resource type="Script" uid="uid://ua6dr3roqehw" path="res://scenes/ui/trinket_menu/trinket_selection.gd" id="2_od85x"]
+[ext_resource type="AudioStream" uid="uid://cnygpqlgl6bvf" path="res://sounds/ui/ui_hover.wav" id="3_iuyna"]
+[ext_resource type="AudioStream" uid="uid://dj2ykqol653i7" path="res://sounds/ui/ui_trinket_equip.wav" id="4_gvaru"]
+[ext_resource type="FontFile" uid="uid://dnkywiuaeww1n" path="res://fonts/Caladea-Bold.ttf" id="4_jb5nq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_od85x"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.08362889, 0.08362889, 0.08362889, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.1764706)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0.82, 0.82, 0.82, 0.050980393)
+shadow_size = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jb5nq"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[node name="Trinket" type="PanelContainer" node_paths=PackedStringArray("icon", "title", "desc", "equip_indicator")]
+custom_minimum_size = Vector2(50, 50)
+size_flags_horizontal = 3
+theme = ExtResource("1_u7nxx")
+theme_type_variation = &"TrinketSelectionPanel"
+script = ExtResource("2_od85x")
+icon = NodePath("HBoxContainer/IconContainer/Icon")
+title = NodePath("HBoxContainer/VBoxContainer/Title")
+desc = NodePath("HBoxContainer/VBoxContainer/Desc")
+hover_sound = ExtResource("3_iuyna")
+select_sound = ExtResource("4_gvaru")
+equip_indicator = NodePath("EquipIndicator")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="IconContainer" type="PanelContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_od85x")
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/IconContainer"]
+layout_mode = 2
+texture = ExtResource("1_lpxwc")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"TrinketSelectionLabelVBox"
+
+[node name="Title" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_jb5nq")
+text = "DEVIL HAND"
+
+[node name="Desc" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Shoot a spout of flame"
+
+[node name="EquipIndicator" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jb5nq")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+theme_type_variation = &"TrinketSelectionButton"
+
+[connection signal="mouse_entered" from="Button" to="." method="_on_hover"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_unhover"]
+[connection signal="pressed" from="Button" to="." method="_on_pressed"]

@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="SoundMatResource" load_steps=15 format=3 uid="uid://b0b4nigr4yt0f"]
+
+[ext_resource type="AudioStream" uid="uid://cx3rgt0cs35vk" path="res://sounds/physics/wood/wood_light_impact-01.wav" id="1_8a4fa"]
+[ext_resource type="AudioStream" uid="uid://dkl4jhsyxpcwl" path="res://sounds/physics/wood/wood_light_impact-02.wav" id="2_j0uu1"]
+[ext_resource type="AudioStream" uid="uid://ty5w7uabp3mr" path="res://sounds/physics/wood/wood_light_impact-03.wav" id="3_23ydb"]
+[ext_resource type="AudioStream" uid="uid://brx5wfw4n5tx6" path="res://sounds/physics/wood/wood_light_impact-04.wav" id="4_yppx5"]
+[ext_resource type="AudioStream" uid="uid://cqfo7wtvo70nx" path="res://sounds/physics/wood/wood_light_impact-05.wav" id="5_id2fs"]
+[ext_resource type="AudioStream" uid="uid://cdrjk3kw3ryvm" path="res://sounds/physics/wood/wood_light_impact-06.wav" id="6_y6ypn"]
+[ext_resource type="AudioStream" uid="uid://p66wcctaeme1" path="res://sounds/physics/wood/wood_light_impact-07.wav" id="7_0i32d"]
+[ext_resource type="AudioStream" uid="uid://5tivgueaefuq" path="res://sounds/physics/wood/wood_light_impact-08.wav" id="8_jycxq"]
+[ext_resource type="AudioStream" uid="uid://dwdmj676hc1x2" path="res://sounds/physics/wood/wood_light_impact-09.wav" id="9_suf33"]
+[ext_resource type="AudioStream" uid="uid://tou6mka7b1a1" path="res://sounds/physics/wood/wood_light_impact-10.wav" id="10_i0iur"]
+[ext_resource type="AudioStream" uid="uid://d1bq851h2gxbx" path="res://sounds/physics/wood/wood_light_impact-11.wav" id="11_kl4fp"]
+[ext_resource type="AudioStream" uid="uid://cx0hjgxgaulks" path="res://sounds/physics/wood/wood_light_impact-12.wav" id="12_ea1m0"]
+[ext_resource type="Script" uid="uid://cjs0ly5by451e" path="res://components/sound/soundmat_resource_script.gd" id="13_y3vqe"]
+[ext_resource type="AudioStream" uid="uid://t7cc236a1d4u" path="res://sounds/physics/plastic/thick_plastic_slide_hard.wav" id="14_5ctcf"]
+
+[resource]
+script = ExtResource("13_y3vqe")
+impacts = Array[AudioStream]([ExtResource("1_8a4fa"), ExtResource("2_j0uu1"), ExtResource("3_23ydb"), ExtResource("4_yppx5"), ExtResource("5_id2fs"), ExtResource("6_y6ypn"), ExtResource("7_0i32d"), ExtResource("8_jycxq"), ExtResource("9_suf33"), ExtResource("10_i0iur"), ExtResource("11_kl4fp"), ExtResource("12_ea1m0")])
+impact_min_pitch = 0.6
+impact_max_pitch = 0.8
+sliding = ExtResource("14_5ctcf")
+metadata/_custom_type_script = "uid://cjs0ly5by451e"
